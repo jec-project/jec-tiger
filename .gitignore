@@ -1,0 +1,63 @@
+#####################################
+# JEC Tiger Project .gitignore
+# Please maintain alphabetical order!
+#####################################
+
+#####################################
+# Utilities
+#####################################
+
+# Ignore TypeScript temp file
+*tscommand*.*
+
+# Ignore TypeScript temp folder
+types/temp
+
+#####################################
+# VSCE
+#####################################
+
+# Ignore VSCE folder
+.vscode
+
+#####################################
+# TSC
+#####################################
+
+# Ignore TSC cache folder 
+.tscache
+
+#####################################
+# Documentation
+#####################################
+
+# Ignore docs folder
+docs
+
+#####################################
+# node_modules
+#####################################
+
+# Ignore 'node_modules' folder
+node_modules
+
+#####################################
+# src
+#####################################
+
+# Ignore JavaScript files in src folder
+src/**/*.js
+
+#####################################
+# test
+#####################################
+
+# Ignore JavaScript files in test folder
+test/**/*.js
+
+#####################################
+# utils
+#####################################
+
+# Ignore JavaScript files in utils folder
+utils/**/*.js
