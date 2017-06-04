@@ -17,10 +17,14 @@
 import {TestSuiteDescriptorRegistry} from "../../metadata/TestSuiteDescriptorRegistry";
 import {TestSuiteDescriptor} from "../../reflect/TestSuiteDescriptor";
 import {TestDescriptor} from "../../reflect/TestDescriptor";
+import {ParameterDescriptor} from "../../reflect/ParameterDescriptor";
 import {AnnotatedMethodDescriptor} from "../../reflect/AnnotatedMethodDescriptor";
-import {RunableTestSuite, TestSuiteError, TestMethod, AnnotatedMethod} from "jec-juta";
+import {RunableTestSuite, TestSuiteError, TestMethod, AnnotatedMethod, TestableMethod} from "jec-juta";
 import {TestMethodBuilder} from "../../builders/TestMethodBuilder";
 import {AnnotatedMethodBuilder} from "../../builders/AnnotatedMethodBuilder";
+import {ParametersMapUtil} from "../../utils/ParametersMapUtil";
+import {TestSorters} from "jec-juta";
+import {TestSorterUtil} from "../../utils/TestSorterUtil";
 
 /**
  * The <code>TigerRunableTestSuite<code> class is te default implementation for 
@@ -66,6 +70,25 @@ export class TigerRunableTestSuite implements RunableTestSuite {
    */
   private _annotatedMethods:AnnotatedMethod[] = null;
 
+  /**
+   * Indicates whether this <code>RunableTestSuite</code> object has to be
+   * ignored by the test runners (<code>true</code>), or not
+   * (<code>false</code>).
+   */
+  private _disabled:boolean = false;
+
+  /**
+   * Indicates the test execution order for this <code>RunableTestSuite</code>
+   * object.
+   */
+  private _testOrder:number = TestSorters.DEFAULT;
+
+  /**
+   * The utility which is resposible for sorting test methods that compose this
+   * <code>RunableTestSuite</code>
+   */
+  private _testSorter:TestSorterUtil = null;
+
   //////////////////////////////////////////////////////////////////////////////
   // Private methods
   //////////////////////////////////////////////////////////////////////////////
@@ -76,6 +99,7 @@ export class TigerRunableTestSuite implements RunableTestSuite {
   private initObj():void {
     this._testMethods = new Array<TestMethod>();
     this._annotatedMethods = new Array<AnnotatedMethod>();
+    this._testSorter = new TestSorterUtil();
   }
 
   /**
@@ -87,10 +111,13 @@ export class TigerRunableTestSuite implements RunableTestSuite {
     let len:number = coll.length;
     let builder:TestMethodBuilder = new TestMethodBuilder();
     let method:TestMethod = null;
+    let descriptor:TestDescriptor = null;
     while(len--) {
-      method = builder.build(coll[len]);
+      descriptor = coll[len];
+      method = builder.build(descriptor);
       this._testMethods.push(method);
     }
+    this._testSorter.sort(this._testMethods, this._testOrder);
   }
 
   /**
@@ -102,9 +129,41 @@ export class TigerRunableTestSuite implements RunableTestSuite {
     let len:number = coll.length;
     let builder:AnnotatedMethodBuilder = new AnnotatedMethodBuilder();
     let method:AnnotatedMethod = null;
+    let descriptor:AnnotatedMethodDescriptor = null;
     while(len--) {
-      method = builder.build(coll[len]);
+      descriptor = coll[len];
+      method = builder.build(descriptor);
       this._annotatedMethods.push(method);
+    }
+  }
+
+  /**
+   * Initializes the test parameters for this object.
+   */
+  private initParameters():void {
+    let map:Map<string, ParameterDescriptor[]> = 
+                                 TestSuiteDescriptorRegistry.getParametersMap();
+    this.initAsyncProps(map, this._testMethods);
+    this.initAsyncProps(map, this._annotatedMethods);
+  }
+
+  /**
+   * Initializes the asynchronous testable methods for this object.
+   * 
+   * @param {Map<string, ParameterDescriptor[]>} map the map that contains the
+   *                                                 references to the 
+   *                                                 asynchronous callback
+   *                                                 methods.
+   * @param {TestableMethod[]>} coll the collection of testable methods to
+   *                                 initialize.
+   */
+  private initAsyncProps(map:Map<string, ParameterDescriptor[]>,
+                                                   coll:TestableMethod[]):void {
+    let len:number = coll.length;
+    let method:TestableMethod = null;
+    while(len--) {
+      method = coll[len];
+      if(map.has(method.name)) method.async = true;
     }
   }
 
@@ -134,8 +193,11 @@ export class TigerRunableTestSuite implements RunableTestSuite {
     }
     this._testSuite = testSuite;
     this._description = descriptor.description;
+    this._disabled = descriptor.disabled;
+    this._testOrder = descriptor.testOrder;
     this.initTestMethods();
     this.initAnnotatedMethods();
+    this.initParameters();
   }
 
   /**
@@ -152,10 +214,24 @@ export class TigerRunableTestSuite implements RunableTestSuite {
     return this._testMethods;
   }
 
-   /**
+  /**
    * @inheritDoc
    */
   public getAnnotatedMethods():AnnotatedMethod[] {
     return this._annotatedMethods;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public isDisabled():boolean {
+    return this._disabled;
+  }
+  
+  /**
+   * @inheritDoc
+   */
+  public getTestOrder():number {
+    return this._testOrder;
   }
 }

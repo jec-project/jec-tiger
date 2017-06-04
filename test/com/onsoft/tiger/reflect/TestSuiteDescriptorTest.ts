@@ -29,11 +29,7 @@ describe("TestSuiteDescriptor", ()=> {
     expect(descriptor).to.have.property("description", null);
   });
 
-  it("should have a 'before' property set to null", function() {
-    expect(descriptor).to.have.property("before", null);
-  });
-  
-  it("should have a 'after' property set to null", function() {
-    expect(descriptor).to.have.property("after", null);
+  it("should have a 'disabled' property set to false", function() {
+    expect(descriptor).to.have.property("disabled", false);
   });
 });

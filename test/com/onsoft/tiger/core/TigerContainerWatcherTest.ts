@@ -23,7 +23,7 @@ import {RunableTestSuite} from "jec-juta";
 import {TigerContainerWatcher} from "../../../../../src/com/onsoft/tiger/core/TigerContainerWatcher";
 
 // Utilities:
-const utils:any = require("../../../../..//utils/test-utils/utilities/TigerContainerWatcherTestUtils");
+import * as utils from "../../../../..//utils/test-utils/utilities/TigerContainerWatcherTestUtils";
 
 // Test:
 describe("TigerContainerWatcher", ()=> {

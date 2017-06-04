@@ -1,11 +1,19 @@
-# JEC JUTA Project: Update Release Notes
+# JEC Tiger Project: Update Release Notes
 
-<a name="jec-juta-1.0.0-RC1"></a>
+<a name="jec-tiger-1.0.0"></a>
 ## **1.0.0** (2017-05-28)
 
 ### Bug Fixes
 
 ### Features
 
-- Initial release of the JEC JavaScript Unit Testing API *(JUTA)* module
-- **juta:** contains the JEC JUTA API
+- **@Async:** implementation of the `@Async` annotation
+
+<a name="jec-tiger-1.0.0-RC1"></a>
+## **1.0.0-RC1** (2017-05-28)
+
+### Bug Fixes
+
+### Features
+
+- Initial release of the JEC Tiger framework

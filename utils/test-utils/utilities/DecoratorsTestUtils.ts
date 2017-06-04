@@ -23,23 +23,26 @@ import {TestSuiteDescriptor} from "../../../src/com/onsoft/tiger/reflect/TestSui
  */
 
 // Utilities:
+export const DISABLED:boolean = true;
 const buildMethodParams:Function = function():AnnotatedMethodParams {
   let params:AnnotatedMethodParams = ({
-    timeout: TIMEOUT
+    timeout: TIMEOUT,
+    disabled: DISABLED
   } as AnnotatedMethodParams);
   return params;
 };
 const buildTestParams:Function = function():TestParams {
   let params:TestParams = ({
     timeout: TIMEOUT,
-    description: DESCRIPTION
+    description: DESCRIPTION,
+    disabled: DISABLED
   } as TestParams);
   return params;
 };
 const buildTestSuiteParams:Function = function():TestSuiteParams {
   let params:TestSuiteParams = ({
-    timeout: TIMEOUT,
-    description: DESCRIPTION
+    description: DESCRIPTION,
+    disabled: DISABLED
   } as TestSuiteParams);
   return params;
 };

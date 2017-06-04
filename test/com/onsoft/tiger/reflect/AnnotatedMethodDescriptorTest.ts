@@ -16,6 +16,7 @@
 
 import "mocha";
 import {expect} from "chai";
+import {TestableMethodDescriptor} from "../../../../../src/com/onsoft/tiger/reflect/TestableMethodDescriptor";
 
 // Class to test:
 import {AnnotatedMethodDescriptor} from "../../../../../src/com/onsoft/tiger/reflect/AnnotatedMethodDescriptor";
@@ -25,15 +26,11 @@ describe("AnnotatedMethodDescriptor", ()=> {
 
   let descriptor:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
   
-  it("should have a 'type' property set to -1", function() {
-    expect(descriptor).to.have.property("type", -1);
+  it("should extend the TestableMethodDescriptor class", function() {
+    expect(descriptor).to.be.an.instanceOf(TestableMethodDescriptor);
   });
 
-  it("should have a 'method' property set to null", function() {
-    expect(descriptor).to.have.property("method", null);
-  });
-  
-  it("should have a 'timeout' property set to -1", function() {
-    expect(descriptor).to.have.property("timeout", -1);
+  it("should have a 'type' property set to -1", function() {
+    expect(descriptor).to.have.property("type", -1);
   });
 });

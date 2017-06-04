@@ -22,7 +22,7 @@ import {TestDescriptor} from "../../../../../src/com/onsoft/tiger//reflect/TestD
 import {TestDescriptorBuilder} from "../../../../../src/com/onsoft/tiger/builders/TestDescriptorBuilder";
 
 // Utilities:
-const utils:any = require("../../../../..//utils/test-utils/utilities/TestDescriptorBuilderTestUtils");
+import * as utils from "../../../../..//utils/test-utils/utilities/TestDescriptorBuilderTestUtils";
 
 // Test:
 describe("TestDescriptorBuilder", ()=> {
@@ -30,7 +30,7 @@ describe("TestDescriptorBuilder", ()=> {
   describe("#build()", ()=> {
     let builder:TestDescriptorBuilder = new TestDescriptorBuilder();
     
-    it("should return an instance of the TigerRunableTestSuite class", function() {
+    it("should return an instance of the TestDescriptor class", function() {
       let descriptor:TestDescriptor =
                         builder.build(utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
       expect(descriptor).to.be.an.instanceof(TestDescriptor);
@@ -58,6 +58,18 @@ describe("TestDescriptorBuilder", ()=> {
       let descriptor:TestDescriptor =
                         builder.build(utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
       expect(descriptor.timeout).to.equal(utils.TIMEOUT);
+    });
+    
+    it("should return the 'order' property as defined by the 'params.order' parameter", function() {
+      let descriptor:TestDescriptor =
+                        builder.build(utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
+      expect(descriptor.order).to.equal(utils.ORDER);
+    });
+    
+    it("should return the 'disabled' property as defined by the 'params.disabled' parameter", function() {
+      let descriptor:TestDescriptor =
+                        builder.build(utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
+      expect(descriptor.disabled).to.equal(utils.DISABLED);
     });
   });
 });

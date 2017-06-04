@@ -15,8 +15,8 @@
 //   limitations under the License.
 
 import {TigerLoggerProxy} from "../logging/TigerLoggerProxy";
-import {UrlStringsEnum, SourceFileInspector, FilePreProcessor,
-        FileProperties, WalkPathUtil} from "jec-commons";
+import {UrlStringsEnum, SourceFileInspector, FilePreProcessor, FileProperties} from "jec-commons";
+import {WalkPathUtil} from "jec-commons-node";
 
 /**
  * The default <code>SourceFileInspector</code> implementation for Tiger

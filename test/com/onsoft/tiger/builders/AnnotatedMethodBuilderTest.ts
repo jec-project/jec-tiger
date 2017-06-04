@@ -24,7 +24,7 @@ import {TigerAnnotatedMethod} from "../../../../../src/com/onsoft/tiger/runners/
 import {AnnotatedMethodBuilder} from "../../../../../src/com/onsoft/tiger/builders/AnnotatedMethodBuilder";
 
 // Utilities:
-const utils:any = require("../../../../..//utils/test-utils/utilities/AnnotatedMethodBuilderTestUtils");
+import * as utils from "../../../../..//utils/test-utils/utilities/AnnotatedMethodBuilderTestUtils";
 
 // Test:
 describe("AnnotatedMethodBuilder", ()=> {

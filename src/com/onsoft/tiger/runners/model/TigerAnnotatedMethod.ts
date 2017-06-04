@@ -15,12 +15,14 @@
 //   limitations under the License.
 
 import {AnnotatedMethod} from "jec-juta";
+import {TigerTestableMethod} from "./TigerTestableMethod";
 
 /**
  * The <code>TigerAnnotatedMethod</code> class is te default implementation for 
  * the <code>AnnotatedMethod</code> interface in the Tiger framework.
  */
-export class TigerAnnotatedMethod implements AnnotatedMethod {
+export class TigerAnnotatedMethod extends TigerTestableMethod
+                                                    implements AnnotatedMethod {
   
   //////////////////////////////////////////////////////////////////////////////
   // Constructor function
@@ -29,21 +31,13 @@ export class TigerAnnotatedMethod implements AnnotatedMethod {
   /**
    * Creates a new <code>TigerAnnotatedMethod</code> instance.
    */
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // Private properties
   //////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * @inheritDoc
-   */
-  public timeout:number = -1;
-  
-  /**
-   * @inheritDoc
-   */
-  public name:string = null;
   
   /**
    * @inheritDoc

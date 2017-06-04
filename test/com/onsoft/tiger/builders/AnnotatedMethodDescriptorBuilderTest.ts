@@ -22,7 +22,7 @@ import {AnnotatedMethodDescriptor} from "../../../../../src/com/onsoft/tiger/ref
 import {AnnotatedMethodDescriptorBuilder} from "../../../../../src/com/onsoft/tiger/builders/AnnotatedMethodDescriptorBuilder";
 
 // Utilities:
-const utils:any = require("../../../../..//utils/test-utils/utilities/AnnotatedMethodDescriptorBuilderTestUtils");
+import * as utils from "../../../../..//utils/test-utils/utilities/AnnotatedMethodDescriptorBuilderTestUtils";
 
 // Test:
 describe("AnnotatedMethodDescriptorBuilder", ()=> {

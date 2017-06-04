@@ -22,7 +22,7 @@ import {AnnotatedMethod, AnnotatedMethodType} from "jec-juta";
 import {AnnotatedMethodsMapper} from "../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
 
 // Utilities:
-const utils:any = require("../../../../../utils/test-utils/utilities/AnnotatedMethodsMapperTestUtils");
+import * as utils from "../../../../../utils/test-utils/utilities/AnnotatedMethodsMapperTestUtils";
 
 // Test:
 describe("AnnotatedMethodsMapper", ()=> {

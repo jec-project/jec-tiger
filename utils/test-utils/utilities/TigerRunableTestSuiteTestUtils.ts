@@ -18,7 +18,7 @@ import {TestSuiteDescriptor} from "../../../src/com/onsoft/tiger/reflect/TestSui
 import {TestDescriptor} from "../../../src/com/onsoft/tiger/reflect/TestDescriptor";
 import {AnnotatedMethodDescriptor} from "../../../src/com/onsoft/tiger/reflect/AnnotatedMethodDescriptor";
 import {TestSuiteDescriptorRegistry} from "../../../src/com/onsoft/tiger/metadata/TestSuiteDescriptorRegistry";
-import {AnnotatedMethodType} from "jec-juta";
+import {AnnotatedMethodType, TestSorters} from "jec-juta";
 
 /*!
  * This module constains utilities used by the TigerRunableTestSuiteTest 
@@ -27,6 +27,8 @@ import {AnnotatedMethodType} from "jec-juta";
 
 // Utilities:
 export const DESCRIPTION:string = "Test description";
+export const DISABLED:boolean = true;
+export const TEST_ORDER:number = TestSorters.NAME_ASCENDING;
 const buildTestDescriptor:Function = function():TestDescriptor {
   let descriptor:TestDescriptor = new TestDescriptor();
   descriptor.description = DESCRIPTION;
@@ -38,6 +40,8 @@ const buildTestDescriptor:Function = function():TestDescriptor {
 const buildTestSuiteDescriptor:Function = function():TestSuiteDescriptor {
   let testSuiteDescriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
   testSuiteDescriptor.description = DESCRIPTION;
+  testSuiteDescriptor.disabled = DISABLED;
+  testSuiteDescriptor.testOrder = TEST_ORDER;
   return testSuiteDescriptor;
 };
 const buildAnnotatedMethodDescriptor:Function = function():AnnotatedMethodDescriptor {

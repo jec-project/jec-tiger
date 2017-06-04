@@ -15,6 +15,7 @@
 //--> com/onsoft/tiger/builders
 export {AnnotatedMethodBuilder} from "./builders/AnnotatedMethodBuilder";
 export {AnnotatedMethodDescriptorBuilder} from "./builders/AnnotatedMethodDescriptorBuilder";
+export {ParameterDescriptorBuilder} from "./builders/ParameterDescriptorBuilder";
 export {RunableTestSuiteFactory} from "./builders/RunableTestSuiteFactory";
 export {TestDescriptorBuilder} from "./builders/TestDescriptorBuilder";
 export {TestMethodBuilder} from "./builders/TestMethodBuilder";
@@ -30,6 +31,7 @@ export {TigerConnector} from "./jcad/connectors/TigerConnector";
 //--> com/onsoft/tiger/jcad/decorators
 export {AfterClassDecorator} from "./jcad/decorators/AfterClassDecorator";
 export {AfterDecorator} from "./jcad/decorators/AfterDecorator";
+export {AsyncDecorator} from "./jcad/decorators/AsyncDecorator";
 export {BeforeClassDecorator} from "./jcad/decorators/BeforeClassDecorator";
 export {BeforeDecorator} from "./jcad/decorators/BeforeDecorator";
 export {TestDecorator} from "./jcad/decorators/TestDecorator";
@@ -40,16 +42,21 @@ export {TigerLoggerProxy} from "./logging/TigerLoggerProxy";
 export {TestSuiteDescriptorRegistry} from "./metadata/TestSuiteDescriptorRegistry";
 //--> com/onsoft/tiger/reflect
 export {AnnotatedMethodDescriptor} from "./reflect/AnnotatedMethodDescriptor";
+export {ParameterDescriptor} from "./reflect/ParameterDescriptor";
+export {TestableMethodDescriptor} from "./reflect/TestableMethodDescriptor";
 export {TestDescriptor} from "./reflect/TestDescriptor";
 export {TestSuiteDescriptor} from "./reflect/TestSuiteDescriptor";
 //--> com/onsoft/tiger/runners/model
 export {TigerAnnotatedMethod} from "./runners/model/TigerAnnotatedMethod";
 export {TigerRunableTestSuite} from "./runners/model/TigerRunableTestSuite";
+export {TigerTestableMethod} from "./runners/model/TigerTestableMethod";
 export {TigerTestMethod} from "./runners/model/TigerTestMethod";
 //--> com/onsoft/tiger/runners
 export {TigerTestRunner} from "./runners/TigerTestRunner";
 //--> com/onsoft/tiger/utils
 export {AnnotatedMethodsMapper} from "./utils/AnnotatedMethodsMapper";
+export {ParametersMapUtil} from "./utils/ParametersMapUtil";
 export {SplashScreen} from "./utils/SplashScreen";
+export {TestSorterUtil} from "./utils/TestSorterUtil";
 //--> com/onsoft/tiger
 export {Tiger} from "./Tiger";

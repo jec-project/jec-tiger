@@ -53,6 +53,8 @@ export class TestDescriptorBuilder {
     testDesc.method = key;
     testDesc.repeat = params.repeat || 0;
     testDesc.timeout = params.timeout || -1;
+    testDesc.disabled = params.disabled || false;
+    testDesc.order = params.order || 0;
     return testDesc;
   }
 };

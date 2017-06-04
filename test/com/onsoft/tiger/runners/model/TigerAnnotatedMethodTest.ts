@@ -16,6 +16,7 @@
 
 import "mocha";
 import {expect} from "chai";
+import {TigerTestableMethod} from "../../../../../../src/com/onsoft/tiger/runners/model/TigerTestableMethod";
 
 // Class to test:
 import {TigerAnnotatedMethod} from "../../../../../../src/com/onsoft/tiger/runners/model/TigerAnnotatedMethod";
@@ -25,15 +26,11 @@ describe("TigerAnnotatedMethod", ()=> {
 
   let descriptor:TigerAnnotatedMethod = new TigerAnnotatedMethod();
   
-  it("should have a 'type' property set to null", function() {
-    expect(descriptor).to.have.property("type", null);
+  it("should extend the TigerTestableMethod class", function() {
+    expect(descriptor).to.be.an.instanceOf(TigerTestableMethod);
   });
 
-  it("should have a 'name' property set to null", function() {
-    expect(descriptor).to.have.property("name", null);
-  });
-  
-  it("should have a 'timeout' property set to -1", function() {
-    expect(descriptor).to.have.property("timeout", -1);
+  it("should have a 'type' property set to null", function() {
+    expect(descriptor).to.have.property("type", null);
   });
 });

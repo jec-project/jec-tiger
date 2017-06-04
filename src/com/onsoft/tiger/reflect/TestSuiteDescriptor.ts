@@ -14,6 +14,8 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+import {TestSorters} from "jec-juta";
+
 /**
  * The <code>TestSuiteDescriptor</code> class contains information about a JUTA 
  * test suite.
@@ -39,14 +41,15 @@ export class TestSuiteDescriptor {
   public description:string = null;
 
   /**
-   * The reference of the function called before each test of the associated
-   * test suite.
+   * Indicates whether the associated test suite has to be ignored 
+   * (<code>true</code>), or not (<code>false</code>). Default value is
+   * <code>false</code>.
    */
-  public before:Function = null;
+  public disabled:boolean = false;
 
   /**
-   * The reference of the function called immediately after each test of the 
-   * associated test suite.
+   * Indicates the test execution order for the associated test suite. Default
+   * value is <code>TestSorters.DEFAULT</code>.
    */
-  public after:Function = null;
+  public testOrder:number = TestSorters.DEFAULT;
 }

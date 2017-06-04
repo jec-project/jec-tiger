@@ -23,7 +23,7 @@ import {AbstractDecoratorConnector} from "jec-commons";
 import {TigerConnector} from "../../../../../../src/com/onsoft/tiger/jcad/connectors/TigerConnector";
 
 // Utilities:
-const utils:any = require("../../../../../../utils/test-utils/utilities/TigerConnectorTestUtils");
+import * as utils from "../../../../../../utils/test-utils/utilities/TigerConnectorTestUtils";
 
 // Test:
 describe("TigerConnector", ()=> {

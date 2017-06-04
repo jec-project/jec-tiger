@@ -59,6 +59,7 @@ export class AnnotatedMethodDescriptorBuilder {
     desc.type = type;
     if(params) {
       desc.timeout = params.timeout;
+      desc.disabled = params.disabled || false;
     }
     return desc;
   }

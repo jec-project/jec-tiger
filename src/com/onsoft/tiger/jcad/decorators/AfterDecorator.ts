@@ -21,7 +21,7 @@ import {AnnotatedMethodDescriptorBuilder} from "../../builders/AnnotatedMethodDe
 import {AnnotatedMethodDescriptor} from "../../reflect/AnnotatedMethodDescriptor";
 
 /**
- * The <code>AAfterDecorator</code> class defines the <code>Decorator</code>  
+ * The <code>AfterDecorator</code> class defines the <code>Decorator</code>  
  * implementation for the JUTA <code>@After</code> decorator.
  */
 export class AfterDecorator implements Decorator {

@@ -50,6 +50,7 @@ export class TestMethodBuilder {
     testMethod.name = descriptor.method;
     testMethod.timeout = descriptor.timeout;
     testMethod.repeat = descriptor.repeat;
+    testMethod.disabled = descriptor.disabled || false;
     return testMethod;
   }
 };

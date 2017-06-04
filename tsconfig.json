@@ -13,7 +13,9 @@
     "baseUrl": "."
   },
   "filesGlob": [
-    "./src/**/*.ts"
+    "./src/**/*.ts",
+    "./utils/**/*.ts",
+    "./test/**/*.ts"
   ],
   "exclude": [
     "node_modules",

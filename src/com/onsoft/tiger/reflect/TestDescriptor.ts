@@ -14,11 +14,13 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+import {TestableMethodDescriptor} from "./TestableMethodDescriptor";
+
 /**
  * The <code>TestDescriptor</code> class contains information about a JUTA test
  * class.
  */
-export class TestDescriptor {
+export class TestDescriptor extends TestableMethodDescriptor {
   
   ////////////////////////////////////////////////////////////////////////////
   // Constructor function
@@ -27,7 +29,9 @@ export class TestDescriptor {
   /**
    * Creates a new <code>TestDescriptor</code> instance.
    */
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   ////////////////////////////////////////////////////////////////////////////
   // Public properties
@@ -39,20 +43,14 @@ export class TestDescriptor {
   public description:string = null;
 
   /**
-   * The name of the method that wraps the test associated whith this
-   * <code>TestDescriptor</code> instance.
-   */
-  public method:string = null;
-  
-  /**
    * The number of repetitions for the test associated whith this
    * <code>TestDescriptor</code> instance.
    */
   public repeat:number = 0;
 
   /**
-   * The timeout for the test associated whith this <code>TestDescriptor</code>
-   * instance.
+   * The number the execution order for the test associated whith this
+   * <code>TestDescriptor</code> instance.
    */
-  public timeout:number = -1;
+  public order:number = 0;
 }

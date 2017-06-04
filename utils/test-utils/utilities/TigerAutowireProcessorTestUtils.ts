@@ -14,7 +14,8 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import {FileProperties, FilePropertiesBuilder, JcadContextManager} from "jec-commons";
+import {FileProperties, JcadContextManager} from "jec-commons";
+import {FilePropertiesBuilder} from "jec-commons-node";
 import {Tiger} from "../../../src/com/onsoft/tiger/Tiger";
 import {TestWatcher} from "../../../src/com/onsoft/tiger/core/TestWatcher";
 import {TigerFactory} from "../../../src/com/onsoft/tiger/builders/TigerFactory";

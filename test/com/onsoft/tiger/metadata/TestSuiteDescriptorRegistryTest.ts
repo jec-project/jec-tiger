@@ -23,7 +23,7 @@ import {AnnotatedMethodDescriptor} from "../../../../../src/com/onsoft/tiger/ref
 import {TestSuiteDescriptorRegistry} from "../../../../../src/com/onsoft/tiger/metadata/TestSuiteDescriptorRegistry";
 
 // Utilities:
-const utils:any = require("../../../../../utils/test-utils/utilities/TestSuiteDescriptorRegistryTestUtils");
+import * as utils from "../../../../../utils/test-utils/utilities/TestSuiteDescriptorRegistryTestUtils";
 
 // Test:
 describe("TestSuiteDescriptorRegistry", ()=> {
@@ -32,9 +32,11 @@ describe("TestSuiteDescriptorRegistry", ()=> {
     it("should initialize the TestSuiteDescriptorRegistry members when a TestSuiteDescriptor have been registered", ()=> {
       expect(TestSuiteDescriptorRegistry.getTestDescriptorCollection()).to.be.null;
       expect(TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection()).to.be.null;
+      expect(TestSuiteDescriptorRegistry.getParametersMap()).to.be.null;
       TestSuiteDescriptorRegistry.registerDescriptor(utils.TEST_SUITE_DESCRIPTOR);
       expect(TestSuiteDescriptorRegistry.getTestDescriptorCollection()).not.to.be.null;
       expect(TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection()).not.to.be.null;
+      expect(TestSuiteDescriptorRegistry.getParametersMap()).not.to.be.null;
       TestSuiteDescriptorRegistry.registerDescriptor(null);
     });
 
@@ -42,9 +44,11 @@ describe("TestSuiteDescriptorRegistry", ()=> {
       TestSuiteDescriptorRegistry.registerDescriptor(utils.TEST_SUITE_DESCRIPTOR);
       expect(TestSuiteDescriptorRegistry.getTestDescriptorCollection()).not.to.be.null;
       expect(TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection()).not.to.be.null;
+      expect(TestSuiteDescriptorRegistry.getParametersMap()).not.to.be.null;
       TestSuiteDescriptorRegistry.registerDescriptor(null);
       expect(TestSuiteDescriptorRegistry.getTestDescriptorCollection()).to.be.null;
       expect(TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection()).to.be.null;
+      expect(TestSuiteDescriptorRegistry.getParametersMap()).to.be.null;
     });
     
     it("should trhow an error when trying to reset the TestSuiteDescriptorRegistry members that have not been initialized", ()=> {

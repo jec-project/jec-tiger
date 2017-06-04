@@ -10,7 +10,7 @@ import { FileProperties, FilePreProcessor, SourceFileInspector,
          Decorator, AbstractDecoratorConnector, LoggerProxy,
          AbstractLoggerProxy } from "jec-commons";
 import { AnnotatedMethod, AnnotatedMethodParams, RunableTestSuite, TestParams,
-         TestMethod, TestSuiteParams, TestRunner } from "jec-juta";
+         TestMethod, TestSuiteParams, TestRunner, TestableMethod } from "jec-juta";
 
 export class AnnotatedMethodBuilder {
     constructor();
@@ -20,6 +20,11 @@ export class AnnotatedMethodBuilder {
 export class AnnotatedMethodDescriptorBuilder {
     constructor();
     build(key: string, descriptor: PropertyDescriptor, type: number, params?: AnnotatedMethodParams): AnnotatedMethodDescriptor;
+}
+
+export class ParameterDescriptorBuilder {
+    constructor();
+    build(methodName: string, connectorRef: string, parameterIndex: number): ParameterDescriptor;
 }
 
 export class RunableTestSuiteFactory {
@@ -120,6 +125,11 @@ export class AfterDecorator implements Decorator {
     decorate(target: any, key: string, descriptor: PropertyDescriptor, params?: AnnotatedMethodParams): any;
 }
 
+export class AsyncDecorator implements Decorator {
+    constructor();
+    decorate(target: any, propertyKey: string | symbol, parameterIndex: number): any;
+}
+
 export class BeforeClassDecorator implements Decorator {
     constructor();
     decorate(target: any, key: string, descriptor: PropertyDescriptor, params?: AnnotatedMethodParams): any;
@@ -159,33 +169,41 @@ export class TestSuiteDescriptorRegistry {
     static addAnnotatedMethodDescriptor(methodDescriptor: AnnotatedMethodDescriptor): void;
 }
 
-export class AnnotatedMethodDescriptor {
+export class AnnotatedMethodDescriptor extends TestableMethodDescriptor {
     constructor();
     type: number;
-    method: string;
-    timeout: number;
 }
 
-export class TestDescriptor {
+export class ParameterDescriptor {
+    constructor();
+    index: number;
+    methodName: string;
+    connectorRef: string;
+}
+
+export abstract class TestableMethodDescriptor {
+    constructor();
+    method: string;
+    timeout: number;
+    disabled: boolean;
+}
+
+export class TestDescriptor extends TestableMethodDescriptor {
     constructor();
     description: string;
-    method: string;
     repeat: number;
-    timeout: number;
+    order: number;
 }
 
 export class TestSuiteDescriptor {
     constructor();
-    private initObj();
     description: string;
-    before: Function;
-    after: Function;
+    disabled: boolean;
+    testOrder: number;
 }
 
-export class TigerAnnotatedMethod implements AnnotatedMethod {
+export class TigerAnnotatedMethod extends TigerTestableMethod implements AnnotatedMethod {
     constructor();
-    timeout: number;
-    name: string;
     type: number;
 }
 
@@ -203,14 +221,23 @@ export class TigerRunableTestSuite implements RunableTestSuite {
     getDescription(): string;
     getTestMethods(): TestMethod[];
     getAnnotatedMethods(): AnnotatedMethod[];
+    isDisabled(): boolean;
+    getTestOrder(): number;
 }
 
-export class TigerTestMethod implements TestMethod {
+export abstract class TigerTestableMethod implements TestableMethod {
+    constructor();
+    timeout: number;
+    name: string;
+    async: boolean;
+    disabled: boolean;
+}
+
+export class TigerTestMethod extends TigerTestableMethod implements TestMethod {
     constructor();
     description: string;
-    name: string;
-    timeout: number;
     repeat: number;
+    order: number;
 }
 
 export class TigerTestRunner implements TestRunner {
@@ -232,9 +259,23 @@ export class AnnotatedMethodsMapper {
     getMethodByType(type: number): AnnotatedMethod;
 }
 
+export class ParametersMapUtil {
+    constructor();
+    static getParameterCollection(methodName: string): Array<ParameterDescriptor>;
+}
+
 export class SplashScreen {
     constructor();
     displayMessage(version: string): void;
+}
+
+export class TestSorterUtil {
+    constructor();
+    private nameAscendingSorter(a, b);
+    private nameDescendingSorter(a, b);
+    private orderDescendingSorter(a, b);
+    private orderAscendingSorter(a, b);
+    sort(methods: TestMethod[], sortBy: number): void;
 }
 
 export interface Tiger {

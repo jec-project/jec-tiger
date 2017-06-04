@@ -23,7 +23,7 @@ import {TestSuiteError} from "jec-juta";
 import {DefaultTigerContainer} from "../../../../../src/com/onsoft/tiger/core/DefaultTigerContainer";
 
 // Utilities:
-const utils:any = require("../../../../..//utils/test-utils/utilities/DefaultTigerContainerTestUtils");
+import * as utils from "../../../../..//utils/test-utils/utilities/DefaultTigerContainerTestUtils";
 
 // Test:
 describe("DefaultTigerContainer", ()=> {

@@ -11,7 +11,7 @@ import { FileProperties, FilePreProcessor, SourceFileInspector,
          Decorator, AbstractDecoratorConnector, LoggerProxy,
          AbstractLoggerProxy } from "jec-commons";
 import { AnnotatedMethod, AnnotatedMethodParams, RunableTestSuite, TestParams,
-         TestMethod, TestSuiteParams, TestRunner } from "jec-juta";
+         TestMethod, TestSuiteParams, TestRunner, TestableMethod } from "jec-juta";
 
 /*PLACEHOLDER*/
 

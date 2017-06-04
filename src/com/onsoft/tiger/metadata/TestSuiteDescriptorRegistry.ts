@@ -17,6 +17,7 @@
 import {TestSuiteDescriptor} from "../reflect/TestSuiteDescriptor";
 import {TestDescriptor} from "../reflect/TestDescriptor";
 import {AnnotatedMethodDescriptor} from "../reflect/AnnotatedMethodDescriptor";
+import {ParameterDescriptor} from "../reflect/ParameterDescriptor";
 
 /**
  * A static helper class which is used to temporarily store
@@ -47,6 +48,12 @@ export class TestSuiteDescriptorRegistry {
    */
   private static _methodColl:Array<AnnotatedMethodDescriptor> = null;
 
+  /**
+   * The map which is used to store the parameter descriptors for the HTTP
+   * methods exposed by the associated resource.
+   */
+  private static _parametersMap:Map<string, Array<ParameterDescriptor>> = null;
+
   //////////////////////////////////////////////////////////////////////////////
   // Public methods
   //////////////////////////////////////////////////////////////////////////////
@@ -67,11 +74,15 @@ export class TestSuiteDescriptorRegistry {
       TestSuiteDescriptorRegistry._testColl = new Array<TestDescriptor>();
       TestSuiteDescriptorRegistry._methodColl = 
                                          new Array<AnnotatedMethodDescriptor>();
+      TestSuiteDescriptorRegistry._parametersMap =
+                                  new Map<string, Array<ParameterDescriptor>>();
     } else {
       TestSuiteDescriptorRegistry._testColl.splice(0);
       TestSuiteDescriptorRegistry._testColl = null;
       TestSuiteDescriptorRegistry._methodColl.splice(0);
       TestSuiteDescriptorRegistry._methodColl = null;
+      TestSuiteDescriptorRegistry._parametersMap.clear();
+      TestSuiteDescriptorRegistry._parametersMap = null;
     }
     return testSuiteDescriptor;
   }
@@ -134,5 +145,16 @@ export class TestSuiteDescriptorRegistry {
   public static addAnnotatedMethodDescriptor(
                               methodDescriptor:AnnotatedMethodDescriptor):void {
     TestSuiteDescriptorRegistry._methodColl.push(methodDescriptor);
+  }
+  
+  /**
+   * Returns the map which is used to store the parameter descriptors for the 
+   * associated test class.
+   *
+   * @return {Map<string, Array<ParameterDescriptor>>}
+   *                        the map of <code>ParameterDescriptor</code> objects.
+   */
+  public static getParametersMap():Map<string, Array<ParameterDescriptor>> {
+    return TestSuiteDescriptorRegistry._parametersMap;
   }
 }

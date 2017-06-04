@@ -49,6 +49,7 @@ export class AnnotatedMethodBuilder {
     method.name = descriptor.method;
     method.type = descriptor.type;
     method.timeout = descriptor.timeout;
+    method.disabled = descriptor.disabled;
     return method;
   }
 };

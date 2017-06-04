@@ -19,7 +19,7 @@
  */
 
 // Utilities:
-const VERSION:string = "1.0.0";
-const TITLE:string = "Tiger Unit Testing Framework";
-const RIGHTS:string = "All Rights Reserved";
-const COPYRIGHT:RegExp = /\(C\) [0-9]{4} - ONSOFT SYSTEMS/;
+export const VERSION:string = "1.0.0";
+export const TITLE:string = "Tiger Unit Testing Framework";
+export const RIGHTS:string = "All Rights Reserved";
+export const COPYRIGHT:RegExp = /\(C\) [0-9]{4} - ONSOFT SYSTEMS/;

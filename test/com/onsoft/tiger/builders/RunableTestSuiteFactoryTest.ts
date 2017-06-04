@@ -23,7 +23,7 @@ import {TigerRunableTestSuite} from "../../../../../src/com/onsoft/tiger/runners
 import {RunableTestSuiteFactory} from "../../../../../src/com/onsoft/tiger/builders/RunableTestSuiteFactory";
 
 // Utilities:
-const utils:any = require("../../../../..//utils/test-utils/utilities/RunableTestSuiteFactoryTestUtils");
+import * as utils from "../../../../..//utils/test-utils/utilities/RunableTestSuiteFactoryTestUtils";
 
 // Test:
 describe("RunableTestSuiteFactory", ()=> {
@@ -33,6 +33,8 @@ describe("RunableTestSuiteFactory", ()=> {
     utils.DCM.addConnector(utils.TEST_SUITE_CONNECTOR, utils.CONTEXT);
     utils.CTXM.addContext(JutaConnectorRefs.TEST_CONNECTOR_REF, utils.CONTEXT);
     utils.DCM.addConnector(utils.TEST_CONNECTOR, utils.CONTEXT);
+    utils.CTXM.addContext(JutaConnectorRefs.ASYNC_CONNECTOR_REF, utils.CONTEXT);
+    utils.DCM.addConnector(utils.ASYNC_CONNECTOR, utils.CONTEXT);
   });
 
   after(()=> {
@@ -40,6 +42,8 @@ describe("RunableTestSuiteFactory", ()=> {
     utils.DCM.removeConnector(JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF, utils.CONTEXT);
     utils.CTXM.removeContext(JutaConnectorRefs.TEST_CONNECTOR_REF);
     utils.DCM.removeConnector(JutaConnectorRefs.TEST_CONNECTOR_REF, utils.CONTEXT);
+    utils.CTXM.removeContext(JutaConnectorRefs.ASYNC_CONNECTOR_REF);
+    utils.DCM.removeConnector(JutaConnectorRefs.ASYNC_CONNECTOR_REF, utils.CONTEXT);
   });
 
   describe("#create()", ()=> {

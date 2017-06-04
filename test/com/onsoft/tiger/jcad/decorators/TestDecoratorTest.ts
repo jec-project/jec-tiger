@@ -26,7 +26,7 @@ import {TestDescriptor} from "../../../../../../src/com/onsoft/tiger/reflect/Tes
 import {TestDecorator} from "../../../../../../src/com/onsoft/tiger/jcad/decorators/TestDecorator";
 
 // Utilities:
-const utils:any = require("../../../../../../utils/test-utils/utilities/DecoratorsTestUtils");
+import * as utils from "../../../../../../utils/test-utils/utilities/DecoratorsTestUtils";
 
 // Chai declarations:
 const expect:any = chai.expect;
@@ -35,32 +35,64 @@ chai.use(spies);
 // Test:
 describe("TestDecorator", ()=> {
   
+  let decorator:Decorator = null;
+
   beforeEach(()=> {
     utils.initRegistry();
+    decorator = new TestDecorator();
   });
 
   afterEach(()=> {
     utils.resetRegistry();
+    decorator = null;
   });
 
   describe("#decorate()", ()=> {
 
     it("should return the reference to the target instance", ()=>{
-      let decorator:Decorator = new TestDecorator();
       let target:any = decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.TEST_PARAMS);
       expect(target).to.equal(utils.TARGET);
     });
 
-    it("should register information into the TestSuiteDescriptorRegistry object", ()=>{
+    it("should register information into the TestSuiteDescriptorRegistry by invoking the addAnnotatedMethodDescriptor() method", ()=>{
       let spy:any = chai.spy.on(TestSuiteDescriptorRegistry, "addTestDescriptor");
-      let decorator:Decorator = new TestDecorator();
       decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.TEST_PARAMS);
       expect(spy).to.have.been.called.once;
+    });
+
+    it("should create an TestDescriptor object into the TestSuiteDescriptorRegistry object", ()=>{
       let descriptors:TestDescriptor[] = TestSuiteDescriptorRegistry.getTestDescriptorCollection();
+      expect(descriptors).to.have.lengthOf(0);
+      decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.TEST_PARAMS);
+      descriptors= TestSuiteDescriptorRegistry.getTestDescriptorCollection();
       expect(descriptors).to.have.lengthOf(1);
+    });
+
+    it("should create an TestDescriptor instance with the specified 'method' value", ()=>{
+      decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.TEST_PARAMS);
+      let descriptors:TestDescriptor[] = TestSuiteDescriptorRegistry.getTestDescriptorCollection();
       let descriptor:TestDescriptor = descriptors[0];
       expect(descriptor.method).to.equal(utils.KEY);
+    });
+    
+    it("should create an TestDescriptor instance with the specified 'timeout' value", ()=>{
+      decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.TEST_PARAMS);
+      let descriptors:TestDescriptor[] = TestSuiteDescriptorRegistry.getTestDescriptorCollection();
+      let descriptor:TestDescriptor = descriptors[0];
       expect(descriptor.timeout).to.equal(utils.TIMEOUT);
+    });
+    
+    it("should create an TestDescriptor instance with the specified 'disabled' value", ()=>{
+      decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.TEST_PARAMS);
+      let descriptors:TestDescriptor[] = TestSuiteDescriptorRegistry.getTestDescriptorCollection();
+      let descriptor:TestDescriptor = descriptors[0];
+      expect(descriptor.disabled).to.equal(utils.DISABLED);
+    });
+
+    it("should create an TestDescriptor instance with the specified 'description' value", ()=>{
+      decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.TEST_PARAMS);
+      let descriptors:TestDescriptor[] = TestSuiteDescriptorRegistry.getTestDescriptorCollection();
+      let descriptor:TestDescriptor = descriptors[0];
       expect(descriptor.description).to.equal(utils.DESCRIPTION);
     });
   });

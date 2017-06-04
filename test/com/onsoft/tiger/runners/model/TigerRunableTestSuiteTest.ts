@@ -16,13 +16,13 @@
 
 import "mocha";
 import {expect} from "chai";
-import {TestSuiteError, TestMethod, AnnotatedMethod} from "jec-juta";
+import {TestSuiteError, TestMethod, AnnotatedMethod, TestSorters} from "jec-juta";
 
 // Class to test:
 import {TigerRunableTestSuite} from "../../../../../../src/com/onsoft/tiger/runners/model/TigerRunableTestSuite";
 
 // Utilities:
-const utils:any = require("../../../../../../utils/test-utils/utilities/TigerRunableTestSuiteTestUtils");
+import * as utils from "../../../../../../utils/test-utils/utilities/TigerRunableTestSuiteTestUtils";
 
 // Test:
 describe("TigerRunableTestSuite", ()=> {
@@ -38,6 +38,38 @@ describe("TigerRunableTestSuite", ()=> {
     });
   });
   
+  describe("#isDisabled()", ()=> {
+
+    it("should return false when no test suite have been registered", ()=> {
+      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      expect(trts.isDisabled()).to.be.false;
+    });
+    
+    it("should return the same as value as specified by the TestSuiteDescriptor ", ()=> {
+      utils.initRegistry();
+      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      trts.setTestSuite(utils.TEST_SUITE);
+      expect(trts.isDisabled()).to.equal(utils.DISABLED);
+      utils.resetRegistry();
+    });
+  });
+
+  describe("#getTestOrder()", ()=> {
+
+    it("should return TestSorters.DEFAULT when no test suite have been registered", ()=> {
+      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      expect(trts.getTestOrder()).to.equal(TestSorters.DEFAULT);
+    });
+    
+    it("should return the same as value as specified by the TestSuiteDescriptor ", ()=> {
+      utils.initRegistry();
+      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      trts.setTestSuite(utils.TEST_SUITE);
+      expect(trts.getTestOrder()).to.equal(utils.TEST_ORDER);
+      utils.resetRegistry();
+    });
+  });
+
   describe("#getTestSuite()", ()=> {
 
     it("should return null when no test suite have been registered", ()=> {

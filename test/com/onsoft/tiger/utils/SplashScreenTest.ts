@@ -22,7 +22,7 @@ import * as spies from "chai-spies";
 import {SplashScreen} from "../../../../../src/com/onsoft/tiger/utils/SplashScreen";
 
 // Utilities:
-const utils:any = require("../../../../..//utils/test-utils/utilities/AnnotatedMethodsMapperTestUtils");
+import * as utils from "../../../../../utils/test-utils/utilities/SplashScreenTestUtils";
 
 // Chai declarations:
 const expect:any = chai.expect;
@@ -41,7 +41,7 @@ describe("SplashScreen", ()=> {
         expect(message).to.have.string(utils.TITLE);
         expect(message).to.have.string(utils.VERSION);
         expect(message).to.have.string(utils.RIGHTS);
-        expect(COPYRIGHT.test(message)).to.be.true;
+        expect(utils.COPYRIGHT.test(message)).to.be.true;
         oldLog.apply(console, arguments);
       };
       expect(spy).to.have.been.called;

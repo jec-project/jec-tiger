@@ -23,7 +23,7 @@ import {TigerTestMethod} from "../../../../../src/com/onsoft/tiger/runners/model
 import {TestMethodBuilder} from "../../../../../src/com/onsoft/tiger/builders/TestMethodBuilder";
 
 // Utilities:
-const utils:any = require("../../../../..//utils/test-utils/utilities/TestMethodBuilderTestUtils");
+import * as utils from "../../../../..//utils/test-utils/utilities/TestMethodBuilderTestUtils";
 
 // Test:
 describe("TestMethodBuilder", ()=> {

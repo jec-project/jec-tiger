@@ -24,6 +24,7 @@ import {AfterClassDecorator} from "./decorators/AfterClassDecorator";
 import {AfterDecorator} from "./decorators/AfterDecorator";
 import {BeforeClassDecorator} from "./decorators/BeforeClassDecorator";
 import {BeforeDecorator} from "./decorators/BeforeDecorator";
+import {AsyncDecorator} from "./decorators/AsyncDecorator";
 
 /**
  * A helper class that is used to manage desciptor contexts for the JUTA
@@ -122,6 +123,9 @@ export class JutaContextManager {
     this.initContext(
       JutaConnectorRefs.BEFORE_CONNECTOR_REF, BeforeDecorator
     );
+    this.initContext(
+      JutaConnectorRefs.ASYNC_CONNECTOR_REF, AsyncDecorator
+    );
   }
 
   /**
@@ -136,6 +140,7 @@ export class JutaContextManager {
     this.removeContext(JutaConnectorRefs.AFTER_CONNECTOR_REF);
     this.removeContext(JutaConnectorRefs.BEFORE_CLASS_CONNECTOR_REF);
     this.removeContext(JutaConnectorRefs.BEFORE_CONNECTOR_REF);
+    this.removeContext(JutaConnectorRefs.ASYNC_CONNECTOR_REF);
     this._jcadContext = null;
   }
 }

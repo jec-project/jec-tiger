@@ -24,7 +24,7 @@ import {TestWatcher} from "../../../../../src/com/onsoft/tiger/core/TestWatcher"
 import {TigerSourceFileInspector} from "../../../../../src/com/onsoft/tiger/core/TigerSourceFileInspector";
 
 // Utilities:
-const utils:any = require("../../../../..//utils/test-utils/utilities/TigerSourceFileInspectorTestUtils");
+import * as utils from "../../../../..//utils/test-utils/utilities/TigerSourceFileInspectorTestUtils";
 
 // Chai declarations:
 const expect:any = chai.expect;
@@ -72,7 +72,7 @@ describe("TigerSourceFileInspector", ()=> {
       inspector.addSourcePath(utils.SOURCE_PATH);
       inspector.addProcessor(processor);
       inspector.inspect();
-      expect(processSpy).to.have.been.called.once;
+      expect(processSpy).to.have.been.called.exactly(utils.NUM_TEST_CLASS);
       expect(processSpy).to.have.been.called.with(utils.WATCHER);
       expect(processCompleteSpy).to.have.been.called.with(utils.WATCHER);
     });

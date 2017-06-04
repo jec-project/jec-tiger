@@ -15,12 +15,13 @@
 //   limitations under the License.
 
 import {TestMethod} from "jec-juta";
+import {TigerTestableMethod} from "./TigerTestableMethod";
 
 /**
  * The <code>TigerTestMethod</code> class is te default implementation for the
  * <code>TestMethod</code> interface in the Tiger framework.
  */
-export class TigerTestMethod implements TestMethod {
+export class TigerTestMethod extends TigerTestableMethod implements TestMethod {
   
   //////////////////////////////////////////////////////////////////////////////
   // Constructor function
@@ -29,7 +30,9 @@ export class TigerTestMethod implements TestMethod {
   /**
    * Creates a new <code>TigerTestMethod</code> instance.
    */
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // Private properties
@@ -43,15 +46,10 @@ export class TigerTestMethod implements TestMethod {
   /**
    * @inheritDoc
    */
-  public name:string = null;
-  
-  /**
-   * @inheritDoc
-   */
-  public timeout:number = -1;
-  
-  /**
-   * @inheritDoc
-   */
   public repeat:number = 0;
+  
+  /**
+   * @inheritDoc
+   */
+  public order:number = 0;
 }

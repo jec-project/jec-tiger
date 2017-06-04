@@ -43,3 +43,4 @@ export const buildProcessor:Function = function():FilePreProcessor {
 export const TIGER:Tiger = buildTiger();
 export const SOURCE_PATH:string = "/utils/test-utils/classes";
 export const WATCHER:TestWatcher = buildWatcher();
+export const NUM_TEST_CLASS:number = 2;

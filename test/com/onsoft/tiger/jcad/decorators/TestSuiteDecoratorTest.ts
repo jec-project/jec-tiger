@@ -26,7 +26,7 @@ import {TestSuiteDescriptor} from "../../../../../../src/com/onsoft/tiger/reflec
 import {TestSuiteDecorator} from "../../../../../../src/com/onsoft/tiger/jcad/decorators/TestSuiteDecorator";
 
 // Utilities:
-const utils:any = require("../../../../../../utils/test-utils/utilities/DecoratorsTestUtils");
+import * as utils from "../../../../../../utils/test-utils/utilities/DecoratorsTestUtils";
 
 // Chai declarations:
 const expect:any = chai.expect;
@@ -35,29 +35,32 @@ chai.use(spies);
 // Test:
 describe("TestSuiteDecorator", ()=> {
 
+  let decorator:Decorator = null;
+
   beforeEach(()=> {
     utils.initRegistry();
+    decorator = new TestSuiteDecorator();
   });
 
   afterEach(()=> {
     utils.resetRegistry();
+    decorator = null;
   });
 
   describe("#decorate()", ()=> {
 
     it("should return the reference to the target instance", ()=>{
-      let decorator:Decorator = new TestSuiteDecorator();
       let target:any = decorator.decorate(utils.TARGET, utils.TEST_SUITE_PARAMS);
       expect(target).to.equal(utils.TARGET);
     });
 
     it("should register information into the TestSuiteDescriptorRegistry object", ()=>{
       let spy:any = chai.spy.on(TestSuiteDescriptorRegistry, "getRegisteredDescriptor");
-      let decorator:Decorator = new TestSuiteDecorator();
       decorator.decorate(utils.TARGET, utils.TEST_SUITE_PARAMS);
       expect(spy).to.have.been.called.once;
       let descriptor:TestSuiteDescriptor = TestSuiteDescriptorRegistry.getRegisteredDescriptor();
       expect(descriptor.description).to.equal(utils.DESCRIPTION);
+      expect(descriptor.disabled).to.equal(utils.DISABLED);
     });
   });
 });

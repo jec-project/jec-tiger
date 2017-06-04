@@ -23,7 +23,7 @@ import {DefaultTigerContainer} from "../../../../../src/com/onsoft/tiger/core/De
 import {TigerFactory} from "../../../../../src/com/onsoft/tiger/builders/TigerFactory";
 
 // Utilities:
-const utils:any = require("../../../../..//utils/test-utils/utilities/TestMethodBuilderTestUtils");
+import * as utils from "../../../../..//utils/test-utils/utilities/TestMethodBuilderTestUtils";
 
 // Test:
 describe("TigerFactory", ()=> {

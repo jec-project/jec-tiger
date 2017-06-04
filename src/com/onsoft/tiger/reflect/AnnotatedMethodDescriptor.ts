@@ -14,11 +14,13 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+import {TestableMethodDescriptor} from "./TestableMethodDescriptor";
+
 /**
  * The <code>AnnotatedMethodDescriptor</code> class contains information about a 
  * method annotated by a JUTA decorator.
  */
-export class AnnotatedMethodDescriptor {
+export class AnnotatedMethodDescriptor extends TestableMethodDescriptor {
   
   ////////////////////////////////////////////////////////////////////////////
   // Constructor function
@@ -27,7 +29,9 @@ export class AnnotatedMethodDescriptor {
   /**
    * Creates a new <code>AnnotatedMethodDescriptor</code> instance.
    */
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   ////////////////////////////////////////////////////////////////////////////
   // Public properties
@@ -39,16 +43,4 @@ export class AnnotatedMethodDescriptor {
    * enum.
    */
   public type:number = -1;
-
-  /**
-   * The name of the method that wraps the test associated whith this
-   * <code>AnnotatedMethodDescriptor</code> instance.
-   */
-  public method:string = null;
-
-  /**
-   * Specifies the timeout for this <code>AnnotatedMethodDescriptor</code>
-   * instance.
-   */
-  public timeout:number = -1;
 }

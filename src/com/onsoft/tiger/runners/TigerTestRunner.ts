@@ -60,11 +60,21 @@ export class TigerTestRunner implements TestRunner {
    * @param {any} scope the scope for current test.
    */
   private applyTestMethod(method:TestMethod, testSuiteObj:any, scope:any):void {
+    if(method.disabled) {
+        it(`disabled test: ${method.name}`);
+        return;
+    }
     let timeout:number = method.timeout;
     if(timeout && timeout > 0) scope.timeout(timeout);
-    it(method.description, () => {
-      testSuiteObj[method.name]();
-    });
+    if(method.async) {
+       it(method.description, (done?:MochaDone) => {
+        testSuiteObj[method.name](done);
+      });
+    } else {
+       it(method.description, () => {
+        testSuiteObj[method.name]();
+       });
+    }
   }
 
   /**
@@ -79,31 +89,37 @@ export class TigerTestRunner implements TestRunner {
   private applyAnnotatedMethod(method:AnnotatedMethod, testSuiteObj:any,
                                                                scope:any):void {
     let timeout:number = -1;
+    let methodRef:Function = null;
     if(method) {
+      if(method.disabled) {
+         it(`disabled config method: ${method.name}`);
+         return;
+      }
       timeout = method.timeout;
       if(timeout && timeout > 0) scope.timeout(timeout);
       switch(method.type) {
         case AnnotatedMethodType.BEFORE_CLASS :
-          before(() => {
-            testSuiteObj[method.name]();
-          });
+          methodRef = before;
           break;
         case AnnotatedMethodType.AFTER_CLASS :
-          after(() => {
-            testSuiteObj[method.name]();
-          });
+          methodRef = after;
           break;
         case AnnotatedMethodType.BEFORE :
-          beforeEach(() => {
-            testSuiteObj[method.name]()
-          });
+          methodRef = beforeEach;
           break;
         case AnnotatedMethodType.AFTER :
-          afterEach(() => {
-            testSuiteObj[method.name]();
-          });
+          methodRef = afterEach;
           break;
       }
+      if(method.async) {
+        methodRef((done?:MochaDone) => {
+          testSuiteObj[method.name](done);
+        });
+      } else {
+        methodRef(() => {
+          testSuiteObj[method.name]();
+        });
+      } 
     }
   }
 
@@ -117,7 +133,8 @@ export class TigerTestRunner implements TestRunner {
   public runTest(testSuite:RunableTestSuite, callback:(err:any)=>void):void {
     let testMethods:TestMethod[] = testSuite.getTestMethods();
     let testMethod:TestMethod = null;
-    let len:number = testMethods.length;
+    let len:number = testMethods.length - 1;
+    let cursor:number = 0;
     let _this:TigerTestRunner = this;
     let testSuiteObj:any = testSuite.getTestSuite();
     let mapper:AnnotatedMethodsMapper = 
@@ -126,6 +143,10 @@ export class TigerTestRunner implements TestRunner {
     let repeat:number = 0;
     this.sendMessage("test suite run");
     describe(testSuite.getDescription(), function() {
+      if(testSuite.isDisabled()) {
+        it(`disabled test suite: ${testSuiteObj.constructor.name}`);
+        return;
+      }
       describeScope = this;
       _this.applyAnnotatedMethod(
         mapper.getMethodByType(AnnotatedMethodType.BEFORE_CLASS),
@@ -147,8 +168,8 @@ export class TigerTestRunner implements TestRunner {
         testSuiteObj,
         describeScope
       );
-      while(len--) {
-        testMethod = testMethods[len];
+      for(; cursor <= len; ++cursor) {
+        testMethod = testMethods[cursor];
         repeat = testMethod.repeat;
         if(repeat && repeat > 0) {
           while(repeat--) {
