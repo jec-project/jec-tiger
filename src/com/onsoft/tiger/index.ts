@@ -53,6 +53,7 @@ export {TigerTestableMethod} from "./runners/model/TigerTestableMethod";
 export {TigerTestMethod} from "./runners/model/TigerTestMethod";
 //--> com/onsoft/tiger/runners
 export {TigerTestRunner} from "./runners/TigerTestRunner";
+export {TigerTestStats} from "./runners/TigerTestStats";
 //--> com/onsoft/tiger/utils
 export {AnnotatedMethodsMapper} from "./utils/AnnotatedMethodsMapper";
 export {ParametersMapUtil} from "./utils/ParametersMapUtil";

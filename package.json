@@ -49,6 +49,7 @@
     "jec-juta": "^1.0.1"
   },
   "dependencies": {
+    "moment": "^2.18.1",
     "print-message": "^2.1.0"
   }
 }

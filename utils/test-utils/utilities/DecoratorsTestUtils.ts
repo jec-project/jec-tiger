@@ -61,3 +61,4 @@ export const TEST_SUITE_PARAMS:TestSuiteParams = buildTestSuiteParams();
 export const DESCRIPTOR:PropertyDescriptor = null;
 export const KEY:string = "memberToTest";
 export const TARGET:any = {};
+export const PARAMETER_INDEX:number = 0;

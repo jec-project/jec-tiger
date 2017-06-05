@@ -16,7 +16,7 @@
 
 import "mocha";
 import {expect} from "chai";
-import {RunableTestSuite} from "jec-juta";
+import {RunableTestSuite, TestStats} from "jec-juta";
 
 // Class to test:
 import {TigerTestRunner} from "../../../../../src/com/onsoft/tiger/runners/TigerTestRunner";
@@ -28,23 +28,24 @@ import * as utils from "../../../../../utils/test-utils/utilities/TigerTestRunne
 describe("TigerTestRunner", ()=> {
   
   describe("#runTest()", ()=> {
-
-    it("we must implement stats to improve this test");
-
     it("should run the specified test suite", ()=> {
       utils.initRegistry();
       let runner:TigerTestRunner = new TigerTestRunner();
-      runner.runTest(utils.buildRunableTestSuite(), (err:any)=> {
-        expect("runTest").to.be.OK;
+      runner.runTest(utils.buildRunableTestSuite(), (stats:TestStats)=> {
+        expect(stats.error).to.be.null;
+        expect(stats.numTestSuites).to.equal(1);
+        expect(stats.numDisabledTestSuites).to.equal(0);
+        expect(stats.numAsyncTests).to.equal(0);
+        expect(stats.numDisabledTests).to.equal(0);
+        expect(stats.time).not.to.be.null;
+        expect(stats.duration).not.to.equal(0);
+        expect(stats.numTests).to.equal(3); // 1 test repeated 3 times
         utils.resetRegistry();
       });
     });
   });
 
   describe("#runAllTests()", ()=> {
-
-    it("we must implement stats to improve this test");
-    
     it("should run the specified test suites", ()=> {
       utils.initRegistry();
       let runner:TigerTestRunner = new TigerTestRunner();
@@ -53,8 +54,15 @@ describe("TigerTestRunner", ()=> {
         utils.buildRunableTestSuite(),
         utils.buildRunableTestSuite()
       ];
-      runner.runAllTests(testSuites, (err:any)=> {
-        expect("runAllTests").to.be.OK;
+      runner.runAllTests(testSuites, (stats:TestStats)=> {
+        expect(stats.error).to.be.null;
+        expect(stats.numTestSuites).to.equal(3);
+        expect(stats.numDisabledTestSuites).to.equal(0);
+        expect(stats.numAsyncTests).to.equal(0);
+        expect(stats.numDisabledTests).to.equal(0);
+        expect(stats.time).not.to.be.null;
+        expect(stats.duration).not.to.equal(0);
+        expect(stats.numTests).to.equal(9); // 3 tests repeated 3 times
         utils.resetRegistry();
       });
     });

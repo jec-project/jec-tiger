@@ -21,7 +21,7 @@ import {expect} from "chai";
 import {TigerTestableMethodImpl} from "../../../../../../utils/test-utils/utilities/TigerTestableMethodImpl";
 
 // Test:
-describe("TigerTestableMethodTest", ()=> {
+describe("TigerTestableMethod", ()=> {
 
   let descriptor:TigerTestableMethodImpl = new TigerTestableMethodImpl();
   

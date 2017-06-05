@@ -10,7 +10,8 @@ import { FileProperties, FilePreProcessor, SourceFileInspector,
          Decorator, AbstractDecoratorConnector, LoggerProxy,
          AbstractLoggerProxy } from "jec-commons";
 import { AnnotatedMethod, AnnotatedMethodParams, RunableTestSuite, TestParams,
-         TestMethod, TestSuiteParams, TestRunner, TestableMethod } from "jec-juta";
+         TestMethod, TestSuiteParams, TestRunner, TestableMethod,
+         TestStats } from "jec-juta";
 
 export class AnnotatedMethodBuilder {
     constructor();
@@ -242,11 +243,24 @@ export class TigerTestMethod extends TigerTestableMethod implements TestMethod {
 
 export class TigerTestRunner implements TestRunner {
     constructor();
+    private _stats;
     private sendMessage(message, logLevel?);
     private applyTestMethod(method, testSuiteObj, scope);
     private applyAnnotatedMethod(method, testSuiteObj, scope);
-    runTest(testSuite: RunableTestSuite, callback: (err: any) => void): void;
-    runAllTests(testSuiteColl: RunableTestSuite[], callback: (err: any) => void): void;
+    runTest(testSuite: RunableTestSuite, callback: (stats: TestStats) => void): void;
+    runAllTests(testSuiteColl: RunableTestSuite[], callback: (stats: TestStats) => void): void;
+}
+
+export class TigerTestStats implements TestStats {
+    constructor();
+    numTestSuites: number;
+    numDisabledTestSuites: number;
+    numTests: number;
+    numDisabledTests: number;
+    duration :number;
+    time :string;
+    error: any;
+    numAsyncTests :number;
 }
 
 export class AnnotatedMethodsMapper {
