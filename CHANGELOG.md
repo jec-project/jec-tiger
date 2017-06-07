@@ -1,7 +1,16 @@
 # JEC Tiger Project: Update Release Notes
 
+<a name="jec-tiger-1.0.1"></a>
+## **1.0.1** (2017-06-05)
+
+### Bug Fixes
+
+### Features
+
+- Dependencies upgrade
+
 <a name="jec-tiger-1.0.0"></a>
-## **1.0.0** (2017-05-28)
+## **1.0.0** (2017-06-05)
 
 ### Bug Fixes
 
