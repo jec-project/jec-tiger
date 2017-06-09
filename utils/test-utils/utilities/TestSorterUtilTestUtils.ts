@@ -28,11 +28,11 @@ const buildTestMethod:Function = function(name:string, order:number):TestMethod 
   testMethod.order = order;
   return testMethod;
 };
-export const A_METHOD:TestMethod = buildTestMethod("aMethod", 5);
+export const A_METHOD:TestMethod = buildTestMethod("aMethod", 2);
 export const B_METHOD:TestMethod = buildTestMethod("bMethod", 4);
-export const C_METHOD:TestMethod = buildTestMethod("cMethod", 3);
-export const D_METHOD:TestMethod = buildTestMethod("dMethod", 2);
-export const E_METHOD:TestMethod = buildTestMethod("eMethod", 1);
+export const C_METHOD:TestMethod = buildTestMethod("cMethod", 5);
+export const D_METHOD:TestMethod = buildTestMethod("dMethod", 1);
+export const E_METHOD:TestMethod = buildTestMethod("eMethod", 3);
 export const getTestMethods:Function = function():TestMethod[] {
   let methods:TestMethod[] = [
     A_METHOD, E_METHOD, B_METHOD, D_METHOD, C_METHOD
@@ -42,5 +42,5 @@ export const getTestMethods:Function = function():TestMethod[] {
 export const DEFAULT_SORT:TestMethod[] = [ A_METHOD, E_METHOD, B_METHOD, D_METHOD, C_METHOD ];
 export const NAME_ASCENDING_SORT:TestMethod[] = [ A_METHOD, B_METHOD, C_METHOD, D_METHOD, E_METHOD ];
 export const NAME_DESCENDING_SORT:TestMethod[] = [ E_METHOD, D_METHOD, C_METHOD, B_METHOD, A_METHOD ];
-export const ORDER_ASCENDING_SORT:TestMethod[] = [ E_METHOD, D_METHOD, C_METHOD, B_METHOD, A_METHOD ];
-export const ORDER_DESCENDING_SORT:TestMethod[] = [ A_METHOD, B_METHOD, C_METHOD, D_METHOD, E_METHOD ];
+export const ORDER_DESCENDING_SORT:TestMethod[] = [ C_METHOD, B_METHOD, E_METHOD, A_METHOD, D_METHOD ];
+export const ORDER_ASCENDING_SORT:TestMethod[] = [ D_METHOD, A_METHOD, E_METHOD, B_METHOD, C_METHOD ];

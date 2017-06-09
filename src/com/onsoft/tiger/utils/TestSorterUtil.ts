@@ -80,8 +80,8 @@ export class TestSorterUtil {
   private orderDescendingSorter(a:TestMethod, b:TestMethod):number {
     let aVal:number = a.order;
     let bVal:number = b.order;
-    if(aVal < bVal) return -1;
-    if(aVal > bVal) return 1;
+    if(aVal > bVal) return -1;
+    if(aVal < bVal) return 1;
     return 0;
   }
 
@@ -97,8 +97,8 @@ export class TestSorterUtil {
   private orderAscendingSorter(a:TestMethod, b:TestMethod):number {
     let aVal:number = a.order;
     let bVal:number = b.order;
-    if(aVal > bVal) return -1;
-    if(aVal < bVal) return 1;
+    if(aVal < bVal) return -1;
+    if(aVal > bVal) return 1;
     return 0;
   }
 
@@ -126,10 +126,10 @@ export class TestSorterUtil {
         sortMethod = this.nameDescendingSorter;
         break;
       case TestSorters.ORDER_ASCENDING:
-        sortMethod = this.orderDescendingSorter;
+        sortMethod = this.orderAscendingSorter;
         break;
       case TestSorters.ORDER_DESCENDING:
-        sortMethod = this.orderAscendingSorter;
+        sortMethod = this.orderDescendingSorter;
         break;
       case TestSorters.DEFAULT:
       default:

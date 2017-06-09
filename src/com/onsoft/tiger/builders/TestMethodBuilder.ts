@@ -51,6 +51,7 @@ export class TestMethodBuilder {
     testMethod.timeout = descriptor.timeout;
     testMethod.repeat = descriptor.repeat;
     testMethod.disabled = descriptor.disabled || false;
+    testMethod.order = descriptor.order || 0;
     return testMethod;
   }
 };
