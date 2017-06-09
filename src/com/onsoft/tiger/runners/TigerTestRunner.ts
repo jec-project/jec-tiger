@@ -195,12 +195,13 @@ export class TigerTestRunner implements TestRunner {
                     new AnnotatedMethodsMapper(testSuite.getAnnotatedMethods());
     let describeScope:any = null;
     let repeat:number = 0;
+    let name:string = testSuiteObj.constructor.name;
     this._stats = this.initStats();
-    this.sendMessage("test suite run");
+    this.sendMessage(`test suite run: ${name}`);
     describe(testSuite.getDescription(), function() {
       if(testSuite.isDisabled()) {
         _this._stats.numDisabledTestSuites++;
-        it(`disabled test suite: ${testSuiteObj.constructor.name}`);
+        it(`disabled test suite: ${name}`);
         return;
       }
       _this._stats.numTestSuites++;
