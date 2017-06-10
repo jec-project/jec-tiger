@@ -87,22 +87,24 @@ export class TigerTestRunner implements TestRunner {
    */
   private applyTestMethod(method:TestMethod, testSuiteObj:any, scope:any,
                                                          stats:TestStats):void {
+    let name:string = method.name;
+    let timeout:number = method.timeout;
+    let desc:string = `${name}: ${method.description}`;
     if(method.disabled) {
         stats.numDisabledTests++;
-        it(`disabled test: ${method.name}`);
+        it(`disabled test: ${name}`);
         return;
     }
-    let timeout:number = method.timeout;
     if(timeout && timeout > 0) scope.timeout(timeout);
     if(method.async) {
       stats.numAsyncTests++;
-      it(method.description, (done?:MochaDone) => {
-        testSuiteObj[method.name](done);
+      it(desc, (done?:MochaDone) => {
+        testSuiteObj[name](done);
       });
     } else {
       stats.numTests++;
-      it(method.description, () => {
-        testSuiteObj[method.name]();
+      it(desc, () => {
+        testSuiteObj[name]();
       });
     }
   }
