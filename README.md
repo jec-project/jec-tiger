@@ -20,10 +20,11 @@ JEC Tiger needs the following system parameters in order to work correctly:
 
 ## Installation
 
-Set up the JEC Tiger module with:
+Set up the JEC Tiger and the Mocha modules with:
 
 ```bash
 $ npm install jec-tiger --save-dev
+$ npm install mocha --save-dev
 ```
 
 ## Tiger Framework Initialization
@@ -32,13 +33,14 @@ You have to configure the Tiger framework with a basic script file (e.g. `test-c
 in order to run JUTA unit tests:
 
 ```javascript
+import { TestStats } from "jec-juta";
 import {Tiger, TigerFactory} from "jec-tiger";
 
 let factory:TigerFactory = new TigerFactory();
-let tester:Tiger = factory.create();
-tester.process((err:any)=>{
-  console.log(err);
-});
+let tiger:Tiger = factory.create();
+tiger.process((stats:TestStats)=> {
+  if(stats.error) console.error(stats.error);
+ });
 ```
 
 By default, test classes are located in the `test` folder, at the root of your project.
