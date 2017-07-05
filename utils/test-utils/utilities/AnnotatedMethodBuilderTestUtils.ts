@@ -30,7 +30,7 @@ const buildMethodDescriptor:Function = function():AnnotatedMethodDescriptor {
   descriptor.timeout = METHOD_TIMEOUT;
   return descriptor;
 };
-export const METHOD_TYPE:number = AnnotatedMethodType.BEFORE_CLASS;
+export const METHOD_TYPE:number = AnnotatedMethodType.BEFORE_ALL;
 export const METHOD_NAME:string = "methodName";
 export const METHOD_TIMEOUT:number = 100;
 export const DESCRIPTOR:AnnotatedMethodDescriptor = buildMethodDescriptor();

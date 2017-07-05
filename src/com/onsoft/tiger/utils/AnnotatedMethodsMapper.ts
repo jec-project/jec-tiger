@@ -42,16 +42,16 @@ export class AnnotatedMethodsMapper {
   ////////////////////////////////////////////////////////////////////////////
 
   /**
-   * The reference to method annotated with the <code>@BeforeClass</code>
+   * The reference to method annotated with the <code>@BeforeAll</code>
    * decorator.
    */
-  private _beforeClass:AnnotatedMethod = null;
+  private _beforeAll:AnnotatedMethod = null;
   
   /**
-   * The reference to method annotated with the <code>@AfterClass</code>
+   * The reference to method annotated with the <code>@AfterAll</code>
    * decorator.
    */
-  private _afterClass:AnnotatedMethod = null;
+  private _afterAll:AnnotatedMethod = null;
   
   /**
    * The reference to method annotated with the <code>@Before</code>
@@ -82,11 +82,11 @@ export class AnnotatedMethodsMapper {
     while(len--) {
       method = methods[len];
        switch(method.type) {
-        case AnnotatedMethodType.BEFORE_CLASS :
-          this._beforeClass = method;
+        case AnnotatedMethodType.BEFORE_ALL :
+          this._beforeAll = method;
           break;
-        case AnnotatedMethodType.AFTER_CLASS :
-          this._afterClass = method;
+        case AnnotatedMethodType.AFTER_ALL :
+          this._afterAll = method;
           break;
         case AnnotatedMethodType.BEFORE :
           this._before = method;
@@ -115,11 +115,11 @@ export class AnnotatedMethodsMapper {
   public getMethodByType(type:number):AnnotatedMethod{
     let method:AnnotatedMethod = null;
     switch(type) {
-      case AnnotatedMethodType.BEFORE_CLASS :
-        method = this._beforeClass;
+      case AnnotatedMethodType.BEFORE_ALL :
+        method = this._beforeAll;
         break;
-      case AnnotatedMethodType.AFTER_CLASS :
-        method = this._afterClass;
+      case AnnotatedMethodType.AFTER_ALL :
+        method = this._afterAll;
         break;
       case AnnotatedMethodType.BEFORE :
         method = this._before;

@@ -1,7 +1,17 @@
 # JEC Tiger Project: Update Release Notes
 
+<a name="jec-tiger-1.1.0"></a>
+## **1.1.0** (2017-06-05)
+
+### Bug Fixes
+
+### Features
+
+- **JUTA Update:** implements the new `@AfterAll` and `@BeforeAll` decorators.
+- **build improvements:** in this release definition types are updated during the build process.
+
 <a name="jec-tiger-1.0.1"></a>
-## **1.0.1** (2017-06-05)
+## **1.0.1** (2017-05-06)
 
 ### Bug Fixes
 
@@ -10,7 +20,7 @@
 - Dependencies upgrade
 
 <a name="jec-tiger-1.0.0"></a>
-## **1.0.0** (2017-06-05)
+## **1.0.0** (2017-05-06)
 
 ### Bug Fixes
 

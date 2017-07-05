@@ -42,13 +42,13 @@ const buildTestSuiteDescriptor:Function = function():TestSuiteDescriptor {
 };
 const buildAnnotatedMethodDescriptor:Function = function():AnnotatedMethodDescriptor {
   let descriptor:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
-  descriptor.method = "beforeClassMethod",
-  descriptor.type = AnnotatedMethodType.BEFORE_CLASS;
+  descriptor.method = "beforeAllMethod",
+  descriptor.type = AnnotatedMethodType.BEFORE_ALL;
   return descriptor;
 };
 export const METHOD_TO_TEST_LOG:string = "methodToTest called";
 const TEST_SUITE:any = {
-  beforeClassMethod: function():void {},
+  beforeAllMethod: function():void {},
   methodToTest: function():void {}
 };
 const TEST_DESCRIPTOR:TestDescriptor = buildTestDescriptor();

@@ -26,7 +26,7 @@ import {TigerLoggerProxy} from "../../../../../src/com/onsoft/tiger/logging/Tige
 import {TigerAutowireProcessor} from "../../../../../src/com/onsoft/tiger/core/TigerAutowireProcessor";
 
 // Utilities:
-import * as utils from "../../../../..//utils/test-utils/utilities/TigerAutowireProcessorTestUtils";
+import * as utils from "../../../../../utils/test-utils/utilities/TigerAutowireProcessorTestUtils";
 
 // Chai declarations:
 const expect:any = chai.expect;

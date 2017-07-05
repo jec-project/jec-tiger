@@ -23,7 +23,7 @@ import {TestSuiteDescriptorRegistry} from "../../../../../../src/com/onsoft/tige
 import {AnnotatedMethodDescriptor} from "../../../../../../src/com/onsoft/tiger/reflect/AnnotatedMethodDescriptor";
 
 // Class to test:
-import {AfterClassDecorator} from "../../../../../../src/com/onsoft/tiger/jcad/decorators/AfterClassDecorator";
+import {BeforeAllDecorator} from "../../../../../../src/com/onsoft/tiger/jcad/decorators/BeforeAllDecorator";
 
 // Utilities:
 import * as utils from "../../../../../../utils/test-utils/utilities/DecoratorsTestUtils";
@@ -33,13 +33,13 @@ const expect:any = chai.expect;
 chai.use(spies);
 
 // Test:
-describe("AfterClassDecorator", ()=> {
-
+describe("BeforeAllDecorator", ()=> {
+  
   let decorator:Decorator = null;
 
   beforeEach(()=> {
     utils.initRegistry();
-    decorator = new AfterClassDecorator();
+    decorator = new BeforeAllDecorator();
   });
 
   afterEach(()=> {
@@ -82,11 +82,11 @@ describe("AfterClassDecorator", ()=> {
       expect(descriptor.timeout).to.equal(utils.TIMEOUT);
     });
     
-    it("should create an AnnotatedMethodDescriptor instance with the AnnotatedMethodType.AFTER_CLASS 'type' value", ()=>{
+    it("should create an AnnotatedMethodDescriptor instance with the AnnotatedMethodType.BEFORE_ALL 'type' value", ()=>{
       decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
       let descriptors:AnnotatedMethodDescriptor[] = TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
       let descriptor:AnnotatedMethodDescriptor = descriptors[0];
-      expect(descriptor.type).to.equal(AnnotatedMethodType.AFTER_CLASS);
+      expect(descriptor.type).to.equal(AnnotatedMethodType.BEFORE_ALL);
     });
     
     it("should create an AnnotatedMethodDescriptor instance with the specified 'disabled' value", ()=>{

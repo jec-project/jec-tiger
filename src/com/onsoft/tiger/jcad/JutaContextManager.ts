@@ -20,9 +20,9 @@ import {JutaConnectorRefs} from "jec-juta";
 import {TigerConnector} from "./connectors/TigerConnector";
 import {TestSuiteDecorator} from "./decorators/TestSuiteDecorator";
 import {TestDecorator} from "./decorators/TestDecorator";
-import {AfterClassDecorator} from "./decorators/AfterClassDecorator";
+import {AfterAllDecorator} from "./decorators/AfterAllDecorator";
 import {AfterDecorator} from "./decorators/AfterDecorator";
-import {BeforeClassDecorator} from "./decorators/BeforeClassDecorator";
+import {BeforeAllDecorator} from "./decorators/BeforeAllDecorator";
 import {BeforeDecorator} from "./decorators/BeforeDecorator";
 import {AsyncDecorator} from "./decorators/AsyncDecorator";
 
@@ -112,13 +112,13 @@ export class JutaContextManager {
       JutaConnectorRefs.TEST_CONNECTOR_REF, TestDecorator
     );
     this.initContext(
-      JutaConnectorRefs.AFTER_CLASS_CONNECTOR_REF, AfterClassDecorator
+      JutaConnectorRefs.AFTER_ALL_CONNECTOR_REF, AfterAllDecorator
     );
     this.initContext(
       JutaConnectorRefs.AFTER_CONNECTOR_REF, AfterDecorator
     );
     this.initContext(
-      JutaConnectorRefs.BEFORE_CLASS_CONNECTOR_REF, BeforeClassDecorator
+      JutaConnectorRefs.BEFORE_ALL_CONNECTOR_REF, BeforeAllDecorator
     );
     this.initContext(
       JutaConnectorRefs.BEFORE_CONNECTOR_REF, BeforeDecorator
@@ -136,9 +136,9 @@ export class JutaContextManager {
   public deleteContext():void {
     this.removeContext(JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF);
     this.removeContext(JutaConnectorRefs.TEST_CONNECTOR_REF);
-    this.removeContext(JutaConnectorRefs.AFTER_CLASS_CONNECTOR_REF);
+    this.removeContext(JutaConnectorRefs.AFTER_ALL_CONNECTOR_REF);
     this.removeContext(JutaConnectorRefs.AFTER_CONNECTOR_REF);
-    this.removeContext(JutaConnectorRefs.BEFORE_CLASS_CONNECTOR_REF);
+    this.removeContext(JutaConnectorRefs.BEFORE_ALL_CONNECTOR_REF);
     this.removeContext(JutaConnectorRefs.BEFORE_CONNECTOR_REF);
     this.removeContext(JutaConnectorRefs.ASYNC_CONNECTOR_REF);
     this._jcadContext = null;

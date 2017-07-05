@@ -21,17 +21,17 @@ import {AnnotatedMethodDescriptorBuilder} from "../../builders/AnnotatedMethodDe
 import {AnnotatedMethodDescriptor} from "../../reflect/AnnotatedMethodDescriptor";
 
 /**
- * The <code>AfterClassDecorator</code> class defines the <code>Decorator</code>  
- * implementation for the JUTA <code>@AfterClass</code> decorator.
+ * The <code>BeforeAllDecorator</code> class defines the <code>Decorator</code>
+ * implementation for the JUTA <code>@BeforeAll</code> decorator.
  */
-export class AfterClassDecorator implements Decorator {
+export class BeforeAllDecorator implements Decorator {
   
   ////////////////////////////////////////////////////////////////////////////
   // Constructor function
   ////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Creates a new <code>AfterClassDecorator</code> instance.
+   * Creates a new <code>BeforeAllDecorator</code> instance.
    */
   constructor() {}
 
@@ -47,7 +47,7 @@ export class AfterClassDecorator implements Decorator {
     let builder:AnnotatedMethodDescriptorBuilder =
                                          new AnnotatedMethodDescriptorBuilder();
     let methodDescriptor:AnnotatedMethodDescriptor =
-        builder.build(key, descriptor, AnnotatedMethodType.AFTER_CLASS, params);
+         builder.build(key, descriptor, AnnotatedMethodType.BEFORE_ALL, params);
     TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(methodDescriptor);
     return target;
   }

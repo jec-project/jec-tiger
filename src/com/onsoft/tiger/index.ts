@@ -29,10 +29,10 @@ export {TigerSourceFileInspector} from "./core/TigerSourceFileInspector";
 //--> com/onsoft/tiger/jcad/connectors
 export {TigerConnector} from "./jcad/connectors/TigerConnector";
 //--> com/onsoft/tiger/jcad/decorators
-export {AfterClassDecorator} from "./jcad/decorators/AfterClassDecorator";
+export {AfterAllDecorator} from "./jcad/decorators/AfterAllDecorator";
 export {AfterDecorator} from "./jcad/decorators/AfterDecorator";
 export {AsyncDecorator} from "./jcad/decorators/AsyncDecorator";
-export {BeforeClassDecorator} from "./jcad/decorators/BeforeClassDecorator";
+export {BeforeAllDecorator} from "./jcad/decorators/BeforeAllDecorator";
 export {BeforeDecorator} from "./jcad/decorators/BeforeDecorator";
 export {TestDecorator} from "./jcad/decorators/TestDecorator";
 export {TestSuiteDecorator} from "./jcad/decorators/TestSuiteDecorator";

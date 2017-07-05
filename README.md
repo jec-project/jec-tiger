@@ -48,8 +48,8 @@ You can use the Tiger API to set the location of the test folder:
 
 ```javascript
 const testFolder:string[] = ["my-test-folder"];
-let tester:Tiger = factory.create();
-tester.setTestPaths(testFolder);
+let tiger:Tiger = factory.create();
+tiger.setTestPaths(testFolder);
 ```
 
 To call the configuration file with the mocha command, add the following
@@ -114,7 +114,7 @@ The documentation generator is [TypeDoc](http://typedoc.org/)
 
 ## Update Release Notes
 
-**Current stable release:** [1.0.1](CHANGELOG.md#jec-tiger-1.0.1)
+**Current stable release:** [1.1.0](CHANGELOG.md#jec-tiger-1.1.0)
  
 For a complete listing of release notes for all JEC Tiger update releases, see the [CHANGELOG](CHANGELOG.md) file. 
 

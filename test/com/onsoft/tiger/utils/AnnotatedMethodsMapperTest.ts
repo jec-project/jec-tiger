@@ -18,7 +18,7 @@ import "mocha";
 import {expect} from "chai";
 import {AnnotatedMethod, AnnotatedMethodType} from "jec-juta";
 
-// Class to test:
+// ALL to test:
 import {AnnotatedMethodsMapper} from "../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
 
 // Utilities:
@@ -30,12 +30,12 @@ describe("AnnotatedMethodsMapper", ()=> {
   describe("#getMethodByType()", ()=> {
     let mapper:AnnotatedMethodsMapper = utils.buildEmptyMapper();
 
-    it("should return null when no AnnotatedMethodType.BEFORE_CLASS method is specified", function() {
-      expect(mapper.getMethodByType(AnnotatedMethodType.BEFORE_CLASS)).to.be.null;
+    it("should return null when no AnnotatedMethodType.BEFORE_ALL method is specified", function() {
+      expect(mapper.getMethodByType(AnnotatedMethodType.BEFORE_ALL)).to.be.null;
     });
 
-    it("should return null when no AnnotatedMethodType.AFTER_CLASS method is specified", function() {
-      expect(mapper.getMethodByType(AnnotatedMethodType.AFTER_CLASS)).to.be.null;
+    it("should return null when no AnnotatedMethodType.AFTER_ALL method is specified", function() {
+      expect(mapper.getMethodByType(AnnotatedMethodType.AFTER_ALL)).to.be.null;
     });
 
     it("should return null when no AnnotatedMethodType.BEFORE method is specified", function() {
@@ -50,12 +50,12 @@ describe("AnnotatedMethodsMapper", ()=> {
   describe("#getMethodByType()", ()=> {
     let mapper:AnnotatedMethodsMapper = utils.buildCompleteMapper();
 
-    it("should return the registered method for the type AnnotatedMethodType.BEFORE_CLASS", function() {
-      expect(mapper.getMethodByType(AnnotatedMethodType.BEFORE_CLASS)).to.equal(utils.BEFORE_CLASS_METHOD);
+    it("should return the registered method for the type AnnotatedMethodType.BEFORE_ALL", function() {
+      expect(mapper.getMethodByType(AnnotatedMethodType.BEFORE_ALL)).to.equal(utils.BEFORE_ALL_METHOD);
     });
 
-    it("should return the registered method for the type AnnotatedMethodType.AFTER_CLASS", function() {
-      expect(mapper.getMethodByType(AnnotatedMethodType.AFTER_CLASS)).to.equal(utils.AFTER_CLASS_METHOD);
+    it("should return the registered method for the type AnnotatedMethodType.AFTER_ALL", function() {
+      expect(mapper.getMethodByType(AnnotatedMethodType.AFTER_ALL)).to.equal(utils.AFTER_ALL_METHOD);
     });
 
     it("should return the registered method for the type AnnotatedMethodType.BEFORE", function() {

@@ -1,6 +1,6 @@
 {
   "name": "jec-tiger",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "JEC Tiger - The default unit testing framework for JEC applications.",
   "main": "lib/com/onsoft/tiger/index",
   "types": "types/jec-tiger.d.ts",
@@ -33,6 +33,7 @@
     "chai": "^3.5.0",
     "chai-spies": "^0.7.1",
     "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-jsdoc": "^2.1.0",
     "grunt-mocha-test": "^0.13.2",
@@ -53,6 +54,6 @@
     "print-message": "^2.1.0",
     "jec-commons": "^1.1.1",
     "jec-commons-node": "^1.0.1",
-    "jec-juta": "^1.0.3"
+    "jec-juta": "^1.1.0"
   }
 }

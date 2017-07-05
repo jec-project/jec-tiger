@@ -130,10 +130,10 @@ export class TigerTestRunner implements TestRunner {
       timeout = method.timeout;
       if(timeout && timeout > 0) scope.timeout(timeout);
       switch(method.type) {
-        case AnnotatedMethodType.BEFORE_CLASS :
+        case AnnotatedMethodType.BEFORE_ALL :
           methodRef = before;
           break;
-        case AnnotatedMethodType.AFTER_CLASS :
+        case AnnotatedMethodType.AFTER_ALL :
           methodRef = after;
           break;
         case AnnotatedMethodType.BEFORE :
@@ -209,12 +209,12 @@ export class TigerTestRunner implements TestRunner {
       _this._stats.numTestSuites++;
       describeScope = this;
       _this.applyAnnotatedMethod(
-        mapper.getMethodByType(AnnotatedMethodType.BEFORE_CLASS),
+        mapper.getMethodByType(AnnotatedMethodType.BEFORE_ALL),
         testSuiteObj,
         describeScope
       );
       _this.applyAnnotatedMethod(
-        mapper.getMethodByType(AnnotatedMethodType.AFTER_CLASS),
+        mapper.getMethodByType(AnnotatedMethodType.AFTER_ALL),
         testSuiteObj,
         describeScope
       );

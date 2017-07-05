@@ -27,7 +27,7 @@ const buildMethodParams:Function = function():AnnotatedMethodParams {
              ( { timeout: TIMEOUT } as AnnotatedMethodParams );
   return params;
 };
-export const TYPE:number = AnnotatedMethodType.BEFORE_CLASS;
+export const TYPE:number = AnnotatedMethodType.BEFORE_ALL;
 export const KEY:string = "methodName";
 export const TIMEOUT:number = 100;
 export const DESCRIPTOR:PropertyDescriptor = null;
