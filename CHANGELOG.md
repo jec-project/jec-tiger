@@ -1,5 +1,16 @@
 # JEC Tiger Project: Update Release Notes
 
+<a name="jec-tiger-1.1.1"></a>
+## **1.1.1** (2017-07-14)
+
+### Bug Fixes
+
+### Features
+
+- **JUTA Update:** implements the new `@AfterClass` and `@BeforeClass` decorators.
+- **JUTA Update:** implements the new `instanciationPolicy` property.
+- **TestClassRunner:** the new `TestClassRunner` class allows test suites delegation.
+
 <a name="jec-tiger-1.1.0"></a>
 ## **1.1.0** (2017-06-05)
 

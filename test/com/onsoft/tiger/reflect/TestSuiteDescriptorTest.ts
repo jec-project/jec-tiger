@@ -19,17 +19,28 @@ import {expect} from "chai";
 
 // Class to test:
 import {TestSuiteDescriptor} from "../../../../../src/com/onsoft/tiger/reflect/TestSuiteDescriptor";
+import { InstanciationPolicy, TestSorters } from "jec-juta";
 
 // Test:
 describe("TestSuiteDescriptor", ()=> {
 
   let descriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
   
-  it("should have a 'description' property set to null", function() {
+  it("should have a 'description' property set to 'null'", function() {
     expect(descriptor).to.have.property("description", null);
   });
 
-  it("should have a 'disabled' property set to false", function() {
+  it("should have a 'disabled' property set to 'false'", function() {
     expect(descriptor).to.have.property("disabled", false);
+  });
+
+  it("should have a 'testOrder' property set to 'TestSorters.DEFAULT'", function() {
+    expect(descriptor).to.have.property("testOrder", TestSorters.DEFAULT);
+  });
+
+  it("should have a 'instanciationPolicy' property set to 'InstanciationPolicy.SINGLE'", function() {
+    expect(descriptor).to.have.property(
+      "instanciationPolicy", InstanciationPolicy.SINGLE
+    );
   });
 });

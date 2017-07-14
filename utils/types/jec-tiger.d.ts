@@ -14,5 +14,4 @@ import { AnnotatedMethod, AnnotatedMethodParams, RunableTestSuite, TestParams,
          TestMethod, TestSuiteParams, TestRunner, TestableMethod,
          TestStats } from "jec-juta";
 
-/*PLACEHOLDER*/
-}
+/*PLACEHOLDER*/}

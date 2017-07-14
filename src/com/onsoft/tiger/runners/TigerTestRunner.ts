@@ -15,9 +15,11 @@
 //   limitations under the License.
 
 import {RunableTestSuite, TestRunner, TestMethod, AnnotatedMethodType,
-        AnnotatedMethod, TestStats} from "jec-juta";
+  AnnotatedMethod, TestStats, InstanciationPolicy, TestSuiteError
+} from "jec-juta";
 import {TigerLoggerProxy} from "../logging/TigerLoggerProxy";
 import {AnnotatedMethodsMapper} from "../utils/AnnotatedMethodsMapper";
+import {TestClassRunner} from "./utils/TestClassRunner";
 import {TigerTestStats} from "./TigerTestStats";
 import "mocha";
 import * as moment from "moment";
@@ -35,7 +37,9 @@ export class TigerTestRunner implements TestRunner {
   /**
    * Creates a new <code>TigerTestRunner</code> instance.
    */
-  constructor() {}
+  constructor() {
+    this.initObj();
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   // Private properties
@@ -59,9 +63,22 @@ export class TigerTestRunner implements TestRunner {
    */
   private _testStart:Date = null;
 
+  /**
+   * The delagator object useed by this <code>TigerTestRunner</code> instance to
+   * run test suite classes.
+   */
+  private _classRunner:TestClassRunner = null;
+
   //////////////////////////////////////////////////////////////////////////////
   // Private methods
   //////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Initializes this object.
+     */
+  private initObj():void {
+    this._classRunner = new TestClassRunner();
+  }
 
   /**
    * The wrapper function used to send decorated messages to the output stream.
@@ -74,85 +91,6 @@ export class TigerTestRunner implements TestRunner {
    */
   private sendMessage(message:string, logLevel?:number):void {
     TigerLoggerProxy.getInstance().log(message, logLevel);
-  }
-
-  /**
-   * Applies the mocha test to the specified test method.
-   * 
-   * @param {TestMethod} method the method to wrap whithin a mocha hook method.
-   * @param {any} testSuiteObj the reference to the current test suite instance.
-   * @param {any} scope the scope for current test.
-   * @param {TestStats} stats the <code>TestStats</code> associated with the
-   *                          current test.
-   */
-  private applyTestMethod(method:TestMethod, testSuiteObj:any, scope:any,
-                                                         stats:TestStats):void {
-    let name:string = method.name;
-    let timeout:number = method.timeout;
-    let desc:string = `${name}: ${method.description}`;
-    if(method.disabled) {
-        stats.numDisabledTests++;
-        it(`disabled test: ${name}`);
-        return;
-    }
-    if(timeout && timeout > 0) scope.timeout(timeout);
-    if(method.async) {
-      stats.numAsyncTests++;
-      it(desc, (done?:MochaDone) => {
-        testSuiteObj[name](done);
-      });
-    } else {
-      stats.numTests++;
-      it(desc, () => {
-        testSuiteObj[name]();
-      });
-    }
-  }
-
-  /**
-   * Applies the mocha hook method depending on the <code>type</code> properties 
-   * of the specified annotated method.
-   * 
-   * @param {AnnotatedMethod} method the annotated method to wrap whithin a
-   *                                 mocha hook method.
-   * @param {any} testSuiteObj the reference to the current test suite instance.
-   * @param {any} scope the scope for current test.
-   */
-  private applyAnnotatedMethod(method:AnnotatedMethod, testSuiteObj:any,
-                                                               scope:any):void {
-    let timeout:number = -1;
-    let methodRef:Function = null;
-    if(method) {
-      if(method.disabled) {
-         it(`disabled config method: ${method.name}`);
-         return;
-      }
-      timeout = method.timeout;
-      if(timeout && timeout > 0) scope.timeout(timeout);
-      switch(method.type) {
-        case AnnotatedMethodType.BEFORE_ALL :
-          methodRef = before;
-          break;
-        case AnnotatedMethodType.AFTER_ALL :
-          methodRef = after;
-          break;
-        case AnnotatedMethodType.BEFORE :
-          methodRef = beforeEach;
-          break;
-        case AnnotatedMethodType.AFTER :
-          methodRef = afterEach;
-          break;
-      }
-      if(method.async) {
-        methodRef((done?:MochaDone) => {
-          testSuiteObj[method.name](done);
-        });
-      } else {
-        methodRef(() => {
-          testSuiteObj[method.name]();
-        });
-      } 
-    }
   }
 
   /**
@@ -188,17 +126,14 @@ export class TigerTestRunner implements TestRunner {
   public runTest(testSuite:RunableTestSuite,
                                         callback:(stats:TestStats)=>void):void {
     let testMethods:TestMethod[] = testSuite.getTestMethods();
-    let testMethod:TestMethod = null;
-    let len:number = testMethods.length - 1;
-    let cursor:number = 0;
     let _this:TigerTestRunner = this;
     let testSuiteObj:any = testSuite.getTestSuite();
     let mapper:AnnotatedMethodsMapper = 
                     new AnnotatedMethodsMapper(testSuite.getAnnotatedMethods());
-    let describeScope:any = null;
-    let repeat:number = 0;
     let name:string = testSuiteObj.constructor.name;
-    this._stats = this.initStats();
+    let testPolicy:string = testSuite.getInstanciationPolicy();
+    let stats:TestStats = this.initStats();
+    this._stats = stats;
     this.sendMessage(`test suite run: ${name}`);
     describe(testSuite.getDescription(), function() {
       if(testSuite.isDisabled()) {
@@ -207,47 +142,23 @@ export class TigerTestRunner implements TestRunner {
         return;
       }
       _this._stats.numTestSuites++;
-      describeScope = this;
-      _this.applyAnnotatedMethod(
-        mapper.getMethodByType(AnnotatedMethodType.BEFORE_ALL),
-        testSuiteObj,
-        describeScope
+      _this._classRunner.applyGlobalFixtures(
+        testPolicy, mapper, testSuiteObj, this
       );
-      _this.applyAnnotatedMethod(
-        mapper.getMethodByType(AnnotatedMethodType.AFTER_ALL),
-        testSuiteObj,
-        describeScope
-      );
-      _this.applyAnnotatedMethod(
-        mapper.getMethodByType(AnnotatedMethodType.BEFORE),
-        testSuiteObj,
-        describeScope
-      );
-      _this.applyAnnotatedMethod(
-        mapper.getMethodByType(AnnotatedMethodType.AFTER),
-        testSuiteObj,
-        describeScope
-      );
-      for(; cursor <= len; ++cursor) {
-        testMethod = testMethods[cursor];
-        repeat = testMethod.repeat;
-        if(repeat && repeat > 0) {
-          while(repeat--) {
-            _this.applyTestMethod(
-              testMethod,
-              testSuiteObj,
-              describeScope,
-              _this._stats
-            );
-          }
-        } else {
-          _this.applyTestMethod(
-            testMethod,
-            testSuiteObj,
-            describeScope,
-            _this._stats
-          );
-        }
+      if(testPolicy === InstanciationPolicy.SINGLE) {
+         _this._classRunner.runSingleInstanceTests(
+          testMethods, mapper, testSuiteObj, this, stats
+        );
+      } else if(testPolicy === InstanciationPolicy.MULTIPLE) {
+        _this._classRunner.runMultipleInstanceTest(
+          testMethods, mapper, testSuiteObj, stats
+        );
+      } else {
+        throw new TestSuiteError(
+          `Instanciation Policy is not valid on test suite ${name}:
++expected InstanciationPolicy.SINGLE or InstanciationPolicy.MULTIPLE 
+-actual ${testPolicy}`
+        );
       }
       _this.sendMessage("test suite complete");
       if(!_this._runMultipleTests) _this.computeTestDuration();

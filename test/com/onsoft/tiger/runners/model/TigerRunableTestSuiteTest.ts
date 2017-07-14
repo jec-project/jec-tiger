@@ -16,7 +16,7 @@
 
 import "mocha";
 import {expect} from "chai";
-import {TestSuiteError, TestMethod, AnnotatedMethod, TestSorters} from "jec-juta";
+import { TestSuiteError, TestMethod, AnnotatedMethod, TestSorters, InstanciationPolicy } from "jec-juta";
 
 // Class to test:
 import {TigerRunableTestSuite} from "../../../../../../src/com/onsoft/tiger/runners/model/TigerRunableTestSuite";
@@ -66,6 +66,26 @@ describe("TigerRunableTestSuite", ()=> {
       let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       trts.setTestSuite(utils.TEST_SUITE);
       expect(trts.getTestOrder()).to.equal(utils.TEST_ORDER);
+      utils.resetRegistry();
+    });
+  });
+
+  describe("#getInstanciationPolicy()", ()=> {
+
+    it("should return InstanciationPolicy.SINGLE when no test suite have been registered", ()=> {
+      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      expect(
+        trts.getInstanciationPolicy()
+      ).to.equal(InstanciationPolicy.SINGLE);
+    });
+    
+    it("should return the same as value as specified by the TestSuiteDescriptor ", ()=> {
+      utils.initRegistry();
+      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      trts.setTestSuite(utils.TEST_SUITE);
+      expect(
+        trts.getInstanciationPolicy()
+      ).to.equal(utils.TEST_INSTANCIATION_POLICY);
       utils.resetRegistry();
     });
   });

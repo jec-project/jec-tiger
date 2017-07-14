@@ -38,14 +38,18 @@ export const buildEmptyMapper:Function = function():AnnotatedMethodsMapper {
   return mapper;
 };
 export const BEFORE_ALL_METHOD:AnnotatedMethod = buildMethod(AnnotatedMethodType.BEFORE_ALL);
+export const BEFORE_CLASS_METHOD:AnnotatedMethod = buildMethod(AnnotatedMethodType.BEFORE_CLASS);
 export const BEFORE_METHOD:AnnotatedMethod = buildMethod(AnnotatedMethodType.BEFORE);
 export const AFTER_ALL_METHOD:AnnotatedMethod = buildMethod(AnnotatedMethodType.AFTER_ALL);
+export const AFTER_CLASS_METHOD:AnnotatedMethod = buildMethod(AnnotatedMethodType.AFTER_CLASS);
 export const AFTER_METHOD:AnnotatedMethod = buildMethod(AnnotatedMethodType.AFTER);
 export const buildCompleteMapper:Function = function():AnnotatedMethodsMapper {
   let methods:AnnotatedMethod[] = new Array<AnnotatedMethod>();
   methods.push(BEFORE_ALL_METHOD);
+  methods.push(BEFORE_CLASS_METHOD);
   methods.push(BEFORE_METHOD);
   methods.push(AFTER_ALL_METHOD);
+  methods.push(AFTER_CLASS_METHOD);
   methods.push(AFTER_METHOD);
   let mapper:AnnotatedMethodsMapper = new AnnotatedMethodsMapper(methods);
   return mapper;

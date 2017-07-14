@@ -54,6 +54,18 @@ export class AnnotatedMethodsMapper {
   private _afterAll:AnnotatedMethod = null;
   
   /**
+   * The reference to method annotated with the <code>@BeforeClass</code>
+   * decorator.
+   */
+  private _beforeClass:AnnotatedMethod = null;
+  
+  /**
+   * The reference to method annotated with the <code>@AfterClass</code>
+   * decorator.
+   */
+  private _afterClass:AnnotatedMethod = null;
+  
+  /**
    * The reference to method annotated with the <code>@Before</code>
    * decorator.
    */
@@ -85,8 +97,14 @@ export class AnnotatedMethodsMapper {
         case AnnotatedMethodType.BEFORE_ALL :
           this._beforeAll = method;
           break;
+        case AnnotatedMethodType.BEFORE_CLASS :
+          this._beforeClass = method;
+          break;
         case AnnotatedMethodType.AFTER_ALL :
           this._afterAll = method;
+          break;
+        case AnnotatedMethodType.AFTER_CLASS :
+          this._afterClass = method;
           break;
         case AnnotatedMethodType.BEFORE :
           this._before = method;
@@ -118,8 +136,14 @@ export class AnnotatedMethodsMapper {
       case AnnotatedMethodType.BEFORE_ALL :
         method = this._beforeAll;
         break;
+      case AnnotatedMethodType.BEFORE_CLASS :
+        method = this._beforeClass;
+        break;
       case AnnotatedMethodType.AFTER_ALL :
         method = this._afterAll;
+        break;
+      case AnnotatedMethodType.AFTER_CLASS :
+        method = this._afterClass;
         break;
       case AnnotatedMethodType.BEFORE :
         method = this._before;

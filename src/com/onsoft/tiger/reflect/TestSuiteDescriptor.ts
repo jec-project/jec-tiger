@@ -14,7 +14,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import {TestSorters} from "jec-juta";
+import { TestSorters, InstanciationPolicy } from "jec-juta";
 
 /**
  * The <code>TestSuiteDescriptor</code> class contains information about a JUTA 
@@ -52,4 +52,10 @@ export class TestSuiteDescriptor {
    * value is <code>TestSorters.DEFAULT</code>.
    */
   public testOrder:number = TestSorters.DEFAULT;
+  
+  /**
+   * Indicates the policy used to create test class instances. Valid values are
+   * the constants of the <code>InstanciationPolicy</code> class.
+   */
+  public instanciationPolicy:string = InstanciationPolicy.SINGLE;
 }

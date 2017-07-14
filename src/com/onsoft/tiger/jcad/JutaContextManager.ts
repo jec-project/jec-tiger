@@ -25,12 +25,12 @@ import {AfterDecorator} from "./decorators/AfterDecorator";
 import {BeforeAllDecorator} from "./decorators/BeforeAllDecorator";
 import {BeforeDecorator} from "./decorators/BeforeDecorator";
 import {AsyncDecorator} from "./decorators/AsyncDecorator";
+import {AfterClassDecorator} from "./decorators/AfterClassDecorator";
+import {BeforeClassDecorator} from "./decorators/BeforeClassDecorator";
 
 /**
  * A helper class that is used to manage desciptor contexts for the JUTA
  * specification.
- * 
- * @class JutaContextManager
  */
 export class JutaContextManager {
   
@@ -38,6 +38,9 @@ export class JutaContextManager {
   // Constructor function
   ////////////////////////////////////////////////////////////////////////////
 
+  /**
+   * Creates a new <code>JutaContextManager</code> instance.
+   */
   constructor() {}
 
   ////////////////////////////////////////////////////////////////////////////
@@ -45,12 +48,8 @@ export class JutaContextManager {
   ////////////////////////////////////////////////////////////////////////////
 
   /**
-   * The reference to the __JcadContext__ associated with this  context manager.
-   * 
-   * @attribute _jcadContext
-   * @private
-   * @type JcadContext
-   * @default null
+   * The reference to the <code>JcadContext</code> associated with this context
+   * manager.
    */
   private _jcadContext:JcadContext = null;
 
@@ -61,8 +60,6 @@ export class JutaContextManager {
   /**
    * Initializes the context for the specified reference.
    * 
-   * @method initContext
-   * @private
    * @param {string} jcadReference the reference of the context to initialize.
    * @param {Class} decoratorClass the reference to the decorator class
    *                               associated whith the context to initialize.
@@ -81,8 +78,6 @@ export class JutaContextManager {
   /**
    * Removes the context with the specified reference.
    * 
-   * @method removeContext
-   * @private
    * @param {string} jcadReference the reference of the context to remove.
    */
   private removeContext(jcadReference:string):void {
@@ -99,8 +94,6 @@ export class JutaContextManager {
 
   /**
    * Initializes the JCAD context associated with this context manager.
-   * 
-   * @method createContext
    */
   public createContext():void {
     let ctxFactory:JcadContextFactory = new JcadContextFactory();
@@ -115,10 +108,16 @@ export class JutaContextManager {
       JutaConnectorRefs.AFTER_ALL_CONNECTOR_REF, AfterAllDecorator
     );
     this.initContext(
+      JutaConnectorRefs.AFTER_CLASS_CONNECTOR_REF, AfterClassDecorator
+    );
+    this.initContext(
       JutaConnectorRefs.AFTER_CONNECTOR_REF, AfterDecorator
     );
     this.initContext(
       JutaConnectorRefs.BEFORE_ALL_CONNECTOR_REF, BeforeAllDecorator
+    );
+    this.initContext(
+      JutaConnectorRefs.BEFORE_CLASS_CONNECTOR_REF, BeforeClassDecorator
     );
     this.initContext(
       JutaConnectorRefs.BEFORE_CONNECTOR_REF, BeforeDecorator
@@ -130,15 +129,15 @@ export class JutaContextManager {
 
   /**
    * Finalizes the JCAD context associated with this context manager.
-   * 
-   * @method deleteContext
    */
   public deleteContext():void {
     this.removeContext(JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF);
     this.removeContext(JutaConnectorRefs.TEST_CONNECTOR_REF);
     this.removeContext(JutaConnectorRefs.AFTER_ALL_CONNECTOR_REF);
+    this.removeContext(JutaConnectorRefs.AFTER_CLASS_CONNECTOR_REF);
     this.removeContext(JutaConnectorRefs.AFTER_CONNECTOR_REF);
     this.removeContext(JutaConnectorRefs.BEFORE_ALL_CONNECTOR_REF);
+    this.removeContext(JutaConnectorRefs.BEFORE_CLASS_CONNECTOR_REF);
     this.removeContext(JutaConnectorRefs.BEFORE_CONNECTOR_REF);
     this.removeContext(JutaConnectorRefs.ASYNC_CONNECTOR_REF);
     this._jcadContext = null;

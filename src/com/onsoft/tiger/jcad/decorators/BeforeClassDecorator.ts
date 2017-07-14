@@ -15,22 +15,24 @@
 //   limitations under the License.
 
 import {Decorator} from "jec-commons";
-import { TestSuiteError, TestSuiteParams, TestSorters, InstanciationPolicy } from "jec-juta";
 import {TestSuiteDescriptorRegistry} from "../../metadata/TestSuiteDescriptorRegistry";
-import {TestSuiteDescriptor} from "../../reflect/TestSuiteDescriptor";
+import { AnnotatedMethodParams, AnnotatedMethodType, TestSuiteError } from "jec-juta";
+import {AnnotatedMethodDescriptorBuilder} from "../../builders/AnnotatedMethodDescriptorBuilder";
+import {AnnotatedMethodDescriptor} from "../../reflect/AnnotatedMethodDescriptor";
 
 /**
- * The <code>TestSuiteDecorator</code> class defines the <code>Decorator</code> 
- * implementation for the JUTA <code>@TestSuite</code> decorator.
+ * The <code>BeforeClassDecorator</code> class defines the 
+ * <code>Decorator</code> implementation for the JUTA <code>@BeforeClass</code>
+ * decorator.
  */
-export class TestSuiteDecorator implements Decorator {
+export class BeforeClassDecorator implements Decorator {
   
   ////////////////////////////////////////////////////////////////////////////
   // Constructor function
   ////////////////////////////////////////////////////////////////////////////
 
   /**
-   * Creates a new <code>TestSuiteDecorator</code> instance.
+   * Creates a new <code>BeforeClassDecorator</code> instance.
    */
   constructor() {}
 
@@ -41,20 +43,18 @@ export class TestSuiteDecorator implements Decorator {
   /**
    * @inheritDoc
    */
-  public decorate(target:any, params:TestSuiteParams):any {
-    let descriptor:TestSuiteDescriptor =
-                          TestSuiteDescriptorRegistry.getRegisteredDescriptor();
-    if(!params.description) {
+  public decorate(target:any, key:string, descriptor:PropertyDescriptor,
+                                          params?:AnnotatedMethodParams):any {
+    if(typeof target !== "function") {
       throw new TestSuiteError(
-        "TestSuite error: 'description' parameter is missing for test suite " +
-        target
+        `@BeforeClass must decorate a static method: ${target}`
       );
     }
-    descriptor.description = params.description;
-    descriptor.disabled = params.disabled || false;
-    descriptor.testOrder = params.testOrder || TestSorters.DEFAULT;
-    descriptor.instanciationPolicy =
-                       params.instanciationPolicy || InstanciationPolicy.SINGLE;
+    let builder:AnnotatedMethodDescriptorBuilder =
+                                         new AnnotatedMethodDescriptorBuilder();
+    let methodDescriptor:AnnotatedMethodDescriptor =
+       builder.build(key, descriptor, AnnotatedMethodType.BEFORE_CLASS, params);
+    TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(methodDescriptor);
     return target;
   }
 }

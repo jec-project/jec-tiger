@@ -23,7 +23,7 @@ import {RunableTestSuite, TestSuiteError, TestMethod, AnnotatedMethod, TestableM
 import {TestMethodBuilder} from "../../builders/TestMethodBuilder";
 import {AnnotatedMethodBuilder} from "../../builders/AnnotatedMethodBuilder";
 import {ParametersMapUtil} from "../../utils/ParametersMapUtil";
-import {TestSorters} from "jec-juta";
+import { TestSorters, InstanciationPolicy } from "jec-juta";
 import {TestSorterUtil} from "../../utils/TestSorterUtil";
 
 /**
@@ -82,6 +82,11 @@ export class TigerRunableTestSuite implements RunableTestSuite {
    * object.
    */
   private _testOrder:number = TestSorters.DEFAULT;
+
+  /**
+   * Indicates the policy used to create test class instances.
+   */
+  private _instanciationPolicy:string = InstanciationPolicy.SINGLE;
 
   /**
    * The utility which is resposible for sorting test methods that compose this
@@ -195,6 +200,7 @@ export class TigerRunableTestSuite implements RunableTestSuite {
     this._description = descriptor.description;
     this._disabled = descriptor.disabled;
     this._testOrder = descriptor.testOrder;
+    this._instanciationPolicy = descriptor.instanciationPolicy;
     this.initTestMethods();
     this.initAnnotatedMethods();
     this.initParameters();
@@ -233,5 +239,12 @@ export class TigerRunableTestSuite implements RunableTestSuite {
    */
   public getTestOrder():number {
     return this._testOrder;
+  }
+  
+  /**
+   * @inheritDoc
+   */
+  public getInstanciationPolicy():string {
+    return this._instanciationPolicy;
   }
 }

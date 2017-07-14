@@ -30,12 +30,16 @@ export {TigerSourceFileInspector} from "./core/TigerSourceFileInspector";
 export {TigerConnector} from "./jcad/connectors/TigerConnector";
 //--> com/onsoft/tiger/jcad/decorators
 export {AfterAllDecorator} from "./jcad/decorators/AfterAllDecorator";
+export {AfterClassDecorator} from "./jcad/decorators/AfterClassDecorator";
 export {AfterDecorator} from "./jcad/decorators/AfterDecorator";
 export {AsyncDecorator} from "./jcad/decorators/AsyncDecorator";
 export {BeforeAllDecorator} from "./jcad/decorators/BeforeAllDecorator";
+export {BeforeClassDecorator} from "./jcad/decorators/BeforeClassDecorator";
 export {BeforeDecorator} from "./jcad/decorators/BeforeDecorator";
 export {TestDecorator} from "./jcad/decorators/TestDecorator";
 export {TestSuiteDecorator} from "./jcad/decorators/TestSuiteDecorator";
+//--> com/onsoft/tiger/jcad
+export {JutaContextManager} from "./jcad/JutaContextManager";
 //--> com/onsoft/tiger/logging
 export {TigerLoggerProxy} from "./logging/TigerLoggerProxy";
 //--> com/onsoft/tiger/metadata
@@ -51,6 +55,8 @@ export {TigerAnnotatedMethod} from "./runners/model/TigerAnnotatedMethod";
 export {TigerRunableTestSuite} from "./runners/model/TigerRunableTestSuite";
 export {TigerTestableMethod} from "./runners/model/TigerTestableMethod";
 export {TigerTestMethod} from "./runners/model/TigerTestMethod";
+//--> com/onsoft/tiger/runners/utils
+export {TestClassRunner} from "./runners/utils/TestClassRunner";
 //--> com/onsoft/tiger/runners
 export {TigerTestRunner} from "./runners/TigerTestRunner";
 export {TigerTestStats} from "./runners/TigerTestStats";

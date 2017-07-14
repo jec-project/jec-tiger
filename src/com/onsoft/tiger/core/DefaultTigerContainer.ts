@@ -72,7 +72,7 @@ export class DefaultTigerContainer implements Tiger {
    */
   private initObj():void {
     let logger:Logger = new ConsoleLogger();
-    this._version = "1.0.0";
+    this._version = "1.2.0";
     TigerLoggerProxy.getInstance().setLogger(logger);
     this._sourceFileInspector = new TigerSourceFileInspector();
     this._testRunner = new TigerTestRunner();

@@ -59,6 +59,13 @@ export const initRegistry:Function = function():void {
   TestSuiteDescriptorRegistry.addTestDescriptor(TEST_DESCRIPTOR);
   TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(ANNOTATED_METHOD_DESCRIPTOR);
 };
+export const initInvalidPolicyRegistry:Function = function():void {
+  let descriptor:TestSuiteDescriptor = buildTestSuiteDescriptor();
+  descriptor.instanciationPolicy = "invalid";
+  TestSuiteDescriptorRegistry.registerDescriptor(descriptor);
+  TestSuiteDescriptorRegistry.addTestDescriptor(TEST_DESCRIPTOR);
+  TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(ANNOTATED_METHOD_DESCRIPTOR);
+};
 export const resetRegistry:Function = function():void {
   TestSuiteDescriptorRegistry.registerDescriptor(null);
 };

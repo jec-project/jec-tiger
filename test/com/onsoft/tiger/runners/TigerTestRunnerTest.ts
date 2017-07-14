@@ -16,7 +16,7 @@
 
 import "mocha";
 import {expect} from "chai";
-import {RunableTestSuite, TestStats} from "jec-juta";
+import { RunableTestSuite, TestStats, TestSuiteError } from "jec-juta";
 
 // Class to test:
 import {TigerTestRunner} from "../../../../../src/com/onsoft/tiger/runners/TigerTestRunner";
@@ -28,7 +28,7 @@ import * as utils from "../../../../../utils/test-utils/utilities/TigerTestRunne
 describe("TigerTestRunner", ()=> {
   
   describe("#runTest()", ()=> {
-    it("should run the specified test suite", ()=> {
+    it("should run the specified test suite", (done:MochaDone)=> {
       utils.initRegistry();
       let runner:TigerTestRunner = new TigerTestRunner();
       runner.runTest(utils.buildRunableTestSuite(), (stats:TestStats)=> {
@@ -41,12 +41,25 @@ describe("TigerTestRunner", ()=> {
         expect(stats.duration).not.to.equal(0);
         expect(stats.numTests).to.equal(3); // 1 test repeated 3 times
         utils.resetRegistry();
+        done();
       });
     });
   });
 
+  describe("#runTest() with invalid instanciation policy", ()=> {
+    it("should throw a TestSuiteError exception", ()=> {
+      utils.initInvalidPolicyRegistry();
+      let runner:TigerTestRunner = new TigerTestRunner();
+      let doRun:Function = function():void {
+        runner.runTest(utils.buildRunableTestSuite(), (stats:TestStats)=> {});
+      };
+      expect(doRun).to.throw(TestSuiteError);
+      utils.resetRegistry();
+    });
+  });
+
   describe("#runAllTests()", ()=> {
-    it("should run the specified test suites", ()=> {
+    it("should run the specified test suites", (done:MochaDone)=> {
       utils.initRegistry();
       let runner:TigerTestRunner = new TigerTestRunner();
       let testSuites:RunableTestSuite[] = [
@@ -64,6 +77,7 @@ describe("TigerTestRunner", ()=> {
         expect(stats.duration).not.to.equal(0);
         expect(stats.numTests).to.equal(9); // 3 tests repeated 3 times
         utils.resetRegistry();
+        done();
       });
     });
   });
