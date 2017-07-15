@@ -5,6 +5,8 @@
 
 ### Bug Fixes
 
+- **TigerTestRunner.runAllTests():** the callback method was never called when the `testSuiteColl` parameter was an empty  array. This caused the callback method of the `DefaultTigerContainer.process()` method to never been invokated.
+
 ### Features
 
 - **JUTA Update:** implements the new `@AfterClass` and `@BeforeClass` decorators.

@@ -80,5 +80,16 @@ describe("TigerTestRunner", ()=> {
         done();
       });
     });
+
+    it("should invoke the callback method even if not test suite is defined", (done:MochaDone)=> {
+      utils.initRegistry();
+      let runner:TigerTestRunner = new TigerTestRunner();
+      let testSuites:RunableTestSuite[] = [];
+      runner.runAllTests(testSuites, (stats:TestStats)=> {
+        expect(stats.error).to.be.null;
+        utils.resetRegistry();
+        done();
+      });
+    });
   });
 });

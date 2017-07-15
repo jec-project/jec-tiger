@@ -16,7 +16,7 @@
 
 import "mocha";
 import { TestMethod, AnnotatedMethodType, AnnotatedMethod, InstanciationPolicy,
-         TestStats, TestableMethod } from "jec-juta";
+  TestStats, TestableMethod, TestSuiteError } from "jec-juta";
 import {AnnotatedMethodsMapper} from "../../utils/AnnotatedMethodsMapper";
 
 /**
@@ -52,6 +52,16 @@ export class TestClassRunner {
     } else return false;
   }
 
+  /**
+   * Throws an exception of the type of <code>TestSuiteError</code> when the
+   * annotated method type is not valid.
+   * 
+   * @param {string} expected a string that specifies the expected values.
+   */
+  private invalidMethodTypeError(expected:string):void {
+    throw new TestSuiteError(`Invalid decorator: '${expected}' expected`);
+  }
+
   //////////////////////////////////////////////////////////////////////////////
   // Public methods
   //////////////////////////////////////////////////////////////////////////////
@@ -69,17 +79,23 @@ export class TestClassRunner {
                                                                scope:any):void {
     let timeout:number = -1;
     let methodRef:Function = null;
+    let type:number = null;
     if(method) {
+      type = method.type;
       if(this.checkDisabledTest(method)) return;
       timeout = method.timeout;
       if(timeout && timeout > 0) scope.timeout(timeout);
-      switch(method.type) {
+      switch(type) {
         case AnnotatedMethodType.BEFORE_CLASS :
           methodRef = before;
           break;
         case AnnotatedMethodType.AFTER_CLASS :
           methodRef = after;
           break;
+        default :
+        this.invalidMethodTypeError(
+          "AnnotatedMethodType.BEFORE_CLASS or AnnotatedMethodType.AFTER_CLASS"
+        );
       }
       if(method.async) {
         methodRef((done?:MochaDone) => {
@@ -106,11 +122,13 @@ export class TestClassRunner {
                                                                scope:any):void {
     let timeout:number = -1;
     let methodRef:Function = null;
+    let type:number = null;
     if(method) {
+      type = method.type;
       if(this.checkDisabledTest(method)) return;
       timeout = method.timeout;
       if(timeout && timeout > 0) scope.timeout(timeout);
-      switch(method.type) {
+      switch(type) {
         case AnnotatedMethodType.BEFORE_ALL :
           methodRef = before;
           break;
@@ -123,6 +141,10 @@ export class TestClassRunner {
         case AnnotatedMethodType.AFTER :
           methodRef = afterEach;
           break;
+        default :
+        this.invalidMethodTypeError(
+          "AnnotatedMethodType.BEFORE_ALL, AnnotatedMethodType.AFTER_ALL AnnotatedMethodType.BEFORE or AnnotatedMethodType.AFTER"
+        );
       }
       if(method.async) {
         methodRef((done?:MochaDone) => {
@@ -150,8 +172,8 @@ export class TestClassRunner {
    * @param {any} scope the scope reference for current mocha test function.
    */
   public applyGlobalFixtures(testPolicy:string,
-                                mapper:AnnotatedMethodsMapper, 
-                                testSuiteObj:any, scope:any):void {
+                             mapper:AnnotatedMethodsMapper, 
+                             testSuiteObj:any, scope:any):void {
     if(testPolicy === InstanciationPolicy.SINGLE) {
       this.applyAnnotatedMethod(
         mapper.getMethodByType(AnnotatedMethodType.BEFORE_ALL),
@@ -163,7 +185,7 @@ export class TestClassRunner {
         testSuiteObj,
         scope
       );
-    } else {
+    } else if(testPolicy === InstanciationPolicy.MULTIPLE) {
       let ClassRef:Function = testSuiteObj.constructor;
       this.applyStaticMethod(
         mapper.getMethodByType(AnnotatedMethodType.BEFORE_CLASS),
@@ -175,7 +197,13 @@ export class TestClassRunner {
         ClassRef,
         scope
       );
-    }
+    } else {
+        throw new TestSuiteError(
+          `Instanciation Policy is not valid:
++expected InstanciationPolicy.SINGLE or InstanciationPolicy.MULTIPLE 
+-actual ${testPolicy}`
+        );
+      }
   }
 
   /**
@@ -265,7 +293,6 @@ export class TestClassRunner {
     }
   }
 
-  
   /**
    * Invokes all test for the current test suite by creating a new instance
    * of the test class for each test.
@@ -278,10 +305,12 @@ export class TestClassRunner {
    * @param {any} testSuiteObj the reference to the current test suite instance.
    * @param {TestStats} stats the <code>TestStats</code> object associated with 
    *                          the current test.
+   * 
+   * @return {number} the number of new test class instances created.
    */
   public runMultipleInstanceTest(testMethods:TestMethod[],
                                  mapper:AnnotatedMethodsMapper,
-                                 testSuiteObj:any, stats:TestStats):void {
+                                 testSuiteObj:any, stats:TestStats):number {
     let testMethod:TestMethod = null;
     let len:number = testMethods.length - 1;
     let cursor:number = 0;
@@ -290,8 +319,9 @@ export class TestClassRunner {
     let newInstance:any = null;
     let scope:any = null;
     let _this = this;
+    let numInstances:number = 0;
     for(; cursor <= len; ++cursor) {
-      describe("Isolated Test", function() {
+      describe("[Isolated Test]", function() {
         _this.applyAnnotatedMethod(
           mapper.getMethodByType(AnnotatedMethodType.BEFORE),
           testSuiteObj,
@@ -304,6 +334,7 @@ export class TestClassRunner {
         );
         scope = this;
         newInstance = new ClassRef();
+        numInstances++;
         testMethod = testMethods[cursor];
         repeat = testMethod.repeat;
         if(repeat && repeat > 0) {
@@ -325,5 +356,6 @@ export class TestClassRunner {
         }
       });
     }
+    return numInstances;
   }
 };

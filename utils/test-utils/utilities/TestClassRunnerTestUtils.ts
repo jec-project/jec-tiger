@@ -15,8 +15,12 @@
 //   limitations under the License.
 
 import {AnnotatedMethodBuilder} from "../../../src/com/onsoft/tiger/builders/AnnotatedMethodBuilder";
+import {TestMethodBuilder} from "../../../src/com/onsoft/tiger/builders/TestMethodBuilder";
+import {AnnotatedMethodsMapper} from "../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
+import {TestDescriptor} from "../../../src/com/onsoft/tiger/reflect/TestDescriptor";
 import {AnnotatedMethodDescriptor} from "../../../src/com/onsoft/tiger/reflect/AnnotatedMethodDescriptor";
-import { AnnotatedMethodType, AnnotatedMethod } from "jec-juta";
+import {TigerTestStats} from "../../../src/com/onsoft/tiger/runners/TigerTestStats";
+import { AnnotatedMethodType, AnnotatedMethod, TestMethod, TestStats } from "jec-juta";
 
 /*!
  * This module constains utilities used by the TestClassRunnerTest test suite.
@@ -24,8 +28,9 @@ import { AnnotatedMethodType, AnnotatedMethod } from "jec-juta";
 
 // Utilities:
 const BUILDER:AnnotatedMethodBuilder = new AnnotatedMethodBuilder();
+const TEST_BUILDER:TestMethodBuilder = new TestMethodBuilder();
 const DESCRIPTOR:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
-export const buildAnnotatedMethod:Function = function(type:number, disabled:boolean = false, timeout:number = null):AnnotatedMethod {
+export const buildAnnotatedMethod:Function = function(type:number, disabled:boolean = false, timeout:number = 0):AnnotatedMethod {
   let methodName:string = null;
   switch(type) {
     case AnnotatedMethodType.BEFORE : methodName = "before"; break;
@@ -36,9 +41,38 @@ export const buildAnnotatedMethod:Function = function(type:number, disabled:bool
     case AnnotatedMethodType.AFTER_CLASS : methodName = "afterClass"; break;
   }
   DESCRIPTOR.method = methodName;
-  DESCRIPTOR.disabled = true;
   DESCRIPTOR.type = type;
   DESCRIPTOR.disabled = disabled;
-  if(timeout) DESCRIPTOR.timeout = timeout;
+  DESCRIPTOR.timeout = timeout;
   return BUILDER.build(DESCRIPTOR);
 };
+export const buildAnnotatedMethodsMapper:Function = function():AnnotatedMethodsMapper {
+  let mapper:AnnotatedMethodsMapper = null;
+  let methods:AnnotatedMethod[] = [
+    buildAnnotatedMethod(AnnotatedMethodType.BEFORE),
+    buildAnnotatedMethod(AnnotatedMethodType.BEFORE_ALL),
+    buildAnnotatedMethod(AnnotatedMethodType.BEFORE_CLASS),
+    buildAnnotatedMethod(AnnotatedMethodType.AFTER),
+    buildAnnotatedMethod(AnnotatedMethodType.AFTER_ALL),
+    buildAnnotatedMethod(AnnotatedMethodType.AFTER_CLASS)
+  ];
+  mapper = new AnnotatedMethodsMapper(methods);
+  return mapper;
+};
+export const buildTestMethod:Function = function(
+  disabled:boolean = false, timeout:number = 0, repeat:number = null,
+  name:string = null
+):TestMethod {
+  let methodName:string = null;
+  let desc:TestDescriptor = new TestDescriptor();
+  desc.method = name || "test";
+  desc.description = "description";
+  desc.disabled = disabled;
+  desc.timeout = timeout;
+  if(repeat !== null) desc.repeat = repeat;
+  return TEST_BUILDER.build(desc);
+};
+export const buildTestStats:Function = function():TestStats {
+  return new TigerTestStats();
+};
+export const COMPUTED_DESCRIPTION:string = "test: description";

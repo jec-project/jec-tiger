@@ -17,7 +17,9 @@
 import "mocha";
 import * as chai from "chai";
 import * as spies from "chai-spies";
-import { AnnotatedMethod, AnnotatedMethodType } from "jec-juta";
+import { TestSuiteError,
+         InstanciationPolicy, TestStats, TestMethod } from "jec-juta";
+import {AnnotatedMethodsMapper} from "../../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
 
 // Class to test:
 import {TestClassRunner} from "../../../../../../src/com/onsoft/tiger/runners/utils/TestClassRunner";
@@ -35,18 +37,168 @@ chai.use(spies);
 describe("TestClassRunner", ()=> {
 
   let runner:TestClassRunner = new TestClassRunner();
-  
-  describe("#applyStaticMethod()", ()=> {
+  let testSuiteObj:TestClassRunnerTestClass = new TestClassRunnerTestClass();
+  TestClassRunnerTestClass.invokator = {
+    notify: function(methodName:string) { }
+  };
+  let mapper:AnnotatedMethodsMapper = utils.buildAnnotatedMethodsMapper();
 
-     it("should do nothing when test is disabled", function() {
-      let spy:any = chai.spy.on(global, "it");
-      let method:AnnotatedMethod = utils.buildAnnotatedMethod(
-        AnnotatedMethodType.BEFORE, true
-      );
+  describe("#runSingleInstanceTests()", ()=> {
+    
+     it("should increment the 'numDisabledTests' value of the TestStats object when test is disabled", function() {
+      let spy:any = chai.spy.on(runner, "applyTestMethod");
+      let stats:TestStats = utils.buildTestStats();
+      let method:TestMethod = utils.buildTestMethod(true);
       expect(
-        runner.applyStaticMethod(method, TestClassRunnerTestClass, this)
+        runner.runSingleInstanceTests(
+          [method], 
+          mapper, 
+          testSuiteObj, 
+          this, 
+          stats
+        )
       ).to.be.OK;
       expect(spy).to.have.been.called.once;
+      expect(stats.numDisabledTests).to.equal(1);
+    });
+
+    it("should call the 'applyTestMethod' function and and increment the 'numTests' value of the TestStats object", function() {
+      let spy:any = chai.spy.on(runner, "applyTestMethod");
+      let stats:TestStats = utils.buildTestStats();
+      let method:TestMethod = utils.buildTestMethod();
+      expect(
+        runner.runSingleInstanceTests(
+          [method], 
+          mapper, 
+          testSuiteObj, 
+          this, 
+          stats
+        )
+      ).to.be.OK;
+      expect(spy).to.have.been.called.once;
+      expect(stats.numTests).to.equal(1);
+    });
+    
+    it("should call the 'applyAnnotatedMethod' 2 times", function() {
+      let spy:any = chai.spy.on(runner, "applyAnnotatedMethod");
+      let stats:TestStats = utils.buildTestStats();
+      let method:TestMethod = utils.buildTestMethod();
+      expect(
+        runner.runSingleInstanceTests(
+          [method], 
+          mapper, 
+          testSuiteObj, 
+          this, 
+          stats
+        )
+      ).to.be.OK;
+      expect(spy).to.have.been.called.exactly(2);
+      expect(stats.numTests).to.equal(1);
+    });
+
+    it("should call the 'applyTestMethod' function 3 times and and increment the 'numTests' value of the TestStats object", function() {
+      let spy:any = chai.spy.on(runner, "applyTestMethod");
+      let stats:TestStats = utils.buildTestStats();
+      let method:TestMethod = utils.buildTestMethod(false, 0, 3);
+      expect(
+        runner.runSingleInstanceTests(
+          [method], 
+          mapper, 
+          testSuiteObj, 
+          this, 
+          stats
+        )
+      ).to.be.OK;
+      expect(spy).to.have.been.called.exactly(3);
+      expect(stats.numTests).to.equal(3);
+    });
+  });
+
+  
+  describe("#runMultipleInstanceTest()", ()=> {
+    
+     it("should increment the 'numDisabledTests' value of the TestStats object when test is disabled", function() {
+      let spy:any = chai.spy.on(runner, "applyTestMethod");
+      let stats:TestStats = utils.buildTestStats();
+      let method:TestMethod = utils.buildTestMethod(true);
+      expect(
+        runner.runMultipleInstanceTest(
+          [method], 
+          mapper, 
+          testSuiteObj, 
+          stats
+        )
+      ).to.be.OK;
+      expect(spy).to.have.been.called.once;
+      expect(stats.numDisabledTests).to.equal(1);
+    });
+
+    it("should call the 'applyAnnotatedMethod' 2 times", function() {
+      let spy:any = chai.spy.on(runner, "applyAnnotatedMethod");
+      let stats:TestStats = utils.buildTestStats();
+      let method:TestMethod = utils.buildTestMethod();
+      expect(
+        runner.runMultipleInstanceTest(
+          [method], 
+          mapper, 
+          testSuiteObj, 
+          stats
+        )
+      ).to.be.OK;
+      expect(spy).to.have.been.called.exactly(2);
+      expect(stats.numTests).to.equal(1);
+    });
+
+    it("should call the 'applyTestMethod' function and and increment the 'numTests' value of the TestStats object", function() {
+      let spy:any = chai.spy.on(runner, "applyTestMethod");
+      let stats:TestStats = utils.buildTestStats();
+      let method:TestMethod = utils.buildTestMethod();
+      expect(
+        runner.runMultipleInstanceTest(
+          [method], 
+          mapper, 
+          testSuiteObj, 
+          stats
+        )
+      ).to.be.OK;
+      expect(spy).to.have.been.called.once;
+      expect(stats.numTests).to.equal(1);
+    });
+
+    it("should return 3", function() {
+      let spy:any = chai.spy.on(runner, "applyAnnotatedMethod");
+      let stats:TestStats = utils.buildTestStats();
+      let methods:TestMethod[] = [
+        utils.buildTestMethod(),
+        utils.buildTestMethod(false, 0, null, "test2"),
+        utils.buildTestMethod(false, 0, null, "test3")
+      ];
+      expect(
+        runner.runMultipleInstanceTest(
+          methods, 
+          mapper, 
+          testSuiteObj, 
+          stats
+        )
+      ).to.equal(3);
+      expect(spy).to.have.been.called.exactly(6);
+      expect(stats.numTests).to.equal(3);
+    });
+
+    it("should call the 'applyTestMethod' function 3 times and and increment the 'numTests' value of the TestStats object", function() {
+      let spy:any = chai.spy.on(runner, "applyTestMethod");
+      let stats:TestStats = utils.buildTestStats();
+      let method:TestMethod = utils.buildTestMethod(false, 0, 3);
+      expect(
+        runner.runMultipleInstanceTest(
+          [method], 
+          mapper, 
+          testSuiteObj, 
+          stats
+        )
+      ).to.be.OK;
+      expect(spy).to.have.been.called.exactly(3);
+      expect(stats.numTests).to.equal(3);
     });
   });
 });

@@ -175,21 +175,27 @@ export class TigerTestRunner implements TestRunner {
     let process:boolean = true;
     this._stats = this.initStats(true);
     this._testStart = new Date();
-    while(len-- && process) {
-      this.runTest(
-        testSuiteColl[len],
-        (innerStats)=> {
-          if(innerStats.error) {
-            process = false;
-            this.computeTestDuration();
-            callback(this._stats);
-          } else if(len <= 0 && process) {
-            this.computeTestDuration();
-            callback(this._stats);
+    if(len === 0) {
+      this.computeTestDuration();
+      callback(this._stats);
+    } else {
+      while(len-- && process) {
+        this.runTest(
+          testSuiteColl[len],
+          (innerStats)=> {
+            if(innerStats.error) {
+              process = false;
+              this.computeTestDuration();
+              callback(this._stats);
+            } else if(len <= 0 && process) {
+              this.computeTestDuration();
+              callback(this._stats);
+            }
           }
-        }
-      );
+        );
+      }
     }
+    
     this._stats = null;
   }
 }

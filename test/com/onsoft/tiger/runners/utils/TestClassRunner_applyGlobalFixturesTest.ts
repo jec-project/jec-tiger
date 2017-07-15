@@ -1,0 +1,76 @@
+//  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+//
+//   Copyright 2016-2017 Pascal ECHEMANN.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+
+import "mocha";
+import * as chai from "chai";
+import * as spies from "chai-spies";
+import { AnnotatedMethod, TestSuiteError, InstanciationPolicy } from "jec-juta";
+import {AnnotatedMethodsMapper} from "../../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
+
+// Class to test:
+import {TestClassRunner} from "../../../../../../src/com/onsoft/tiger/runners/utils/TestClassRunner";
+
+// Utilities:
+import * as utils from "../../../../../../utils/test-utils/utilities/TestClassRunnerTestUtils";
+import {TestClassRunnerTestClass} from "../../../../../../utils/test-utils/classes/TestClassRunnerTestClass";
+
+
+// Chai declarations:
+const expect:any = chai.expect;
+chai.use(spies);
+
+// Test:
+describe("TestClassRunner", ()=> {
+
+  let runner:TestClassRunner = new TestClassRunner();
+  let testSuiteObj:TestClassRunnerTestClass = new TestClassRunnerTestClass();
+  TestClassRunnerTestClass.invokator = {
+    notify: function(methodName:string) { }
+  };
+  let mapper:AnnotatedMethodsMapper = utils.buildAnnotatedMethodsMapper();
+
+  describe("#applyGlobalFixtures()", ()=> {
+    
+    it("should throw a TestSuiteError exception when test policy is not valid", function() {
+      let applyGlobalFixtures:Function = function():void {
+        runner.applyGlobalFixtures(
+          "invalidPolicy", mapper, testSuiteObj, this
+        );
+      };
+      expect(applyGlobalFixtures.bind(this)).to.throw(TestSuiteError);
+    });
+    
+    it("InstanciationPolicy.MULTIPLE should invoke both mocha 'before' and after' methods on global scope", function() {
+      let spyBefore:any = chai.spy.on(global, "before");
+      let spyAfter:any = chai.spy.on(global, "after");
+      runner.applyGlobalFixtures(
+        InstanciationPolicy.MULTIPLE, mapper, testSuiteObj, this
+      );
+      expect(spyBefore).to.have.been.called.once;
+      expect(spyAfter).to.have.been.called.once;
+    });
+    
+    it("InstanciationPolicy.SINGLE should invoke both mocha 'before' and after' methods on global scope", function() {
+      let spyBefore:any = chai.spy.on(global, "before");
+      let spyAfter:any = chai.spy.on(global, "after");
+      runner.applyGlobalFixtures(
+        InstanciationPolicy.SINGLE, mapper, testSuiteObj, this
+      );
+      expect(spyBefore).to.have.been.called.once;
+      expect(spyAfter).to.have.been.called.once;
+    });
+  });
+});

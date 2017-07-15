@@ -43,7 +43,7 @@ describe("DefaultTigerContainer", ()=> {
       expect(tigerContainer.getTestPaths()).to.be.null;
     });
     
-    it("should return a default test path when no test path has been defined and the process has already be invoked", ()=>{
+    it("should return a default test path when no test path has been defined and the process has already be invoked", (done:MochaDone)=>{
       let tigerContainer:Tiger = new DefaultTigerContainer();
       let paths:string[] = null;
       tigerContainer.process((err:any)=> {
@@ -51,6 +51,7 @@ describe("DefaultTigerContainer", ()=> {
         expect(paths).to.be.an("array");
         expect(paths).to.have.lengthOf(1);
         expect(paths).to.include(utils.DEFAULT_PATH);
+        done();
       });
     });
   });
@@ -61,36 +62,27 @@ describe("DefaultTigerContainer", ()=> {
       let tigerContainer:Tiger = new DefaultTigerContainer();
       tigerContainer.setTestPaths(utils.CUSTOM_PATHS);
       expect(tigerContainer.getTestPaths()).to.equal(utils.CUSTOM_PATHS);
-      
     });
     
-    it("should use the custom test path values for excuting the autowiring process", ()=>{
+    it("should use the custom test path values for excuting the autowiring process", (done:MochaDone)=>{
       let tigerContainer:Tiger = new DefaultTigerContainer();
       tigerContainer.setTestPaths(utils.CUSTOM_PATHS);
       tigerContainer.process((err:any)=> {
         expect(tigerContainer.getTestPaths()).to.equal(utils.CUSTOM_PATHS);
+        done();
       });
     });
   });
 
   describe("#process()", ()=> {
 
-    it("should return a TestSuiteError when class paths are not valid", ()=>{
+    it("should return a TestSuiteError when class paths are not valid", (done:MochaDone)=>{
       let tigerContainer:Tiger = new DefaultTigerContainer();
       tigerContainer.setTestPaths(utils.INVALID_PATHS);
       tigerContainer.process((err:any)=> {
         expect(err).not.to.be.null;
         expect(err).to.be.an.instanceof(TestSuiteError);
-      });
-    });
-    
-    it("should be able to run multiple tests sequentially", ()=>{
-      let tigerContainer:Tiger = new DefaultTigerContainer();
-      tigerContainer.process((err:any)=> {
-        tigerContainer.setTestPaths(utils.CUSTOM_PATHS);
-        tigerContainer.process((err:any)=> {
-          expect("process").to.be.ok;
-        });
+        done();
       });
     });
   });
