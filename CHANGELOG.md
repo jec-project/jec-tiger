@@ -1,5 +1,16 @@
 # JEC Tiger Project: Update Release Notes
 
+<a name="jec-tiger-1.1.3"></a>
+## **1.1.3** (2017-07-17)
+
+### Bug Fixes
+
+- Fixes JUTA 1.2.2 dependency missing in the `package.json` file.
+
+### Features
+
+- JUTA 1.2.2 dependency upgrade
+
 <a name="jec-tiger-1.1.2"></a>
 ## **1.1.2** (2017-07-17)
 
