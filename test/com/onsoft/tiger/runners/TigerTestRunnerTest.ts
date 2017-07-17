@@ -46,7 +46,7 @@ describe("TigerTestRunner", ()=> {
     });
   });
 
-  describe("#runTest() with invalid instanciation policy", ()=> {
+  describe("#runTest() with invalid instantiation policy", ()=> {
     it("should throw a TestSuiteError exception", ()=> {
       utils.initInvalidPolicyRegistry();
       let runner:TigerTestRunner = new TigerTestRunner();

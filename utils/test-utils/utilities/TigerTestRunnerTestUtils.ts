@@ -61,7 +61,7 @@ export const initRegistry:Function = function():void {
 };
 export const initInvalidPolicyRegistry:Function = function():void {
   let descriptor:TestSuiteDescriptor = buildTestSuiteDescriptor();
-  descriptor.instanciationPolicy = "invalid";
+  descriptor.instantiationPolicy = "invalid";
   TestSuiteDescriptorRegistry.registerDescriptor(descriptor);
   TestSuiteDescriptorRegistry.addTestDescriptor(TEST_DESCRIPTOR);
   TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(ANNOTATED_METHOD_DESCRIPTOR);

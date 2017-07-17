@@ -19,7 +19,7 @@ import {expect} from "chai";
 
 // Class to test:
 import {TestSuiteDescriptor} from "../../../../../src/com/onsoft/tiger/reflect/TestSuiteDescriptor";
-import { InstanciationPolicy, TestSorters } from "jec-juta";
+import { InstantiationPolicy, TestSorters } from "jec-juta";
 
 // Test:
 describe("TestSuiteDescriptor", ()=> {
@@ -38,9 +38,9 @@ describe("TestSuiteDescriptor", ()=> {
     expect(descriptor).to.have.property("testOrder", TestSorters.DEFAULT);
   });
 
-  it("should have a 'instanciationPolicy' property set to 'InstanciationPolicy.SINGLE'", function() {
+  it("should have a 'instantiationPolicy' property set to 'InstantiationPolicy.SINGLE'", function() {
     expect(descriptor).to.have.property(
-      "instanciationPolicy", InstanciationPolicy.SINGLE
+      "instantiationPolicy", InstantiationPolicy.SINGLE
     );
   });
 });

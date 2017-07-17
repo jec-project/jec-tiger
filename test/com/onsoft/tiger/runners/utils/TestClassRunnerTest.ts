@@ -17,8 +17,7 @@
 import "mocha";
 import * as chai from "chai";
 import * as spies from "chai-spies";
-import { TestSuiteError,
-         InstanciationPolicy, TestStats, TestMethod } from "jec-juta";
+import { TestSuiteError, TestStats, TestMethod } from "jec-juta";
 import {AnnotatedMethodsMapper} from "../../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
 
 // Class to test:

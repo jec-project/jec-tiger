@@ -1,6 +1,6 @@
 {
   "name": "jec-tiger",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "JEC Tiger - The default unit testing framework for JEC applications.",
   "main": "lib/com/onsoft/tiger/index",
   "types": "types/jec-tiger.d.ts",

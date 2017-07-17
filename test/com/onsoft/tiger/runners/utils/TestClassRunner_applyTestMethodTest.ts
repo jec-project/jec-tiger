@@ -17,16 +17,15 @@
 import "mocha";
 import * as chai from "chai";
 import * as spies from "chai-spies";
-import { TestSuiteError,
-         InstanciationPolicy, TestStats, TestMethod } from "jec-juta";
-import {AnnotatedMethodsMapper} from "../../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
+import { TestSuiteError, TestStats, TestMethod } from "jec-juta";
+import { AnnotatedMethodsMapper } from "../../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
 
 // Class to test:
-import {TestClassRunner} from "../../../../../../src/com/onsoft/tiger/runners/utils/TestClassRunner";
+import { TestClassRunner } from "../../../../../../src/com/onsoft/tiger/runners/utils/TestClassRunner";
 
 // Utilities:
 import * as utils from "../../../../../../utils/test-utils/utilities/TestClassRunnerTestUtils";
-import {TestClassRunnerTestClass} from "../../../../../../utils/test-utils/classes/TestClassRunnerTestClass";
+import { TestClassRunnerTestClass } from "../../../../../../utils/test-utils/classes/TestClassRunnerTestClass";
 
 
 // Chai declarations:

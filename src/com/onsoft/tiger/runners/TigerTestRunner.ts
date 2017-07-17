@@ -15,7 +15,7 @@
 //   limitations under the License.
 
 import {RunableTestSuite, TestRunner, TestMethod, AnnotatedMethodType,
-  AnnotatedMethod, TestStats, InstanciationPolicy, TestSuiteError
+  AnnotatedMethod, TestStats, InstantiationPolicy, TestSuiteError
 } from "jec-juta";
 import {TigerLoggerProxy} from "../logging/TigerLoggerProxy";
 import {AnnotatedMethodsMapper} from "../utils/AnnotatedMethodsMapper";
@@ -131,7 +131,7 @@ export class TigerTestRunner implements TestRunner {
     let mapper:AnnotatedMethodsMapper = 
                     new AnnotatedMethodsMapper(testSuite.getAnnotatedMethods());
     let name:string = testSuiteObj.constructor.name;
-    let testPolicy:string = testSuite.getInstanciationPolicy();
+    let testPolicy:string = testSuite.getInstantiationPolicy();
     let stats:TestStats = this.initStats();
     this._stats = stats;
     this.sendMessage(`test suite run: ${name}`);
@@ -145,18 +145,18 @@ export class TigerTestRunner implements TestRunner {
       _this._classRunner.applyGlobalFixtures(
         testPolicy, mapper, testSuiteObj, this
       );
-      if(testPolicy === InstanciationPolicy.SINGLE) {
+      if(testPolicy === InstantiationPolicy.SINGLE) {
          _this._classRunner.runSingleInstanceTests(
           testMethods, mapper, testSuiteObj, this, stats
         );
-      } else if(testPolicy === InstanciationPolicy.MULTIPLE) {
+      } else if(testPolicy === InstantiationPolicy.MULTIPLE) {
         _this._classRunner.runMultipleInstanceTest(
           testMethods, mapper, testSuiteObj, stats
         );
       } else {
         throw new TestSuiteError(
-          `Instanciation Policy is not valid on test suite ${name}:
-+expected InstanciationPolicy.SINGLE or InstanciationPolicy.MULTIPLE 
+          `Instantiation Policy is not valid on test suite ${name}:
++expected InstantiationPolicy.SINGLE or InstantiationPolicy.MULTIPLE 
 -actual ${testPolicy}`
         );
       }

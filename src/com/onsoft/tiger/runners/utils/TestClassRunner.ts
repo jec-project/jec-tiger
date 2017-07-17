@@ -15,7 +15,7 @@
 //   limitations under the License.
 
 import "mocha";
-import { TestMethod, AnnotatedMethodType, AnnotatedMethod, InstanciationPolicy,
+import { TestMethod, AnnotatedMethodType, AnnotatedMethod, InstantiationPolicy,
   TestStats, TestableMethod, TestSuiteError } from "jec-juta";
 import {AnnotatedMethodsMapper} from "../../utils/AnnotatedMethodsMapper";
 
@@ -159,10 +159,10 @@ export class TestClassRunner {
   }
 
   /**
-   * Invokes test fixture methods depending on the instanciation policy
+   * Invokes test fixture methods depending on the instantiation policy
    * specified in the current test suite configuration.
    * 
-   * @param {string} testPolicy the reference to the instanciation policy as
+   * @param {string} testPolicy the reference to the instantiation policy as
    *                            specified in the current test suite
    *                            configuration.
    * @param {AnnotatedMethodsMapper} mapper the annotated methods mapper 
@@ -174,7 +174,7 @@ export class TestClassRunner {
   public applyGlobalFixtures(testPolicy:string,
                              mapper:AnnotatedMethodsMapper, 
                              testSuiteObj:any, scope:any):void {
-    if(testPolicy === InstanciationPolicy.SINGLE) {
+    if(testPolicy === InstantiationPolicy.SINGLE) {
       this.applyAnnotatedMethod(
         mapper.getMethodByType(AnnotatedMethodType.BEFORE_ALL),
         testSuiteObj,
@@ -185,7 +185,7 @@ export class TestClassRunner {
         testSuiteObj,
         scope
       );
-    } else if(testPolicy === InstanciationPolicy.MULTIPLE) {
+    } else if(testPolicy === InstantiationPolicy.MULTIPLE) {
       let ClassRef:Function = testSuiteObj.constructor;
       this.applyStaticMethod(
         mapper.getMethodByType(AnnotatedMethodType.BEFORE_CLASS),
@@ -199,8 +199,8 @@ export class TestClassRunner {
       );
     } else {
         throw new TestSuiteError(
-          `Instanciation Policy is not valid:
-+expected InstanciationPolicy.SINGLE or InstanciationPolicy.MULTIPLE 
+          `Instantiation Policy is not valid:
++expected InstantiationPolicy.SINGLE or InstantiationPolicy.MULTIPLE 
 -actual ${testPolicy}`
         );
       }

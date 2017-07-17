@@ -17,15 +17,15 @@
 import "mocha";
 import * as chai from "chai";
 import * as spies from "chai-spies";
-import { AnnotatedMethod, TestSuiteError, InstanciationPolicy } from "jec-juta";
-import {AnnotatedMethodsMapper} from "../../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
+import { AnnotatedMethod, TestSuiteError, InstantiationPolicy } from "jec-juta";
+import { AnnotatedMethodsMapper } from "../../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
 
 // Class to test:
-import {TestClassRunner} from "../../../../../../src/com/onsoft/tiger/runners/utils/TestClassRunner";
+import { TestClassRunner } from "../../../../../../src/com/onsoft/tiger/runners/utils/TestClassRunner";
 
 // Utilities:
 import * as utils from "../../../../../../utils/test-utils/utilities/TestClassRunnerTestUtils";
-import {TestClassRunnerTestClass} from "../../../../../../utils/test-utils/classes/TestClassRunnerTestClass";
+import { TestClassRunnerTestClass } from "../../../../../../utils/test-utils/classes/TestClassRunnerTestClass";
 
 
 // Chai declarations:
@@ -53,21 +53,21 @@ describe("TestClassRunner", ()=> {
       expect(applyGlobalFixtures.bind(this)).to.throw(TestSuiteError);
     });
     
-    it("InstanciationPolicy.MULTIPLE should invoke both mocha 'before' and after' methods on global scope", function() {
+    it("InstantiationPolicy.MULTIPLE should invoke both mocha 'before' and after' methods on global scope", function() {
       let spyBefore:any = chai.spy.on(global, "before");
       let spyAfter:any = chai.spy.on(global, "after");
       runner.applyGlobalFixtures(
-        InstanciationPolicy.MULTIPLE, mapper, testSuiteObj, this
+        InstantiationPolicy.MULTIPLE, mapper, testSuiteObj, this
       );
       expect(spyBefore).to.have.been.called.once;
       expect(spyAfter).to.have.been.called.once;
     });
     
-    it("InstanciationPolicy.SINGLE should invoke both mocha 'before' and after' methods on global scope", function() {
+    it("InstantiationPolicy.SINGLE should invoke both mocha 'before' and after' methods on global scope", function() {
       let spyBefore:any = chai.spy.on(global, "before");
       let spyAfter:any = chai.spy.on(global, "after");
       runner.applyGlobalFixtures(
-        InstanciationPolicy.SINGLE, mapper, testSuiteObj, this
+        InstantiationPolicy.SINGLE, mapper, testSuiteObj, this
       );
       expect(spyBefore).to.have.been.called.once;
       expect(spyAfter).to.have.been.called.once;

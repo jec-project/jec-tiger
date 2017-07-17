@@ -15,7 +15,7 @@
 //   limitations under the License.
 
 import {Decorator} from "jec-commons";
-import { TestSuiteError, TestSuiteParams, TestSorters, InstanciationPolicy } from "jec-juta";
+import { TestSuiteError, TestSuiteParams, TestSorters, InstantiationPolicy } from "jec-juta";
 import {TestSuiteDescriptorRegistry} from "../../metadata/TestSuiteDescriptorRegistry";
 import {TestSuiteDescriptor} from "../../reflect/TestSuiteDescriptor";
 
@@ -53,8 +53,8 @@ export class TestSuiteDecorator implements Decorator {
     descriptor.description = params.description;
     descriptor.disabled = params.disabled || false;
     descriptor.testOrder = params.testOrder || TestSorters.DEFAULT;
-    descriptor.instanciationPolicy =
-                       params.instanciationPolicy || InstanciationPolicy.SINGLE;
+    descriptor.instantiationPolicy =
+                       params.instantiationPolicy || InstantiationPolicy.SINGLE;
     return target;
   }
 }

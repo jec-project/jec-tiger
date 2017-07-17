@@ -48,7 +48,7 @@ export class TigerLoggerProxy extends AbstractLoggerProxy
   private static INSTANCE:TigerLoggerProxy = null;
 
   /**
-   * Prevents <code>TigerLoggerProxy</code> illegal instanciations.
+   * Prevents <code>TigerLoggerProxy</code> illegal instantiations.
    */
   private static _locked:boolean = true;
 
