@@ -50,9 +50,9 @@ describe("TigerAutowireProcessor", ()=> {
     it("should throw a JCAD error when trying to create simultaneous instances of the TigerAutowireProcessor class", ()=> {
       let newInstance:Function = function():TigerAutowireProcessor {
         return new TigerAutowireProcessor();
-      }
+      };
       let processor:TigerAutowireProcessor = newInstance();
-      expect(newInstance).to.be.throw(JcadContextError);
+      expect(newInstance).to.throw(JcadContextError);
       processor.processComplete(utils.WATCHER, utils.PATH);
     });
   });

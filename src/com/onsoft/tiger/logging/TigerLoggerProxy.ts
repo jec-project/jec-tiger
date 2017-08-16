@@ -18,7 +18,7 @@ import {Logger, LoggerProxy, AbstractLoggerProxy} from "jec-commons";
 
 /**
  * A singleton that is used by the Tiger framework classes to send logs to a
- * <code>Logger</code> bject defined by the execution environement.
+ * <code>Logger</code> object defined by the execution environement.
  */
 export class TigerLoggerProxy extends AbstractLoggerProxy
                                                         implements LoggerProxy {

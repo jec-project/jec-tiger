@@ -1,11 +1,12 @@
 {
   "name": "jec-tiger",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "JEC Tiger - The default unit testing framework for JEC applications.",
-  "main": "lib/com/onsoft/tiger/index",
+  "main": "lib/com/onsoft/jec-tiger-index",
   "types": "types/jec-tiger.d.ts",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "postinstall": "grunt build"
   },
   "repository": {
     "type": "git",
@@ -41,19 +42,18 @@
     "grunt-typedoc": "^0.2.4",
     "mocha": "^3.3.0",
     "typedoc": "^0.6.0",
-    "typescript": "^2.3.2",
-    "typings": "^2.1.1"
+    "typescript": "^2.4.2"
   },
   "peerDependencies": {
-    "jec-commons": "^1.1.2",
-    "jec-commons-node": "^1.0.2",
-    "jec-juta": "^1.1.2"
+    "jec-commons": "^1.1.3",
+    "jec-commons-node": "^1.0.3",
+    "jec-juta": "^1.1.3"
   },
   "dependencies": {
     "moment": "^2.18.1",
     "print-message": "^2.1.0",
-    "jec-commons": "^1.1.2",
-    "jec-commons-node": "^1.0.2",
-    "jec-juta": "^1.1.1"
+    "jec-commons": "^1.1.3",
+    "jec-commons-node": "^1.0.3",
+    "jec-juta": "^1.1.3"
   }
 }

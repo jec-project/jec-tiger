@@ -38,8 +38,7 @@ module.exports = function(grunt) {
         preserveConstEnums: true,
         emitDecoratorMetadata: true,
         experimentalDecorators: true,
-        alwaysStrict: true,
-        fast: "never"
+        alwaysStrict: true
       }
     },
     test : {

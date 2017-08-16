@@ -18,7 +18,7 @@ import "mocha";
 import {expect} from "chai";
 
 // Class to test:
-import {JutaContextManager} from "../../../../../src/com/onsoft/tiger/jcad/JutaContextManager";
+import { JutaContextManager } from "../../../../../src/com/onsoft/tiger/jcad/JutaContextManager";
 import { JcadContextError } from "jec-commons";
 
 // Test:
@@ -35,7 +35,7 @@ describe("JutaContextManager", ()=> {
   });
   
   describe("#createContext(), #deleteContext()", ()=> {
-    it("should create and remove JCAD contexts without errors", ()=> {
+    it("", ()=> {
       let manager:JutaContextManager = new JutaContextManager();
       expect(manager.createContext()).to.be.OK;
       expect(manager.deleteContext()).to.be.OK;
