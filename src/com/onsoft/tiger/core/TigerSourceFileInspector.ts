@@ -157,6 +157,19 @@ export class TigerSourceFileInspector implements SourceFileInspector {
     this._processors.push(processor);
     this.sendMessage("new processor added: " + processor.constructor.name);
   }
+  
+  /**
+   * @inheritDoc
+   */
+  public removeProcessor(processor:FilePreProcessor):boolean {
+    let result:boolean = false;
+    let id:number = this._processors.indexOf(processor);
+    if(id !== -1) {
+      this._processors.splice(id, 1);
+      this.sendMessage("new processor added: " + processor.constructor.name);
+    }
+    return result;
+  }
 
   /**
    * @inheritDoc
@@ -169,7 +182,7 @@ export class TigerSourceFileInspector implements SourceFileInspector {
   /**
    * @inheritDoc
    */
-  public inspect():void {
+  public inspect(inspectMode:number):void {
     let len:number = this._processors.length;
     if(len > 0) {
       this.sendMessage("lookup process start");
@@ -180,4 +193,9 @@ export class TigerSourceFileInspector implements SourceFileInspector {
       this.sendMessage("lookup process complete");
     }
   }
+  
+  /**
+   * @inheritDoc
+   */
+  public clearCache():void {}
 }

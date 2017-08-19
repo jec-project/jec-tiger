@@ -111,7 +111,7 @@ export class DefaultTigerContainer implements Tiger {
     processor.setTigerContainer(this);
     this._sourceFileInspector.addProcessor(processor);
     try {
-      this._sourceFileInspector.inspect();
+      this._sourceFileInspector.inspect(null);
     } catch(e) {
       if(e.code === "ENOENT") {
         validSourcePaths = false;

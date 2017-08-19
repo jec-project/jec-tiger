@@ -59,7 +59,7 @@ describe("TigerSourceFileInspector", ()=> {
     
     it("should run silently when no properties have been set", ()=> {
       let inspector:SourceFileInspector = new TigerSourceFileInspector();
-      inspector.inspect();
+      inspector.inspect(null);
       expect("inspect").to.be.ok;
     });
 
@@ -71,7 +71,7 @@ describe("TigerSourceFileInspector", ()=> {
       inspector.setWatcher(utils.WATCHER);
       inspector.addSourcePath(utils.SOURCE_PATH);
       inspector.addProcessor(processor);
-      inspector.inspect();
+      inspector.inspect(null);
       expect(processSpy).to.have.been.called.exactly(utils.NUM_TEST_CLASS);
       expect(processSpy).to.have.been.called.with(utils.WATCHER);
       expect(processCompleteSpy).to.have.been.called.with(utils.WATCHER);

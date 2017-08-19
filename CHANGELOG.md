@@ -7,9 +7,10 @@
 
 ### Features
 
-- **build**: adding build script to npm install process for GlassCat instal optimisation
+- **build**: adding build script to npm install process for GlassCat install optimisation
 - **index.ts**: refactoring index.ts file for better types generation
 - Dependencies upgrade
+- **TigerSourceFileInspector**: adding implementation for the new `SourceFileInspector` interface signature
 
 <a name="jec-tiger-1.1.3"></a>
 ## **1.1.3** (2017-07-17)
