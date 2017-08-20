@@ -1,5 +1,14 @@
 # JEC Tiger Project: Update Release Notes
 
+<a name="jec-tiger-1.1.5"></a>
+## **1.1.5** (2017-08-20)
+
+### Bug Fixes
+
+### Features
+
+- Fixing peer dependencies for GlassCat alpha releases integration
+
 <a name="jec-tiger-1.1.4"></a>
 ## **1.1.4** (2017-08-16)
 

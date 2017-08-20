@@ -33,7 +33,7 @@ You have to configure the Tiger framework with a basic script file (e.g. `test-c
 in order to run JUTA unit tests:
 
 ```javascript
-import { TestStats } from "jec-juta";
+import {TestStats} from "jec-juta";
 import {Tiger, TigerFactory} from "jec-tiger";
 
 let factory:TigerFactory = new TigerFactory();
@@ -114,7 +114,7 @@ The documentation generator is [TypeDoc](http://typedoc.org/)
 
 ## Update Release Notes
 
-**Current stable release:** [1.1.4](CHANGELOG.md#jec-tiger-1.1.4)
+**Current stable release:** [1.1.5](CHANGELOG.md#jec-tiger-1.1.5)
  
 For a complete listing of release notes for all JEC Tiger update releases, see the [CHANGELOG](CHANGELOG.md) file. 
 
