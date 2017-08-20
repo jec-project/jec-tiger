@@ -1,5 +1,16 @@
 # JEC Tiger Project: Update Release Notes
 
+<a name="jec-tiger-1.1.6"></a>
+## **1.1.6** (2017-08-20)
+
+### Bug Fixes
+
+- **postinstall**: removing the post install script
+
+### Features
+
+- **dist**: adding binaries to the `dist` folder
+
 <a name="jec-tiger-1.1.5"></a>
 ## **1.1.5** (2017-08-20)
 

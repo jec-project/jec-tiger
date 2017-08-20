@@ -59,11 +59,11 @@ module.exports = function(grunt) {
 
   //--> Copy tasks:
   grunt.config("copy", {
-    //--> Copies all ".js" files from the "src" to the "lib" folder:
+    //--> Copies all ".js" files from the "src" to the "dist" folder:
     main: {
         cwd: "src",
         src: "**/*.js",
-        dest: "lib",
+        dest: "dist",
         expand: true
     },
     //--> Initializes all type files:
@@ -132,7 +132,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ts');
 
   //--> Imports the task used for copying all ".js" files from the "src" to the 
-  //    "lib" folder:
+  //    "dist" folder:
   grunt.loadNpmTasks("grunt-contrib-copy");
 
   //--> Imports the task used for building API documentation:
