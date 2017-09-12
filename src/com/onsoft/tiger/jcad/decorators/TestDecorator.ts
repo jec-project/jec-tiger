@@ -55,6 +55,6 @@ export class TestDecorator implements Decorator {
     let builder:TestDescriptorBuilder = new TestDescriptorBuilder();
     let testDescriptor:TestDescriptor = builder.build(key, descriptor, params);
     TestSuiteDescriptorRegistry.addTestDescriptor(testDescriptor);
-    return target;
+    return descriptor;
   }
 }

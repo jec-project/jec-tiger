@@ -13,7 +13,7 @@ class TestDecorator {
         let builder = new TestDescriptorBuilder_1.TestDescriptorBuilder();
         let testDescriptor = builder.build(key, descriptor, params);
         TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.addTestDescriptor(testDescriptor);
-        return target;
+        return descriptor;
     }
 }
 exports.TestDecorator = TestDecorator;

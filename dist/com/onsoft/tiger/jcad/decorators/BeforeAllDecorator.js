@@ -9,7 +9,7 @@ class BeforeAllDecorator {
         let builder = new AnnotatedMethodDescriptorBuilder_1.AnnotatedMethodDescriptorBuilder();
         let methodDescriptor = builder.build(key, descriptor, jec_juta_1.AnnotatedMethodType.BEFORE_ALL, params);
         TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(methodDescriptor);
-        return target;
+        return descriptor;
     }
 }
 exports.BeforeAllDecorator = BeforeAllDecorator;

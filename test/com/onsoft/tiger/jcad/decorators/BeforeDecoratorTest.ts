@@ -49,9 +49,9 @@ describe("BeforeDecorator", ()=> {
 
   describe("#decorate()", ()=> {
 
-    it("should return the reference to the target instance", ()=>{
+    it("should return the reference to the PropertyDescriptor instance", ()=>{
       let target:any = decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
-      expect(target).to.equal(utils.TARGET);
+      expect(target).to.equal(utils.DESCRIPTOR);
     });
 
     it("should register information into the TestSuiteDescriptorRegistry by invoking the addAnnotatedMethodDescriptor() method", ()=>{

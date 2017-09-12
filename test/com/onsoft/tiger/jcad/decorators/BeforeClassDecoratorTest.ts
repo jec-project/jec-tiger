@@ -49,9 +49,9 @@ describe("BeforeClassDecorator", ()=> {
 
   describe("#decorate()", ()=> {
 
-    it("should return the reference to the static target", ()=>{
+    it("should return the reference to the PropertyDescriptor instance", ()=>{
       let target:any = decorator.decorate(utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
-      expect(target).to.equal(utils.STATIC_TARGET);
+      expect(target).to.equal(utils.DESCRIPTOR);
     });
 
     it("should throw an error when the tarteg is not a static function", ()=>{

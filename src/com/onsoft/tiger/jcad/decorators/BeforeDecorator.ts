@@ -49,6 +49,6 @@ export class BeforeDecorator implements Decorator {
     let methodDescriptor:AnnotatedMethodDescriptor =
              builder.build(key, descriptor, AnnotatedMethodType.BEFORE, params);
     TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(methodDescriptor);
-    return target;
+    return descriptor;
   }
 }

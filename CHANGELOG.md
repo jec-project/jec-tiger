@@ -5,6 +5,8 @@
 
 ### Bug Fixes
 
+- **PropertyDescriptor**: fixing the correct value of the returned element in method decorators: using `descriptor` instead of `target`
+
 ### Features
 
 - Dependencies upgrade
