@@ -18,7 +18,8 @@ import {Tiger} from "../Tiger";
 import {TigerLoggerProxy} from "../logging/TigerLoggerProxy";
 import {TestSuiteDescriptor} from "../reflect/TestSuiteDescriptor";
 import {TestSuiteDescriptorRegistry} from "../metadata/TestSuiteDescriptorRegistry";
-import {JecStringsEnum, UrlStringsEnum, ClassLoader, FileProperties} from "jec-commons";
+import {JecStringsEnum, UrlStringsEnum, ClassLoader, FileProperties,
+        DefaultClassLoader} from "jec-commons";
 import {RunableTestSuite} from "jec-juta";
 import {TigerRunableTestSuite} from "../runners/model/TigerRunableTestSuite";
 
@@ -73,7 +74,7 @@ export class RunableTestSuiteFactory {
   public create(file:FileProperties, tigerContainer:Tiger):RunableTestSuite {
     let descriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
     TestSuiteDescriptorRegistry.registerDescriptor(descriptor);
-    let loader:ClassLoader = new ClassLoader();
+    let loader:ClassLoader = new DefaultClassLoader();
     let filePath:string = file.path + file.name + UrlStringsEnum.DOT +
                           JecStringsEnum.JS_EXTENSION;
     let ClassRef:any = loader.loadClass(filePath);

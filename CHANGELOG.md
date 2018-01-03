@@ -1,5 +1,15 @@
 # JEC Tiger Project: Update Release Notes
 
+<a name="jec-tiger-1.1.8"></a>
+## **1.1.8** (2017-12-26)
+
+### Bug Fixes
+
+### Features
+
+- Dependencies upgrade
+- Fixing `jec-commons` module break changes
+
 <a name="jec-tiger-1.1.7"></a>
 ## **1.1.7** (2017-09-06)
 
