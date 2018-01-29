@@ -15,7 +15,8 @@
 //   limitations under the License.
 
 import {TigerLoggerProxy} from "../logging/TigerLoggerProxy";
-import {UrlStringsEnum, SourceFileInspector, FilePreProcessor, FileProperties} from "jec-commons";
+import {UrlStringsEnum, SourceFileInspector, FilePreProcessor, FileProperties
+        } from "jec-commons";
 import {WalkPathUtil} from "jec-commons-node";
 
 /**
@@ -97,9 +98,11 @@ export class TigerSourceFileInspector implements SourceFileInspector {
   private inspectSourcePath(sourcePath:string):void {
     let file:string = null;
     let targetPath:string = this._targetPath + sourcePath;
+    if(this.beforeProcess) this.beforeProcess(this._watcher);
     this._walkUtil.walkSync(targetPath, (file:FileProperties)=> {
       this.processFile(file);
     });
+    if(this.afterProcess) this.afterProcess(this._watcher);
     this.notifyProcessComplete(targetPath);
   }
 
@@ -129,6 +132,20 @@ export class TigerSourceFileInspector implements SourceFileInspector {
       this._processors[len].processComplete(this._watcher, sourcePath);
     }
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  // Public properties
+  ////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * @inheritDoc
+   */
+  public beforeProcess:Function = null;
+  
+  /**
+   * @inheritDoc
+   */
+  public afterProcess:Function = null;
 
   ////////////////////////////////////////////////////////////////////////////
   // Public methods

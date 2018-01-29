@@ -9,6 +9,7 @@
 
 - Dependencies upgrade
 - Fixing `jec-commons` module break changes
+- **TigerSourceFileInspector**: adding implementation for the `SourceFileInspector` new API
 
 <a name="jec-tiger-1.1.7"></a>
 ## **1.1.7** (2017-09-06)

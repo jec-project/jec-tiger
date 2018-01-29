@@ -10,6 +10,8 @@ class TigerSourceFileInspector {
         this._watcher = null;
         this._targetPath = null;
         this._walkUtil = null;
+        this.beforeProcess = null;
+        this.afterProcess = null;
         this.init();
     }
     init() {
@@ -23,9 +25,13 @@ class TigerSourceFileInspector {
     inspectSourcePath(sourcePath) {
         let file = null;
         let targetPath = this._targetPath + sourcePath;
+        if (this.beforeProcess)
+            this.beforeProcess(this._watcher);
         this._walkUtil.walkSync(targetPath, (file) => {
             this.processFile(file);
         });
+        if (this.afterProcess)
+            this.afterProcess(this._watcher);
         this.notifyProcessComplete(targetPath);
     }
     processFile(file) {
