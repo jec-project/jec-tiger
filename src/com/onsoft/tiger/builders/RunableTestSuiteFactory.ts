@@ -19,7 +19,7 @@ import {TigerLoggerProxy} from "../logging/TigerLoggerProxy";
 import {TestSuiteDescriptor} from "../reflect/TestSuiteDescriptor";
 import {TestSuiteDescriptorRegistry} from "../metadata/TestSuiteDescriptorRegistry";
 import {JecStringsEnum, UrlStringsEnum, ClassLoader, FileProperties,
-        DefaultClassLoader} from "jec-commons";
+        DefaultClassLoader, LogLevel} from "jec-commons";
 import {RunableTestSuite} from "jec-juta";
 import {TigerRunableTestSuite} from "../runners/model/TigerRunableTestSuite";
 
@@ -47,11 +47,10 @@ export class RunableTestSuiteFactory {
    * 
    * @param {string} message the message to decorate and to send to the output
    *                         stream.
-   * @param {number} logLevel the log level of the message sent to the output
-   *                          stream. Valid values are the constants of the
-   *                          <code>LogLevel</code> class.
+   * @param {LogLevel} logLevel the log level of the message sent to the output
+   *                          stream.
    */
-  private sendMessage(message:string, logLevel?:number):void {
+  private sendMessage(message:string, logLevel?:LogLevel):void {
     TigerLoggerProxy.getInstance().log(message, logLevel);
   }
 

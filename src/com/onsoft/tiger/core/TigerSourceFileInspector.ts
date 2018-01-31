@@ -16,7 +16,7 @@
 
 import {TigerLoggerProxy} from "../logging/TigerLoggerProxy";
 import {UrlStringsEnum, SourceFileInspector, FilePreProcessor, FileProperties, 
-        InspectMode} from "jec-commons";
+        InspectMode, LogLevel} from "jec-commons";
 import {WalkPathUtil} from "jec-commons-node";
 
 /**
@@ -84,11 +84,10 @@ export class TigerSourceFileInspector implements SourceFileInspector {
    * 
    * @param {string} message the message to decorate and to send to the output
    *                         stream.
-   * @param {number} logLevel the log level of the message sent to the output
-   *                          stream. Valid values are the constants of the
-   *                          <code>LogLevel</code> class.
+   * @param {LogLevel} logLevel the log level of the message sent to the output
+   *                          stream.
    */
-  private sendMessage(message:string, logLevel?:number):void {
+  private sendMessage(message:string, logLevel?:LogLevel):void {
     TigerLoggerProxy.getInstance().log(message, logLevel);
   }
 

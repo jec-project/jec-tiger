@@ -23,6 +23,7 @@ import {TestClassRunner} from "./utils/TestClassRunner";
 import {TigerTestStats} from "./TigerTestStats";
 import "mocha";
 import * as moment from "moment";
+import {LogLevel} from "jec-commons";
 
 /**
  * The <code>TigerTestRunner</code> class is te default implementation for the
@@ -85,11 +86,10 @@ export class TigerTestRunner implements TestRunner {
    * 
    * @param {string} message the message to decorate and to send to the output
    *                         stream.
-   * @param {number} logLevel the log level of the message sent to the output
-   *                          stream. Valid values are the constants of the
-   *                          <code>LogLevel</code> class.
+   * @param {LogLevel} logLevel the log level of the message sent to the output
+   *                          stream.
    */
-  private sendMessage(message:string, logLevel?:number):void {
+  private sendMessage(message:string, logLevel?:LogLevel):void {
     TigerLoggerProxy.getInstance().log(message, logLevel);
   }
 
