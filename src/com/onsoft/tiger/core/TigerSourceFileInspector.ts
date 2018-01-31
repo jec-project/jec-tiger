@@ -15,8 +15,8 @@
 //   limitations under the License.
 
 import {TigerLoggerProxy} from "../logging/TigerLoggerProxy";
-import {UrlStringsEnum, SourceFileInspector, FilePreProcessor, FileProperties
-        } from "jec-commons";
+import {UrlStringsEnum, SourceFileInspector, FilePreProcessor, FileProperties, 
+        InspectMode} from "jec-commons";
 import {WalkPathUtil} from "jec-commons-node";
 
 /**
@@ -199,7 +199,7 @@ export class TigerSourceFileInspector implements SourceFileInspector {
   /**
    * @inheritDoc
    */
-  public inspect(inspectMode:number):void {
+  public inspect(inspectMode:InspectMode):void {
     let len:number = this._processors.length;
     if(len > 0) {
       this.sendMessage("lookup process start");
