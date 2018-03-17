@@ -5,7 +5,7 @@ const TestSuiteDescriptorRegistry_1 = require("../../metadata/TestSuiteDescripto
 class TestSuiteDecorator {
     constructor() { }
     decorate(target, params) {
-        let descriptor = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getRegisteredDescriptor();
+        const descriptor = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getRegisteredDescriptor();
         if (!params.description) {
             throw new jec_juta_1.TestSuiteError("TestSuite error: 'description' parameter is missing for test suite " +
                 target);

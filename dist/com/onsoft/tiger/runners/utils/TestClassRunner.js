@@ -93,7 +93,7 @@ class TestClassRunner {
             this.applyAnnotatedMethod(mapper.getMethodByType(jec_juta_1.AnnotatedMethodType.AFTER_ALL), testSuiteObj, scope);
         }
         else if (testPolicy === jec_juta_1.InstantiationPolicy.MULTIPLE) {
-            let ClassRef = testSuiteObj.constructor;
+            const ClassRef = testSuiteObj.constructor;
             this.applyStaticMethod(mapper.getMethodByType(jec_juta_1.AnnotatedMethodType.BEFORE_CLASS), ClassRef, scope);
             this.applyStaticMethod(mapper.getMethodByType(jec_juta_1.AnnotatedMethodType.AFTER_CLASS), ClassRef, scope);
         }
@@ -104,9 +104,9 @@ class TestClassRunner {
         }
     }
     applyTestMethod(method, testSuiteObj, scope, stats) {
-        let name = method.name;
-        let timeout = method.timeout;
-        let desc = `${name}: ${method.description}`;
+        const name = method.name;
+        const timeout = method.timeout;
+        const desc = `${name}: ${method.description}`;
         if (this.checkDisabledTest(method)) {
             stats.numDisabledTests++;
             return;
@@ -147,14 +147,14 @@ class TestClassRunner {
         }
     }
     runMultipleInstanceTest(testMethods, mapper, testSuiteObj, stats) {
+        const ClassRef = testSuiteObj.constructor;
+        const _this = this;
         let testMethod = null;
         let len = testMethods.length - 1;
         let cursor = 0;
         let repeat = 0;
-        let ClassRef = testSuiteObj.constructor;
         let newInstance = null;
         let scope = null;
-        let _this = this;
         let numInstances = 0;
         for (; cursor <= len; ++cursor) {
             describe("[Isolated Test]", function () {

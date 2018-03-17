@@ -17,21 +17,21 @@ class JutaContextManager {
         this._jcadContext = null;
     }
     initContext(jcadReference, decoratorClass) {
-        let ctxManager = jec_commons_1.JcadContextManager.getInstance();
-        let connManager = jec_commons_1.DecoratorConnectorManager.getInstance();
-        let decorator = new decoratorClass();
-        let connector = new TigerConnector_1.TigerConnector(jcadReference, decorator);
+        const ctxManager = jec_commons_1.JcadContextManager.getInstance();
+        const connManager = jec_commons_1.DecoratorConnectorManager.getInstance();
+        const decorator = new decoratorClass();
+        const connector = new TigerConnector_1.TigerConnector(jcadReference, decorator);
         ctxManager.addContext(jcadReference, this._jcadContext);
         connManager.addConnector(connector, this._jcadContext);
     }
     removeContext(jcadReference) {
-        let ctxManager = jec_commons_1.JcadContextManager.getInstance();
-        let connManager = jec_commons_1.DecoratorConnectorManager.getInstance();
+        const ctxManager = jec_commons_1.JcadContextManager.getInstance();
+        const connManager = jec_commons_1.DecoratorConnectorManager.getInstance();
         connManager.removeConnector(jcadReference, this._jcadContext);
         ctxManager.removeContext(jcadReference);
     }
     createContext() {
-        let ctxFactory = new jec_commons_1.JcadContextFactory();
+        const ctxFactory = new jec_commons_1.JcadContextFactory();
         this._jcadContext = ctxFactory.create();
         this.initContext(jec_juta_1.JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF, TestSuiteDecorator_1.TestSuiteDecorator);
         this.initContext(jec_juta_1.JutaConnectorRefs.TEST_CONNECTOR_REF, TestDecorator_1.TestDecorator);

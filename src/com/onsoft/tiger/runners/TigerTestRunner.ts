@@ -97,8 +97,8 @@ export class TigerTestRunner implements TestRunner {
    * Initializes the test stats for the current test suites.
    */
   private initStats(multiple?:boolean):TestStats {
-    let stats:TestStats = (this._stats === null) ? new TigerTestStats() :
-                                                   this._stats;                                 
+    const stats:TestStats = (this._stats === null) ? new TigerTestStats() :
+                                                     this._stats;                                 
     if(multiple) this._runMultipleTests = true;
     else this._testStart = new Date();
     return stats;
@@ -108,8 +108,8 @@ export class TigerTestRunner implements TestRunner {
    * Computes the duration of the current tests.
    */
   private computeTestDuration():void {
-    let now:Date = new Date();
-    let duration:number = moment(now).diff(moment(this._testStart));
+    const now:Date = new Date();
+    const duration:number = moment(now).diff(moment(this._testStart));
     this._stats.duration = duration;
     this._stats.time = moment(duration).format("mm:ss.SSS");
     this._testStart = null;
@@ -125,14 +125,14 @@ export class TigerTestRunner implements TestRunner {
    */
   public runTest(testSuite:RunableTestSuite,
                                         callback:(stats:TestStats)=>void):void {
-    let testMethods:TestMethod[] = testSuite.getTestMethods();
-    let _this:TigerTestRunner = this;
-    let testSuiteObj:any = testSuite.getTestSuite();
-    let mapper:AnnotatedMethodsMapper = 
+    const testMethods:TestMethod[] = testSuite.getTestMethods();
+    const _this:TigerTestRunner = this;
+    const testSuiteObj:any = testSuite.getTestSuite();
+    const mapper:AnnotatedMethodsMapper = 
                     new AnnotatedMethodsMapper(testSuite.getAnnotatedMethods());
-    let name:string = testSuiteObj.constructor.name;
-    let testPolicy:string = testSuite.getInstantiationPolicy();
-    let stats:TestStats = this.initStats();
+    const name:string = testSuiteObj.constructor.name;
+    const testPolicy:string = testSuite.getInstantiationPolicy();
+    const stats:TestStats = this.initStats();
     this._stats = stats;
     this.sendMessage(`test suite run: ${name}`);
     describe(testSuite.getDescription(), function() {

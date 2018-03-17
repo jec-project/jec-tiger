@@ -9,9 +9,9 @@ class TestDecorator {
         if (!params.description) {
             throw new jec_juta_1.TestSuiteError("Test error: 'description' parameter is missing for test " + key);
         }
-        let testSuiteDescriptor = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getRegisteredDescriptor();
-        let builder = new TestDescriptorBuilder_1.TestDescriptorBuilder();
-        let testDescriptor = builder.build(key, descriptor, params);
+        const testSuiteDescriptor = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getRegisteredDescriptor();
+        const builder = new TestDescriptorBuilder_1.TestDescriptorBuilder();
+        const testDescriptor = builder.build(key, descriptor, params);
         TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.addTestDescriptor(testDescriptor);
         return descriptor;
     }

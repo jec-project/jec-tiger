@@ -111,10 +111,10 @@ export class TigerRunableTestSuite implements RunableTestSuite {
    * Initializes the test methods for this object.
    */
   private initTestMethods():void {
-    let coll:TestDescriptor[] =
+    const coll:TestDescriptor[] =
                       TestSuiteDescriptorRegistry.getTestDescriptorCollection();
+    const builder:TestMethodBuilder = new TestMethodBuilder();
     let len:number = coll.length;
-    let builder:TestMethodBuilder = new TestMethodBuilder();
     let method:TestMethod = null;
     let descriptor:TestDescriptor = null;
     while(len--) {
@@ -129,10 +129,10 @@ export class TigerRunableTestSuite implements RunableTestSuite {
    * Initializes the annotated methods for this object.
    */
   private initAnnotatedMethods():void {
-    let coll:AnnotatedMethodDescriptor[] =
+    const coll:AnnotatedMethodDescriptor[] =
            TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
+    const builder:AnnotatedMethodBuilder = new AnnotatedMethodBuilder();
     let len:number = coll.length;
-    let builder:AnnotatedMethodBuilder = new AnnotatedMethodBuilder();
     let method:AnnotatedMethod = null;
     let descriptor:AnnotatedMethodDescriptor = null;
     while(len--) {
@@ -146,7 +146,7 @@ export class TigerRunableTestSuite implements RunableTestSuite {
    * Initializes the test parameters for this object.
    */
   private initParameters():void {
-    let map:Map<string, ParameterDescriptor[]> = 
+    const map:Map<string, ParameterDescriptor[]> = 
                                  TestSuiteDescriptorRegistry.getParametersMap();
     this.initAsyncProps(map, this._testMethods);
     this.initAsyncProps(map, this._annotatedMethods);
@@ -187,7 +187,7 @@ export class TigerRunableTestSuite implements RunableTestSuite {
    * @inheritDoc
    */
   public setTestSuite(testSuite:any):void {
-    let descriptor:TestSuiteDescriptor =
+    const descriptor:TestSuiteDescriptor =
                           TestSuiteDescriptorRegistry.getRegisteredDescriptor();
     if(!descriptor){
       //TODO: log this error

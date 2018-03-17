@@ -4,7 +4,7 @@ const TigerAnnotatedMethod_1 = require("../runners/model/TigerAnnotatedMethod");
 class AnnotatedMethodBuilder {
     constructor() { }
     build(descriptor) {
-        let method = new TigerAnnotatedMethod_1.TigerAnnotatedMethod();
+        const method = new TigerAnnotatedMethod_1.TigerAnnotatedMethod();
         method.name = descriptor.method;
         method.type = descriptor.type;
         method.timeout = descriptor.timeout;

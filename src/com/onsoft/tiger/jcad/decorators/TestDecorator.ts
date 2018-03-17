@@ -50,10 +50,11 @@ export class TestDecorator implements Decorator {
         "Test error: 'description' parameter is missing for test " + key
       );
     }
-    let testSuiteDescriptor:TestSuiteDescriptor =
+    const testSuiteDescriptor:TestSuiteDescriptor =
                           TestSuiteDescriptorRegistry.getRegisteredDescriptor();
-    let builder:TestDescriptorBuilder = new TestDescriptorBuilder();
-    let testDescriptor:TestDescriptor = builder.build(key, descriptor, params);
+    const builder:TestDescriptorBuilder = new TestDescriptorBuilder();
+    const testDescriptor:TestDescriptor =
+                                         builder.build(key, descriptor, params);
     TestSuiteDescriptorRegistry.addTestDescriptor(testDescriptor);
     return descriptor;
   }

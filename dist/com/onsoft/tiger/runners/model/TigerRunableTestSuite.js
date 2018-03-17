@@ -24,9 +24,9 @@ class TigerRunableTestSuite {
         this._testSorter = new TestSorterUtil_1.TestSorterUtil();
     }
     initTestMethods() {
-        let coll = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getTestDescriptorCollection();
+        const coll = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getTestDescriptorCollection();
+        const builder = new TestMethodBuilder_1.TestMethodBuilder();
         let len = coll.length;
-        let builder = new TestMethodBuilder_1.TestMethodBuilder();
         let method = null;
         let descriptor = null;
         while (len--) {
@@ -37,9 +37,9 @@ class TigerRunableTestSuite {
         this._testSorter.sort(this._testMethods, this._testOrder);
     }
     initAnnotatedMethods() {
-        let coll = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
+        const coll = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
+        const builder = new AnnotatedMethodBuilder_1.AnnotatedMethodBuilder();
         let len = coll.length;
-        let builder = new AnnotatedMethodBuilder_1.AnnotatedMethodBuilder();
         let method = null;
         let descriptor = null;
         while (len--) {
@@ -49,7 +49,7 @@ class TigerRunableTestSuite {
         }
     }
     initParameters() {
-        let map = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getParametersMap();
+        const map = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getParametersMap();
         this.initAsyncProps(map, this._testMethods);
         this.initAsyncProps(map, this._annotatedMethods);
     }
@@ -66,7 +66,7 @@ class TigerRunableTestSuite {
         return this._testSuite;
     }
     setTestSuite(testSuite) {
-        let descriptor = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getRegisteredDescriptor();
+        const descriptor = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getRegisteredDescriptor();
         if (!descriptor) {
             throw new jec_juta_1.TestSuiteError("No TestSuiteDescriptor is defined for the specified class:" +
                 testSuite.constructor.name);

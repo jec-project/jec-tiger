@@ -21,11 +21,11 @@ class TigerAutowireProcessor {
     }
     processStart(watcher, sourcePath) { }
     process(file, watcher) {
-        let decorators = file.decorators;
+        const decorators = file.decorators;
+        const logger = TigerLoggerProxy_1.TigerLoggerProxy.getInstance();
+        const factory = new RunableTestSuiteFactory_1.RunableTestSuiteFactory();
         let len = decorators.length;
         let decorator = null;
-        let logger = TigerLoggerProxy_1.TigerLoggerProxy.getInstance();
-        let factory = new RunableTestSuiteFactory_1.RunableTestSuiteFactory();
         let testSuite = null;
         while (len--) {
             decorator = decorators[len];

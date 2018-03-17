@@ -4,7 +4,7 @@ const TestSuiteDescriptorRegistry_1 = require("../metadata/TestSuiteDescriptorRe
 class ParametersMapUtil {
     constructor() { }
     static getParameterCollection(methodName) {
-        let map = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getParametersMap();
+        const map = TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.getParametersMap();
         let result = null;
         if (map.has(methodName)) {
             result = map.get(methodName);

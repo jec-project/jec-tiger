@@ -108,11 +108,11 @@ export class TigerAutowireProcessor implements FilePreProcessor {
    * @inheritDoc
    */
   public process(file:FileProperties, watcher:any):void {
-    let decorators:DecoratorProperties[] = file.decorators;
+    const decorators:DecoratorProperties[] = file.decorators;
+    const logger:LoggerProxy = TigerLoggerProxy.getInstance();
+    const factory:RunableTestSuiteFactory = new RunableTestSuiteFactory();
     let len:number = decorators.length;
     let decorator:DecoratorProperties = null;
-    let logger:LoggerProxy = TigerLoggerProxy.getInstance();
-    let factory:RunableTestSuiteFactory = new RunableTestSuiteFactory();
     let testSuite:RunableTestSuite = null;
     while(len--) {
       decorator = decorators[len];

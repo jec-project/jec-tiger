@@ -23,8 +23,8 @@ class TigerSourceFileInspector {
         TigerLoggerProxy_1.TigerLoggerProxy.getInstance().log(message, logLevel);
     }
     inspectSourcePath(sourcePath) {
+        const targetPath = this._targetPath + sourcePath;
         let file = null;
-        let targetPath = this._targetPath + sourcePath;
         if (this.beforeProcess)
             this.beforeProcess(this._watcher);
         this._walkUtil.walkSync(targetPath, (file) => {
@@ -59,8 +59,8 @@ class TigerSourceFileInspector {
         this.sendMessage("new processor added: " + processor.constructor.name);
     }
     removeProcessor(processor) {
+        const id = this._processors.indexOf(processor);
         let result = false;
-        let id = this._processors.indexOf(processor);
         if (id !== -1) {
             this._processors.splice(id, 1);
             this.sendMessage("new processor added: " + processor.constructor.name);

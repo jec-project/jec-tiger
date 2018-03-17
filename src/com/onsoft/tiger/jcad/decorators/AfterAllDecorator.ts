@@ -44,9 +44,9 @@ export class AfterAllDecorator implements Decorator {
    */
   public decorate(target:any, key:string, descriptor:PropertyDescriptor,
                                           params?:AnnotatedMethodParams):any {
-    let builder:AnnotatedMethodDescriptorBuilder =
+    const builder:AnnotatedMethodDescriptorBuilder =
                                          new AnnotatedMethodDescriptorBuilder();
-    let methodDescriptor:AnnotatedMethodDescriptor =
+    const methodDescriptor:AnnotatedMethodDescriptor =
           builder.build(key, descriptor, AnnotatedMethodType.AFTER_ALL, params);
     TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(methodDescriptor);
     return descriptor;

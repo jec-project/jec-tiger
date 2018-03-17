@@ -48,7 +48,7 @@ export class ParameterDescriptorBuilder {
    */
   public build(methodName:string, connectorRef:string, 
                                     parameterIndex:number):ParameterDescriptor {
-    let paramDesc:ParameterDescriptor = new ParameterDescriptor();
+    const paramDesc:ParameterDescriptor = new ParameterDescriptor();
     paramDesc.connectorRef = connectorRef;
     paramDesc.index = parameterIndex;
     paramDesc.methodName = methodName;

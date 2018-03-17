@@ -50,9 +50,9 @@ export class BeforeClassDecorator implements Decorator {
         `@BeforeClass must decorate a static method: ${target}`
       );
     }
-    let builder:AnnotatedMethodDescriptorBuilder =
+    const builder:AnnotatedMethodDescriptorBuilder =
                                          new AnnotatedMethodDescriptorBuilder();
-    let methodDescriptor:AnnotatedMethodDescriptor =
+    const methodDescriptor:AnnotatedMethodDescriptor =
        builder.build(key, descriptor, AnnotatedMethodType.BEFORE_CLASS, params);
     TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(methodDescriptor);
     return descriptor;

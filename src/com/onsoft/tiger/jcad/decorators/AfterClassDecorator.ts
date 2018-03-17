@@ -49,9 +49,9 @@ export class AfterClassDecorator implements Decorator {
         `@AfterClass must decorate a static method: ${target}`
       );
     }
-    let builder:AnnotatedMethodDescriptorBuilder =
+    const builder:AnnotatedMethodDescriptorBuilder =
                                          new AnnotatedMethodDescriptorBuilder();
-    let methodDescriptor:AnnotatedMethodDescriptor =
+    const methodDescriptor:AnnotatedMethodDescriptor =
         builder.build(key, descriptor, AnnotatedMethodType.AFTER_CLASS, params);
     TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(methodDescriptor);
     return descriptor;

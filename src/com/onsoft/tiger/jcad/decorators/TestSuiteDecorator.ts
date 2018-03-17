@@ -42,7 +42,7 @@ export class TestSuiteDecorator implements Decorator {
    * @inheritDoc
    */
   public decorate(target:any, params:TestSuiteParams):any {
-    let descriptor:TestSuiteDescriptor =
+    const descriptor:TestSuiteDescriptor =
                           TestSuiteDescriptorRegistry.getRegisteredDescriptor();
     if(!params.description) {
       throw new TestSuiteError(

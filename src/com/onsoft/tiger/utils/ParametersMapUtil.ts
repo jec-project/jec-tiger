@@ -49,7 +49,7 @@ export class ParametersMapUtil {
    */
   public static getParameterCollection(methodName:string):
                                                     Array<ParameterDescriptor> {
-    let map:Map<string, Array<ParameterDescriptor>> =
+    const map:Map<string, Array<ParameterDescriptor>> =
                                  TestSuiteDescriptorRegistry.getParametersMap();
     let result:Array<ParameterDescriptor> = null;
     if(map.has(methodName)) {

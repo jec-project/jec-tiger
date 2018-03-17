@@ -4,7 +4,7 @@ const TestDescriptor_1 = require("../reflect/TestDescriptor");
 class TestDescriptorBuilder {
     constructor() { }
     build(key, descriptor, params) {
-        let testDesc = new TestDescriptor_1.TestDescriptor();
+        const testDesc = new TestDescriptor_1.TestDescriptor();
         testDesc.description = params.description;
         testDesc.method = key;
         testDesc.repeat = params.repeat || 0;

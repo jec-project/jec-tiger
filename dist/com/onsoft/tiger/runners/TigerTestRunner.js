@@ -22,7 +22,7 @@ class TigerTestRunner {
         TigerLoggerProxy_1.TigerLoggerProxy.getInstance().log(message, logLevel);
     }
     initStats(multiple) {
-        let stats = (this._stats === null) ? new TigerTestStats_1.TigerTestStats() :
+        const stats = (this._stats === null) ? new TigerTestStats_1.TigerTestStats() :
             this._stats;
         if (multiple)
             this._runMultipleTests = true;
@@ -31,21 +31,21 @@ class TigerTestRunner {
         return stats;
     }
     computeTestDuration() {
-        let now = new Date();
-        let duration = moment(now).diff(moment(this._testStart));
+        const now = new Date();
+        const duration = moment(now).diff(moment(this._testStart));
         this._stats.duration = duration;
         this._stats.time = moment(duration).format("mm:ss.SSS");
         this._testStart = null;
         this._runMultipleTests = false;
     }
     runTest(testSuite, callback) {
-        let testMethods = testSuite.getTestMethods();
-        let _this = this;
-        let testSuiteObj = testSuite.getTestSuite();
-        let mapper = new AnnotatedMethodsMapper_1.AnnotatedMethodsMapper(testSuite.getAnnotatedMethods());
-        let name = testSuiteObj.constructor.name;
-        let testPolicy = testSuite.getInstantiationPolicy();
-        let stats = this.initStats();
+        const testMethods = testSuite.getTestMethods();
+        const _this = this;
+        const testSuiteObj = testSuite.getTestSuite();
+        const mapper = new AnnotatedMethodsMapper_1.AnnotatedMethodsMapper(testSuite.getAnnotatedMethods());
+        const name = testSuiteObj.constructor.name;
+        const testPolicy = testSuite.getInstantiationPolicy();
+        const stats = this.initStats();
         this._stats = stats;
         this.sendMessage(`test suite run: ${name}`);
         describe(testSuite.getDescription(), function () {

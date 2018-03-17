@@ -95,8 +95,8 @@ export class TigerSourceFileInspector implements SourceFileInspector {
    * Inspects the specified source path.
    */
   private inspectSourcePath(sourcePath:string):void {
+    const targetPath:string = this._targetPath + sourcePath;
     let file:string = null;
-    let targetPath:string = this._targetPath + sourcePath;
     if(this.beforeProcess) this.beforeProcess(this._watcher);
     this._walkUtil.walkSync(targetPath, (file:FileProperties)=> {
       this.processFile(file);
@@ -178,8 +178,8 @@ export class TigerSourceFileInspector implements SourceFileInspector {
    * @inheritDoc
    */
   public removeProcessor(processor:FilePreProcessor):boolean {
+    const id:number = this._processors.indexOf(processor);
     let result:boolean = false;
-    let id:number = this._processors.indexOf(processor);
     if(id !== -1) {
       this._processors.splice(id, 1);
       this.sendMessage("new processor added: " + processor.constructor.name);

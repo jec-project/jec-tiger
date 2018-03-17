@@ -9,8 +9,8 @@ class AfterClassDecorator {
         if (typeof target !== "function") {
             throw new jec_juta_1.TestSuiteError(`@AfterClass must decorate a static method: ${target}`);
         }
-        let builder = new AnnotatedMethodDescriptorBuilder_1.AnnotatedMethodDescriptorBuilder();
-        let methodDescriptor = builder.build(key, descriptor, jec_juta_1.AnnotatedMethodType.AFTER_CLASS, params);
+        const builder = new AnnotatedMethodDescriptorBuilder_1.AnnotatedMethodDescriptorBuilder();
+        const methodDescriptor = builder.build(key, descriptor, jec_juta_1.AnnotatedMethodType.AFTER_CLASS, params);
         TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(methodDescriptor);
         return descriptor;
     }

@@ -44,9 +44,9 @@ export class AsyncDecorator implements Decorator {
    */
   public decorate(target:any, propertyKey:string | symbol,
                                                     parameterIndex:number):any {
-    let methodName:string = propertyKey.toString();
-    let builder:ParameterDescriptorBuilder = new ParameterDescriptorBuilder();
-    let descriptor:ParameterDescriptor = builder.build(
+    const methodName:string = propertyKey.toString();
+    const builder:ParameterDescriptorBuilder = new ParameterDescriptorBuilder();
+    const descriptor:ParameterDescriptor = builder.build(
       methodName, JutaConnectorRefs.ASYNC_CONNECTOR_REF, parameterIndex
     )
     ParametersMapUtil.getParameterCollection(methodName).push(descriptor);

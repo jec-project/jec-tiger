@@ -4,8 +4,8 @@ const jec_juta_1 = require("jec-juta");
 class TestSorterUtil {
     constructor() { }
     nameAscendingSorter(a, b) {
-        let aVal = a.name;
-        let bVal = b.name;
+        const aVal = a.name;
+        const bVal = b.name;
         if (aVal < bVal)
             return -1;
         if (aVal > bVal)
@@ -13,8 +13,8 @@ class TestSorterUtil {
         return 0;
     }
     nameDescendingSorter(a, b) {
-        let aVal = a.name;
-        let bVal = b.name;
+        const aVal = a.name;
+        const bVal = b.name;
         if (aVal > bVal)
             return -1;
         if (aVal < bVal)
@@ -22,8 +22,8 @@ class TestSorterUtil {
         return 0;
     }
     orderDescendingSorter(a, b) {
-        let aVal = a.order;
-        let bVal = b.order;
+        const aVal = a.order;
+        const bVal = b.order;
         if (aVal > bVal)
             return -1;
         if (aVal < bVal)
@@ -31,8 +31,8 @@ class TestSorterUtil {
         return 0;
     }
     orderAscendingSorter(a, b) {
-        let aVal = a.order;
-        let bVal = b.order;
+        const aVal = a.order;
+        const bVal = b.order;
         if (aVal < bVal)
             return -1;
         if (aVal > bVal)

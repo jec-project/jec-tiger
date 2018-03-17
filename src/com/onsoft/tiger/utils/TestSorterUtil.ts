@@ -44,8 +44,8 @@ export class TestSorterUtil {
    * @return {number} the result of the comparaison.
    */
   private nameAscendingSorter(a:TestMethod, b:TestMethod):number {
-    let aVal:string = a.name;
-    let bVal:string = b.name;
+    const aVal:string = a.name;
+    const bVal:string = b.name;
     if(aVal < bVal) return -1;
     if(aVal > bVal) return 1;
     return 0;
@@ -61,8 +61,8 @@ export class TestSorterUtil {
    * @return {number} the result of the comparaison.
    */
   private nameDescendingSorter(a:TestMethod, b:TestMethod):number {
-    let aVal:string = a.name;
-    let bVal:string = b.name;
+    const aVal:string = a.name;
+    const bVal:string = b.name;
     if(aVal > bVal) return -1;
     if(aVal < bVal) return 1;
     return 0;
@@ -78,8 +78,8 @@ export class TestSorterUtil {
    * @return {number} the result of the comparaison.
    */
   private orderDescendingSorter(a:TestMethod, b:TestMethod):number {
-    let aVal:number = a.order;
-    let bVal:number = b.order;
+    const aVal:number = a.order;
+    const bVal:number = b.order;
     if(aVal > bVal) return -1;
     if(aVal < bVal) return 1;
     return 0;
@@ -95,8 +95,8 @@ export class TestSorterUtil {
    * @return {number} the result of the comparaison.
    */
   private orderAscendingSorter(a:TestMethod, b:TestMethod):number {
-    let aVal:number = a.order;
-    let bVal:number = b.order;
+    const aVal:number = a.order;
+    const bVal:number = b.order;
     if(aVal < bVal) return -1;
     if(aVal > bVal) return 1;
     return 0;

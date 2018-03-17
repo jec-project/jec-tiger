@@ -45,7 +45,7 @@ export class TestMethodBuilder {
    * @return {TestMethod} a new <code>TestMethod</code> instance.
    */
   public build(descriptor:TestDescriptor):TestMethod {
-    let testMethod:TestMethod = new TigerTestMethod();
+    const testMethod:TestMethod = new TigerTestMethod();
     testMethod.description = descriptor.description;
     testMethod.name = descriptor.method;
     testMethod.timeout = descriptor.timeout;

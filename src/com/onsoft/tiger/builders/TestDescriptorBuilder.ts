@@ -48,7 +48,7 @@ export class TestDescriptorBuilder {
    */
   public build(key:string, descriptor:PropertyDescriptor,
                                              params:TestParams):TestDescriptor {
-    let testDesc:TestDescriptor = new TestDescriptor();
+    const testDesc:TestDescriptor = new TestDescriptor();
     testDesc.description = params.description;
     testDesc.method = key;
     testDesc.repeat = params.repeat || 0;

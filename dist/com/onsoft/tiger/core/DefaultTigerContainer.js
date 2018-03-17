@@ -16,7 +16,7 @@ class DefaultTigerContainer {
         this.initObj();
     }
     initObj() {
-        let logger = new jec_commons_1.ConsoleLogger();
+        const logger = new jec_commons_1.ConsoleLogger();
         this._version = "1.2.0";
         TigerLoggerProxy_1.TigerLoggerProxy.getInstance().setLogger(logger);
         this._sourceFileInspector = new TigerSourceFileInspector_1.TigerSourceFileInspector();
@@ -27,8 +27,8 @@ class DefaultTigerContainer {
     }
     process(callback) {
         this.sendMessage("Tiger start");
-        let watcher = new TigerContainerWatcher_1.TigerContainerWatcher();
-        let processor = new TigerAutowireProcessor_1.TigerAutowireProcessor();
+        const watcher = new TigerContainerWatcher_1.TigerContainerWatcher();
+        const processor = new TigerAutowireProcessor_1.TigerAutowireProcessor();
         let validSourcePaths = true;
         let errorMessage = null;
         if (this._testPaths === null || this._testPaths.length === 0) {

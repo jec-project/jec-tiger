@@ -4,7 +4,7 @@ const ParameterDescriptor_1 = require("../reflect/ParameterDescriptor");
 class ParameterDescriptorBuilder {
     constructor() { }
     build(methodName, connectorRef, parameterIndex) {
-        let paramDesc = new ParameterDescriptor_1.ParameterDescriptor();
+        const paramDesc = new ParameterDescriptor_1.ParameterDescriptor();
         paramDesc.connectorRef = connectorRef;
         paramDesc.index = parameterIndex;
         paramDesc.methodName = methodName;

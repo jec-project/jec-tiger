@@ -65,11 +65,11 @@ export class JutaContextManager {
    *                               associated whith the context to initialize.
    */
   private initContext(jcadReference:string, decoratorClass:any):void {
-    let ctxManager:JcadContextManager = JcadContextManager.getInstance();
-    let connManager:DecoratorConnectorManager =
+    const ctxManager:JcadContextManager = JcadContextManager.getInstance();
+    const connManager:DecoratorConnectorManager =
                                         DecoratorConnectorManager.getInstance();
-    let decorator:Decorator = new decoratorClass();
-    let connector:DecoratorConnector =
+    const decorator:Decorator = new decoratorClass();
+    const connector:DecoratorConnector =
                                    new TigerConnector(jcadReference, decorator);
     ctxManager.addContext(jcadReference, this._jcadContext);
     connManager.addConnector(connector, this._jcadContext);
@@ -81,8 +81,8 @@ export class JutaContextManager {
    * @param {string} jcadReference the reference of the context to remove.
    */
   private removeContext(jcadReference:string):void {
-    let ctxManager:JcadContextManager = JcadContextManager.getInstance();
-    let connManager:DecoratorConnectorManager =
+    const ctxManager:JcadContextManager = JcadContextManager.getInstance();
+    const connManager:DecoratorConnectorManager =
                                         DecoratorConnectorManager.getInstance();
     connManager.removeConnector(jcadReference, this._jcadContext);
     ctxManager.removeContext(jcadReference);
@@ -96,7 +96,7 @@ export class JutaContextManager {
    * Initializes the JCAD context associated with this context manager.
    */
   public createContext():void {
-    let ctxFactory:JcadContextFactory = new JcadContextFactory();
+    const ctxFactory:JcadContextFactory = new JcadContextFactory();
     this._jcadContext = ctxFactory.create();
     this.initContext(
       JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF, TestSuiteDecorator

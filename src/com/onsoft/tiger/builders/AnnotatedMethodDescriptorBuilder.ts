@@ -54,7 +54,7 @@ export class AnnotatedMethodDescriptorBuilder {
    */
   public build(key:string, descriptor:PropertyDescriptor, type:number,
                       params?:AnnotatedMethodParams):AnnotatedMethodDescriptor {
-    let desc:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
+    const desc:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
     desc.method = key;
     desc.type = type;
     if(params) {

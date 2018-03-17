@@ -71,7 +71,7 @@ export class DefaultTigerContainer implements Tiger {
    * Initializes this object.
    */
   private initObj():void {
-    let logger:Logger = new ConsoleLogger();
+    const logger:Logger = new ConsoleLogger();
     this._version = "1.2.0";
     TigerLoggerProxy.getInstance().setLogger(logger);
     this._sourceFileInspector = new TigerSourceFileInspector();
@@ -99,8 +99,8 @@ export class DefaultTigerContainer implements Tiger {
    */
   public process(callback:(err:any)=>void):void {
     this.sendMessage("Tiger start");
-    let watcher:TigerContainerWatcher = new TigerContainerWatcher();
-    let processor:TigerAutowireProcessor = new TigerAutowireProcessor();
+    const watcher:TigerContainerWatcher = new TigerContainerWatcher();
+    const processor:TigerAutowireProcessor = new TigerAutowireProcessor();
     let validSourcePaths:boolean = true;
     let errorMessage:string = null;
     if(this._testPaths === null || this._testPaths.length === 0) {

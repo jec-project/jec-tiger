@@ -45,7 +45,7 @@ export class AnnotatedMethodBuilder {
    * @return {AnnotatedMethod} a new <code>AnnotatedMethod</code> instance.
    */
   public build(descriptor:AnnotatedMethodDescriptor):AnnotatedMethod {
-    let method:AnnotatedMethod = new TigerAnnotatedMethod();
+    const method:AnnotatedMethod = new TigerAnnotatedMethod();
     method.name = descriptor.method;
     method.type = descriptor.type;
     method.timeout = descriptor.timeout;

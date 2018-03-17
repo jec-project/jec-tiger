@@ -4,7 +4,7 @@ const AnnotatedMethodDescriptor_1 = require("../reflect/AnnotatedMethodDescripto
 class AnnotatedMethodDescriptorBuilder {
     constructor() { }
     build(key, descriptor, type, params) {
-        let desc = new AnnotatedMethodDescriptor_1.AnnotatedMethodDescriptor();
+        const desc = new AnnotatedMethodDescriptor_1.AnnotatedMethodDescriptor();
         desc.method = key;
         desc.type = type;
         if (params) {

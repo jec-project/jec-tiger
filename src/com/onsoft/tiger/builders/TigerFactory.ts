@@ -42,8 +42,8 @@ export class TigerFactory {
    * @return a new <code>Tiger</code> instance.
    */
   public create():Tiger {
-    let tester:Tiger = new DefaultTigerContainer();
-    let splashScreen:SplashScreen = new SplashScreen();
+    const tester:Tiger = new DefaultTigerContainer();
+    const splashScreen:SplashScreen = new SplashScreen();
     splashScreen.displayMessage(tester.getVersion());
     return tester;
   }

@@ -71,14 +71,14 @@ export class RunableTestSuiteFactory {
    * @return {RunableTestSuite} a new <code>RunableTestSuite</code> instance.
    */
   public create(file:FileProperties, tigerContainer:Tiger):RunableTestSuite {
-    let descriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
+    const descriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
     TestSuiteDescriptorRegistry.registerDescriptor(descriptor);
-    let loader:ClassLoader = new DefaultClassLoader();
-    let filePath:string = file.path + file.name + UrlStringsEnum.DOT +
+    const loader:ClassLoader = new DefaultClassLoader();
+    const filePath:string = file.path + file.name + UrlStringsEnum.DOT +
                           JecStringsEnum.JS_EXTENSION;
-    let ClassRef:any = loader.loadClass(filePath);
-    let testSuiteObj:any = new ClassRef();
-    let runnable:RunableTestSuite = new TigerRunableTestSuite();
+    const ClassRef:any = loader.loadClass(filePath);
+    const testSuiteObj:any = new ClassRef();
+    const runnable:RunableTestSuite = new TigerRunableTestSuite();
     runnable.setTestSuite(testSuiteObj);
     TestSuiteDescriptorRegistry.registerDescriptor(null);
     return runnable;

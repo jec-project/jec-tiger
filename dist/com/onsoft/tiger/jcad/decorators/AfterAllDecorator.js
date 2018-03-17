@@ -6,8 +6,8 @@ const AnnotatedMethodDescriptorBuilder_1 = require("../../builders/AnnotatedMeth
 class AfterAllDecorator {
     constructor() { }
     decorate(target, key, descriptor, params) {
-        let builder = new AnnotatedMethodDescriptorBuilder_1.AnnotatedMethodDescriptorBuilder();
-        let methodDescriptor = builder.build(key, descriptor, jec_juta_1.AnnotatedMethodType.AFTER_ALL, params);
+        const builder = new AnnotatedMethodDescriptorBuilder_1.AnnotatedMethodDescriptorBuilder();
+        const methodDescriptor = builder.build(key, descriptor, jec_juta_1.AnnotatedMethodType.AFTER_ALL, params);
         TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(methodDescriptor);
         return descriptor;
     }

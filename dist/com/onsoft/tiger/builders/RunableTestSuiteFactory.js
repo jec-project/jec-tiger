@@ -11,14 +11,14 @@ class RunableTestSuiteFactory {
         TigerLoggerProxy_1.TigerLoggerProxy.getInstance().log(message, logLevel);
     }
     create(file, tigerContainer) {
-        let descriptor = new TestSuiteDescriptor_1.TestSuiteDescriptor();
+        const descriptor = new TestSuiteDescriptor_1.TestSuiteDescriptor();
         TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.registerDescriptor(descriptor);
-        let loader = new jec_commons_1.DefaultClassLoader();
-        let filePath = file.path + file.name + jec_commons_1.UrlStringsEnum.DOT +
+        const loader = new jec_commons_1.DefaultClassLoader();
+        const filePath = file.path + file.name + jec_commons_1.UrlStringsEnum.DOT +
             jec_commons_1.JecStringsEnum.JS_EXTENSION;
-        let ClassRef = loader.loadClass(filePath);
-        let testSuiteObj = new ClassRef();
-        let runnable = new TigerRunableTestSuite_1.TigerRunableTestSuite();
+        const ClassRef = loader.loadClass(filePath);
+        const testSuiteObj = new ClassRef();
+        const runnable = new TigerRunableTestSuite_1.TigerRunableTestSuite();
         runnable.setTestSuite(testSuiteObj);
         TestSuiteDescriptorRegistry_1.TestSuiteDescriptorRegistry.registerDescriptor(null);
         return runnable;
