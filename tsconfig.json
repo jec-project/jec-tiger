@@ -10,6 +10,7 @@
     "preserveConstEnums": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": "."
   },
   "filesGlob": [
