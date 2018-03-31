@@ -7,6 +7,7 @@
 
 ### Features
 
+- Adding the `beforeProcess` methods
 
 <a name="jec-tiger-1.1.8"></a>
 ## **1.1.8** (2017-12-26)
