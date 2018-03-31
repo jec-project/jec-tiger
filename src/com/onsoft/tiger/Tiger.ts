@@ -25,6 +25,15 @@ export interface Tiger {
   //////////////////////////////////////////////////////////////////////////////
 
   /**
+   * Invokes the specified callback method before the start of the Tiger
+   * framework main process.
+   * 
+   * @param {Function} callback the callback method called before the start of
+   *                            the main process.
+   */
+  beforeProcess(callback:()=>void):void;
+
+  /**
    * Starts the Tiger framework main process.
    * 
    * @param {Function} callback the callback method called an the end of the

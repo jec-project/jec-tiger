@@ -195,7 +195,6 @@ export class TigerTestRunner implements TestRunner {
         );
       }
     }
-    
     this._stats = null;
   }
 }

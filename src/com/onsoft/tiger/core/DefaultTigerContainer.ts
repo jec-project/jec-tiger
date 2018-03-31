@@ -63,6 +63,8 @@ export class DefaultTigerContainer implements Tiger {
    */
   private _testRunner:TestRunner = null;
 
+  private _beforeProcess:Function = null;
+  
   //////////////////////////////////////////////////////////////////////////////
   // Private methods
   //////////////////////////////////////////////////////////////////////////////
@@ -97,6 +99,13 @@ export class DefaultTigerContainer implements Tiger {
   /**
    * @inheritDoc
    */
+  public beforeProcess(callback:()=>void):void {
+    this._beforeProcess = callback;
+  }
+
+  /**
+   * @inheritDoc
+   */
   public process(callback:(err:any)=>void):void {
     this.sendMessage("Tiger start");
     const watcher:TigerContainerWatcher = new TigerContainerWatcher();
@@ -110,6 +119,10 @@ export class DefaultTigerContainer implements Tiger {
     processor.setTigerContainer(this);
     this._sourceFileInspector.addProcessor(processor);
     try {
+      if(this._beforeProcess) {
+        this.sendMessage("calling pre-processing method");
+        this._beforeProcess();
+      }
       this._sourceFileInspector.inspect(null);
     } catch(e) {
       if(e.code === "ENOENT") {
@@ -125,7 +138,7 @@ export class DefaultTigerContainer implements Tiger {
         watcher.getTestSuites(),
         (err:any)=> {
           callback(err);
-          this.sendMessage("Tiger complete");
+          this.sendMessage("running test suites");
       });
     }
   }

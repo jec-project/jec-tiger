@@ -13,6 +13,7 @@ class DefaultTigerContainer {
         this._sourceFileInspector = null;
         this._version = null;
         this._testRunner = null;
+        this._beforeProcess = null;
         this.initObj();
     }
     initObj() {
@@ -24,6 +25,9 @@ class DefaultTigerContainer {
     }
     sendMessage(message, logLevel) {
         TigerLoggerProxy_1.TigerLoggerProxy.getInstance().log(message, logLevel);
+    }
+    beforeProcess(callback) {
+        this._beforeProcess = callback;
     }
     process(callback) {
         this.sendMessage("Tiger start");
@@ -38,6 +42,10 @@ class DefaultTigerContainer {
         processor.setTigerContainer(this);
         this._sourceFileInspector.addProcessor(processor);
         try {
+            if (this._beforeProcess) {
+                this.sendMessage("calling pre-processing method");
+                this._beforeProcess();
+            }
             this._sourceFileInspector.inspect(null);
         }
         catch (e) {
@@ -52,7 +60,7 @@ class DefaultTigerContainer {
         if (validSourcePaths) {
             this._testRunner.runAllTests(watcher.getTestSuites(), (err) => {
                 callback(err);
-                this.sendMessage("Tiger complete");
+                this.sendMessage("running test suites");
             });
         }
     }

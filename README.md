@@ -36,8 +36,8 @@ in order to run JUTA unit tests:
 import {TestStats} from "jec-juta";
 import {Tiger, TigerFactory} from "jec-tiger";
 
-let factory:TigerFactory = new TigerFactory();
-let tiger:Tiger = factory.create();
+const factory:TigerFactory = new TigerFactory();
+const tiger:Tiger = factory.create();
 tiger.process((stats:TestStats)=> {
   if(stats.error) console.error(stats.error);
  });
@@ -48,7 +48,7 @@ You can use the Tiger API to set the location of the test folder:
 
 ```javascript
 const testFolder:string[] = ["my-test-folder"];
-let tiger:Tiger = factory.create();
+const tiger:Tiger = factory.create();
 tiger.setTestPaths(testFolder);
 ```
 
@@ -114,7 +114,7 @@ The documentation generator is [TypeDoc](http://typedoc.org/)
 
 ## Update Release Notes
 
-**Current stable release:** [1.1.8](CHANGELOG.md#jec-tiger-1.1.8)
+**Current stable release:** [1.1.9](CHANGELOG.md#jec-tiger-1.1.9)
  
 For a complete listing of release notes for all JEC Tiger update releases, see the [CHANGELOG](CHANGELOG.md) file. 
 
