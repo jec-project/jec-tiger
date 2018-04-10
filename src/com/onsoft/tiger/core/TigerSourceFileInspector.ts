@@ -182,10 +182,20 @@ export class TigerSourceFileInspector implements SourceFileInspector {
     let result:boolean = false;
     if(id !== -1) {
       this._processors.splice(id, 1);
-      this.sendMessage("new processor added: " + processor.constructor.name);
+      this.sendMessage("processor removed: " + processor.constructor.name);
     }
     return result;
   }
+
+  /**
+   * @inheritDoc
+   */
+  public removeProcessors():void {
+    this._processors.splice(0);
+    this.sendMessage("all processors removed: ");
+  }
+
+  
 
   /**
    * @inheritDoc

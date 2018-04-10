@@ -1,5 +1,14 @@
 # JEC Tiger Project: Update Release Notes
 
+<a name="jec-tiger-1.2.0"></a>
+## **1.2.0** (2018-04-08)
+
+### Bug Fixes
+
+### Features
+
+- Adding the `removeProcessors` method
+
 <a name="jec-tiger-1.1.9"></a>
 ## **1.1.9** (2018-03-31)
 
@@ -7,7 +16,7 @@
 
 ### Features
 
-- Adding the `beforeProcess` methods
+- Adding the `beforeProcess` method
 
 <a name="jec-tiger-1.1.8"></a>
 ## **1.1.8** (2017-12-26)
