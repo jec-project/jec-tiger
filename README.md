@@ -138,5 +138,5 @@ limitations under the License.
 ```
 
 [jec-url]: http://jecproject.org
-[jec-juta-url]: https://github.com/pechemann/jec-juta
-[jec-logo]: https://raw.githubusercontent.com/pechemann/JEC/master/assets/jec-logos/jec-logo.png
+[jec-juta-url]: https://github.com/jec-project/jec-juta
+[jec-logo]: https://raw.githubusercontent.com/jec-project/JEC/master/assets/jec-logos/jec-logo.png

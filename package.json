@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pechemann/jec-tiger.git"
+    "url": "git+https://github.com/jec-project/jec-tiger.git"
   },
   "keywords": [
     "JEC",
@@ -25,7 +25,7 @@
   "author": "Pascal ECHEMANN",
   "license": "SEE LICENSE IN LICENSE",
   "bugs": {
-    "url": "https://github.com/pechemann/jec-tiger/issues"
+    "url": "https://github.com/jec-project/jec-tiger/issues"
   },
   "dependencies": {
     "moment": "^2.18.1",
@@ -34,7 +34,7 @@
     "jec-commons-node": "^1.0.7",
     "jec-juta": "^1.1.7"
   },
-  "homepage": "https://github.com/pechemann/jec-tiger#readme",
+  "homepage": "https://github.com/jec-project/jec-tiger#readme",
   "devDependencies": {
     "@types/mocha": "^2.2.41",
     "chai": "^3.5.0",
