@@ -1,6 +1,6 @@
 {
   "name": "jec-tiger",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "JEC Tiger - The default unit testing framework for JEC applications.",
   "main": "dist/com/onsoft/jec-tiger-index",
   "types": "types/jec-tiger.d.ts",
@@ -30,9 +30,9 @@
   "dependencies": {
     "moment": "^2.18.1",
     "print-message": "^2.1.0",
-    "jec-commons": "^1.1.8",
+    "jec-commons": "^1.1.9",
     "jec-commons-node": "^1.0.7",
-    "jec-juta": "^1.1.7"
+    "jec-juta": "^1.1.8"
   },
   "homepage": "https://github.com/jec-project/jec-tiger#readme",
   "devDependencies": {
