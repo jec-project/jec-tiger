@@ -23,7 +23,8 @@ import {TestableMethodDescriptorImpl} from "../../../../../utils/test-utils/util
 // Test:
 describe("TestableMethodDescriptor", ()=> {
 
-  let descriptor:TestableMethodDescriptorImpl = new TestableMethodDescriptorImpl();
+  const descriptor:TestableMethodDescriptorImpl =
+                                             new TestableMethodDescriptorImpl();
 
   it("should have a 'method' property set to null", function() {
     expect(descriptor).to.have.property("method", null);

@@ -24,7 +24,7 @@ import {AnnotatedMethodDescriptor} from "../../../../../src/com/onsoft/tiger/ref
 // Test:
 describe("AnnotatedMethodDescriptor", ()=> {
 
-  let descriptor:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
+  const descriptor:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
   
   it("should extend the TestableMethodDescriptor class", function() {
     expect(descriptor).to.be.an.instanceOf(TestableMethodDescriptor);

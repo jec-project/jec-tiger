@@ -29,30 +29,31 @@ import * as utils from "../../../../..//utils/test-utils/utilities/TestMethodBui
 describe("TestMethodBuilder", ()=> {
 
   describe("#build()", ()=> {
-    let builder:TestMethodBuilder = new TestMethodBuilder();
+    
+    const builder:TestMethodBuilder = new TestMethodBuilder();
     
     it("should return an instance of the TigerTestMethod class", function() {
-      let method:TestMethod = builder.build(utils.DESCRIPTOR);
+      const method:TestMethod = builder.build(utils.DESCRIPTOR);
       expect(method).to.be.an.instanceof(TigerTestMethod);
     });
 
     it("should return the 'description' property as defined by the 'params.description' parameter", function() {
-      let method:TestMethod = builder.build(utils.DESCRIPTOR);
+      const method:TestMethod = builder.build(utils.DESCRIPTOR);
       expect(method.description).to.equal(utils.DESCRIPTION);
     });
     
     it("should return the 'name' property as defined by the 'params.method' parameter", function() {
-      let method:TestMethod = builder.build(utils.DESCRIPTOR);
+      const method:TestMethod = builder.build(utils.DESCRIPTOR);
       expect(method.name).to.equal(utils.METHOD);
     });
     
     it("should return the 'repeat' property as defined by the 'params.repeat' parameter", function() {
-      let method:TestMethod = builder.build(utils.DESCRIPTOR);
+      const method:TestMethod = builder.build(utils.DESCRIPTOR);
       expect(method.repeat).to.equal(utils.REPEAT);
     });
     
     it("should return the 'timeout' property as defined by the 'params.timeout' parameter", function() {
-      let method:TestMethod = builder.build(utils.DESCRIPTOR);
+      const method:TestMethod = builder.build(utils.DESCRIPTOR);
       expect(method.timeout).to.equal(utils.TIMEOUT);
     });
   });

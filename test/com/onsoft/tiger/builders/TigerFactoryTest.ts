@@ -22,17 +22,14 @@ import {DefaultTigerContainer} from "../../../../../src/com/onsoft/tiger/core/De
 // Class to test:
 import {TigerFactory} from "../../../../../src/com/onsoft/tiger/builders/TigerFactory";
 
-// Utilities:
-import * as utils from "../../../../..//utils/test-utils/utilities/TestMethodBuilderTestUtils";
-
 // Test:
 describe("TigerFactory", ()=> {
 
   describe("#create()", ()=> {
     
     it("should return an instance of the DefaultTigerContainer class", function() {
-      let factory:TigerFactory = new TigerFactory();
-      let tiger:Tiger = factory.create();
+      const factory:TigerFactory = new TigerFactory();
+      const tiger:Tiger = factory.create();
       expect(tiger).to.be.an.instanceof(DefaultTigerContainer);
     });
 

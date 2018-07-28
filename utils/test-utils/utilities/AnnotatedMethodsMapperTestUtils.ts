@@ -24,7 +24,7 @@ import {AnnotatedMethodsMapper} from "../../../src/com/onsoft/tiger/utils/Annota
 
 // Utilities:
 const buildMethod:Function = function(methodType:number):AnnotatedMethod {
-  let method:AnnotatedMethod = (
+  const method:AnnotatedMethod = (
     {
       name:"TestMethod " + methodType,
       timeout: Math.round((Math.random() * 10)),
@@ -33,8 +33,8 @@ const buildMethod:Function = function(methodType:number):AnnotatedMethod {
   return method;
 };
 export const buildEmptyMapper:Function = function():AnnotatedMethodsMapper {
-  let methods:AnnotatedMethod[] = new Array<AnnotatedMethod>();
-  let mapper:AnnotatedMethodsMapper = new AnnotatedMethodsMapper(methods);
+  const methods:AnnotatedMethod[] = new Array<AnnotatedMethod>();
+  const mapper:AnnotatedMethodsMapper = new AnnotatedMethodsMapper(methods);
   return mapper;
 };
 export const BEFORE_ALL_METHOD:AnnotatedMethod = buildMethod(AnnotatedMethodType.BEFORE_ALL);
@@ -44,13 +44,13 @@ export const AFTER_ALL_METHOD:AnnotatedMethod = buildMethod(AnnotatedMethodType.
 export const AFTER_CLASS_METHOD:AnnotatedMethod = buildMethod(AnnotatedMethodType.AFTER_CLASS);
 export const AFTER_METHOD:AnnotatedMethod = buildMethod(AnnotatedMethodType.AFTER);
 export const buildCompleteMapper:Function = function():AnnotatedMethodsMapper {
-  let methods:AnnotatedMethod[] = new Array<AnnotatedMethod>();
+  const methods:AnnotatedMethod[] = new Array<AnnotatedMethod>();
   methods.push(BEFORE_ALL_METHOD);
   methods.push(BEFORE_CLASS_METHOD);
   methods.push(BEFORE_METHOD);
   methods.push(AFTER_ALL_METHOD);
   methods.push(AFTER_CLASS_METHOD);
   methods.push(AFTER_METHOD);
-  let mapper:AnnotatedMethodsMapper = new AnnotatedMethodsMapper(methods);
+  const mapper:AnnotatedMethodsMapper = new AnnotatedMethodsMapper(methods);
   return mapper;
 }

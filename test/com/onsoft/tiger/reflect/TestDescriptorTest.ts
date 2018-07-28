@@ -24,7 +24,7 @@ import {TestDescriptor} from "../../../../../src/com/onsoft/tiger/reflect/TestDe
 // Test:
 describe("TestDescriptor", ()=> {
 
-  let descriptor:TestDescriptor = new TestDescriptor();
+  const descriptor:TestDescriptor = new TestDescriptor();
   
   it("should extend the TestableMethodDescriptor class", function() {
     expect(descriptor).to.be.an.instanceOf(TestableMethodDescriptor);

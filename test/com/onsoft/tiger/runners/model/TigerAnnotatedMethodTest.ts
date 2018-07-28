@@ -24,7 +24,7 @@ import {TigerAnnotatedMethod} from "../../../../../../src/com/onsoft/tiger/runne
 // Test:
 describe("TigerAnnotatedMethod", ()=> {
 
-  let descriptor:TigerAnnotatedMethod = new TigerAnnotatedMethod();
+  const descriptor:TigerAnnotatedMethod = new TigerAnnotatedMethod();
   
   it("should extend the TigerTestableMethod class", function() {
     expect(descriptor).to.be.an.instanceOf(TigerTestableMethod);

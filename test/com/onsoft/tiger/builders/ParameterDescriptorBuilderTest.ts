@@ -27,30 +27,35 @@ import * as utils from "../../../../..//utils/test-utils/utilities/ParameterDesc
 // Test:
 describe("ParameterDescriptorBuilder", ()=> {
 
+  const builder:ParameterDescriptorBuilder = new ParameterDescriptorBuilder();
+
   describe("#build()", ()=> {
-    let builder:ParameterDescriptorBuilder = new ParameterDescriptorBuilder();
     
     it("should return an instance of the ParameterDescriptor class", function() {
-      let descriptor:ParameterDescriptor =
-                        builder.build(utils.METHOD_NAME, utils.CONNECTOR_REF, utils.PARAMETER_INDEX);
+      const descriptor:ParameterDescriptor = builder.build(
+        utils.METHOD_NAME, utils.CONNECTOR_REF, utils.PARAMETER_INDEX
+      );
       expect(descriptor).to.be.an.instanceof(ParameterDescriptor);
     });
 
     it("should return the 'index' property as defined by the 'params.METHOD_NAME' parameter", function() {
-      let descriptor:ParameterDescriptor =
-                        builder.build(utils.METHOD_NAME, utils.CONNECTOR_REF, utils.PARAMETER_INDEX);
+      const descriptor:ParameterDescriptor = builder.build(
+        utils.METHOD_NAME, utils.CONNECTOR_REF, utils.PARAMETER_INDEX
+      );
       expect(descriptor.index).to.equal(utils.PARAMETER_INDEX);
     });
     
     it("should return the 'methodName' property as defined by the 'params.PARAMETER_INDEX' parameter", function() {
-      let descriptor:ParameterDescriptor =
-                        builder.build(utils.METHOD_NAME, utils.CONNECTOR_REF, utils.PARAMETER_INDEX);
+      const descriptor:ParameterDescriptor = builder.build(
+        utils.METHOD_NAME, utils.CONNECTOR_REF, utils.PARAMETER_INDEX
+      );
       expect(descriptor.methodName).to.equal(utils.METHOD_NAME);
     });
     
     it("should return the 'connectorRef' property as defined by the 'params.CONNECTOR_REF' parameter", function() {
-      let descriptor:ParameterDescriptor =
-                        builder.build(utils.METHOD_NAME, utils.CONNECTOR_REF, utils.PARAMETER_INDEX);
+      const descriptor:ParameterDescriptor = builder.build(
+        utils.METHOD_NAME, utils.CONNECTOR_REF, utils.PARAMETER_INDEX
+      );
       expect(descriptor.connectorRef).to.equal(utils.CONNECTOR_REF);
     });
   });

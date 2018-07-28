@@ -23,7 +23,7 @@ import {TigerTestStats} from "../../../../../src/com/onsoft/tiger/runners/TigerT
 // Test:
 describe("TigerTestStats", ()=> {
 
-  let stats:TigerTestStats = new TigerTestStats();
+  const stats:TigerTestStats = new TigerTestStats();
   
   it("should have a 'numTestSuites' property set to 0", function() {
     expect(stats).to.have.property("numTestSuites", 0);

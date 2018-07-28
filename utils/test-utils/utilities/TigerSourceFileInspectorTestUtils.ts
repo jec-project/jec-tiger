@@ -28,15 +28,15 @@ import {TigerFactory} from "../../../src/com/onsoft/tiger/builders/TigerFactory"
 
 // Utilities:
 const buildTiger:Function = function():Tiger {
-  let factory:TigerFactory = new TigerFactory();
+  const factory:TigerFactory = new TigerFactory();
   return factory.create();
 };
 const buildWatcher:Function = function():TestWatcher {
-  let watcher:TestWatcher = new TigerContainerWatcher();
+  const watcher:TestWatcher = new TigerContainerWatcher();
   return watcher;
 };
 export const buildProcessor:Function = function():FilePreProcessor {
-  let processor:TigerAutowireProcessor = new TigerAutowireProcessor();
+  const processor:TigerAutowireProcessor = new TigerAutowireProcessor();
   processor.setTigerContainer(TIGER);
   return processor;
 };

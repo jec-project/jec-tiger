@@ -26,7 +26,7 @@ import {AnnotatedMethodDescriptor} from "../../../src/com/onsoft/tiger/reflect/A
 export const DISABLED:boolean = true;
 export const ORDER:number = 6;
 const buildParams:Function = function():TestParams {
-  let params:TestParams = ({
+  const params:TestParams = ({
       description: DESCRIPTION,
       repeat: REPEAT,
       timeout: TIMEOUT,

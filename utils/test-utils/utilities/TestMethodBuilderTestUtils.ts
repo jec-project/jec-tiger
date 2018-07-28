@@ -23,7 +23,7 @@ import {TestDescriptor} from "../../../src/com/onsoft/tiger/reflect/TestDescript
 
 // Utilities:
 const buildDescriptor:Function = function():TestDescriptor {
-  let descriptor:TestDescriptor = new TestDescriptor();
+  const descriptor:TestDescriptor = new TestDescriptor();
   descriptor.description = DESCRIPTION;
   descriptor.method = METHOD;
   descriptor.timeout = TIMEOUT;

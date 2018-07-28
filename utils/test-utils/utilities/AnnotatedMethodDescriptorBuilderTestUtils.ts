@@ -23,7 +23,7 @@ import {AnnotatedMethodParams, AnnotatedMethodType} from "jec-juta";
 
 // Utilities:
 const buildMethodParams:Function = function():AnnotatedMethodParams {
-  let params:AnnotatedMethodParams = 
+  const params:AnnotatedMethodParams = 
              ( { timeout: TIMEOUT } as AnnotatedMethodParams );
   return params;
 };

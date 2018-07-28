@@ -24,7 +24,7 @@ import {TigerTestMethod} from "../../../../../../src/com/onsoft/tiger/runners/mo
 // Test:
 describe("TigerTestMethod", ()=> {
 
-  let testMethod:TigerTestMethod = new TigerTestMethod();
+  const testMethod:TigerTestMethod = new TigerTestMethod();
   
   it("should extend the TigerTestableMethod class", function() {
     expect(testMethod).to.be.an.instanceOf(TigerTestableMethod);

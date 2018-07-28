@@ -26,7 +26,7 @@ import {AnnotatedMethodType} from "jec-juta";
 
 // Utilities:
 const buildTestDescriptor:Function = function():TestDescriptor {
-  let descriptor:TestDescriptor = new TestDescriptor();
+  const descriptor:TestDescriptor = new TestDescriptor();
   descriptor.description = "Test description";
   descriptor.method = "methodToTest",
   descriptor.timeout = 100;
@@ -34,7 +34,7 @@ const buildTestDescriptor:Function = function():TestDescriptor {
   return descriptor;
 };
 const buildTAnnotatedMethodDescriptor:Function = function():AnnotatedMethodDescriptor {
-  let descriptor:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
+  const descriptor:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
   descriptor.method = "methodToTest",
   descriptor.timeout = 100;
   descriptor.type = AnnotatedMethodType.BEFORE;

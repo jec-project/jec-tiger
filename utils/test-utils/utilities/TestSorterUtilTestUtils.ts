@@ -23,7 +23,7 @@ import {TigerTestMethod} from "../../../src/com/onsoft/tiger/runners/model/Tiger
 
 // Utilities:
 const buildTestMethod:Function = function(name:string, order:number):TestMethod {
-  let testMethod:TestMethod = new TigerTestMethod();
+  const testMethod:TestMethod = new TigerTestMethod();
   testMethod.name = name;
   testMethod.order = order;
   return testMethod;
@@ -34,7 +34,7 @@ export const C_METHOD:TestMethod = buildTestMethod("cMethod", 5);
 export const D_METHOD:TestMethod = buildTestMethod("dMethod", 1);
 export const E_METHOD:TestMethod = buildTestMethod("eMethod", 3);
 export const getTestMethods:Function = function():TestMethod[] {
-  let methods:TestMethod[] = [
+  const methods:TestMethod[] = [
     A_METHOD, E_METHOD, B_METHOD, D_METHOD, C_METHOD
   ];
   return methods;

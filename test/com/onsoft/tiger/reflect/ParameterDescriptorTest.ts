@@ -23,7 +23,7 @@ import {ParameterDescriptor} from "../../../../../src/com/onsoft/tiger/reflect/P
 // Test:
 describe("ParameterDescriptor", ()=> {
 
-  let descriptor:ParameterDescriptor = new ParameterDescriptor();
+  const descriptor:ParameterDescriptor = new ParameterDescriptor();
   
   it("should have a 'index' property set to null", function() {
     expect(descriptor).to.have.property("index", null);

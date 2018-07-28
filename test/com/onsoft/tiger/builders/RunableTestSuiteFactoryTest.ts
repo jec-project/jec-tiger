@@ -29,9 +29,15 @@ import * as utils from "../../../../..//utils/test-utils/utilities/RunableTestSu
 describe("RunableTestSuiteFactory", ()=> {
 
   before(()=> {
-    utils.CTXM.addContext(JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF, utils.CONTEXT);
-    utils.DCM.addConnector(utils.TEST_SUITE_CONNECTOR, utils.CONTEXT);
-    utils.CTXM.addContext(JutaConnectorRefs.TEST_CONNECTOR_REF, utils.CONTEXT);
+    utils.CTXM.addContext(
+      JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF, utils.CONTEXT
+    );
+    utils.DCM.addConnector(
+      utils.TEST_SUITE_CONNECTOR, utils.CONTEXT
+    );
+    utils.CTXM.addContext(
+      JutaConnectorRefs.TEST_CONNECTOR_REF, utils.CONTEXT
+    );
     utils.DCM.addConnector(utils.TEST_CONNECTOR, utils.CONTEXT);
     utils.CTXM.addContext(JutaConnectorRefs.ASYNC_CONNECTOR_REF, utils.CONTEXT);
     utils.DCM.addConnector(utils.ASYNC_CONNECTOR, utils.CONTEXT);
@@ -39,18 +45,24 @@ describe("RunableTestSuiteFactory", ()=> {
 
   after(()=> {
     utils.CTXM.removeContext(JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF);
-    utils.DCM.removeConnector(JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF, utils.CONTEXT);
+    utils.DCM.removeConnector(
+      JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF, utils.CONTEXT
+    );
     utils.CTXM.removeContext(JutaConnectorRefs.TEST_CONNECTOR_REF);
-    utils.DCM.removeConnector(JutaConnectorRefs.TEST_CONNECTOR_REF, utils.CONTEXT);
+    utils.DCM.removeConnector(
+      JutaConnectorRefs.TEST_CONNECTOR_REF, utils.CONTEXT
+    );
     utils.CTXM.removeContext(JutaConnectorRefs.ASYNC_CONNECTOR_REF);
-    utils.DCM.removeConnector(JutaConnectorRefs.ASYNC_CONNECTOR_REF, utils.CONTEXT);
+    utils.DCM.removeConnector(
+      JutaConnectorRefs.ASYNC_CONNECTOR_REF, utils.CONTEXT
+    );
   });
 
   describe("#create()", ()=> {
-    let builder:RunableTestSuiteFactory = new RunableTestSuiteFactory();
+    const builder:RunableTestSuiteFactory = new RunableTestSuiteFactory();
     
     it("should return an instance of the TigerRunableTestSuite class", function() {
-      let testSuite:RunableTestSuite =
+      const testSuite:RunableTestSuite =
                              builder.create(utils.FILE_PROPERTIES, utils.TIGER);
       expect(testSuite).to.be.an.instanceof(TigerRunableTestSuite);
     });

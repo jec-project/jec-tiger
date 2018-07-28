@@ -27,10 +27,13 @@ import * as utils from "../../../../..//utils/test-utils/utilities/AnnotatedMeth
 // Test:
 describe("AnnotatedMethodDescriptorBuilder", ()=> {
 
+  const builder:AnnotatedMethodDescriptorBuilder =
+                                         new AnnotatedMethodDescriptorBuilder();
+  const methodDescriptor:AnnotatedMethodDescriptor =
+           builder.build(utils.KEY, utils.DESCRIPTOR, utils.TYPE, utils.PARAMS);
+  
   describe("#build()", ()=> {
-    let builder:AnnotatedMethodDescriptorBuilder = new AnnotatedMethodDescriptorBuilder();
-    let methodDescriptor:AnnotatedMethodDescriptor =
-            builder.build(utils.KEY, utils.DESCRIPTOR, utils.TYPE, utils.PARAMS);
+    
     
     it("should return an instance of the AnnotatedMethodDescriptor class", function() {
       expect(methodDescriptor).to.be.an.instanceof(AnnotatedMethodDescriptor);

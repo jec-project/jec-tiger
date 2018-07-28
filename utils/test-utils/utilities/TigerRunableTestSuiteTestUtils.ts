@@ -31,7 +31,7 @@ export const DISABLED:boolean = true;
 export const TEST_ORDER:number = TestSorters.NAME_ASCENDING;
 export const TEST_INSTANTIATION_POLICY:string = InstantiationPolicy.MULTIPLE;
 const buildTestDescriptor:Function = function():TestDescriptor {
-  let descriptor:TestDescriptor = new TestDescriptor();
+  const descriptor:TestDescriptor = new TestDescriptor();
   descriptor.description = DESCRIPTION;
   descriptor.method = "methodToTest",
   descriptor.timeout = 100;
@@ -39,7 +39,7 @@ const buildTestDescriptor:Function = function():TestDescriptor {
   return descriptor;
 };
 const buildTestSuiteDescriptor:Function = function():TestSuiteDescriptor {
-  let testSuiteDescriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
+  const testSuiteDescriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
   testSuiteDescriptor.description = DESCRIPTION;
   testSuiteDescriptor.disabled = DISABLED;
   testSuiteDescriptor.testOrder = TEST_ORDER;
@@ -47,7 +47,7 @@ const buildTestSuiteDescriptor:Function = function():TestSuiteDescriptor {
   return testSuiteDescriptor;
 };
 const buildAnnotatedMethodDescriptor:Function = function():AnnotatedMethodDescriptor {
-  let descriptor:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
+  const descriptor:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
   descriptor.timeout = 100;
   descriptor.method = "methodToTest",
   descriptor.type = AnnotatedMethodType.BEFORE;

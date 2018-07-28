@@ -26,7 +26,7 @@ describe("TigerLoggerProxy", ()=> {
 
   describe("singleton error", ()=> {
     it("should throw a singleton error when calling the constructor function", ()=>{
-      let buildInstance:Function = function():void {
+      const buildInstance:Function = function():void {
         new TigerLoggerProxy();
       };
       expect(buildInstance).to.throw(SingletonError);
@@ -35,15 +35,15 @@ describe("TigerLoggerProxy", ()=> {
   
   describe("#getInstance()", ()=> {
     it("should return a TigerLoggerProxy instance", ()=>{
-      let logger:LoggerProxy = TigerLoggerProxy.getInstance();
+      const logger:LoggerProxy = TigerLoggerProxy.getInstance();
       expect(logger).to.be.an.instanceOf(TigerLoggerProxy);
     });
   });
   
   describe("#getInstance()", ()=> {
     it("should return a singleton reference", ()=>{
-      let logger1:LoggerProxy = TigerLoggerProxy.getInstance();
-      let logger2:LoggerProxy = TigerLoggerProxy.getInstance();
+      const logger1:LoggerProxy = TigerLoggerProxy.getInstance();
+      const logger2:LoggerProxy = TigerLoggerProxy.getInstance();
       expect(logger1).to.equal(logger2);
     });
   });

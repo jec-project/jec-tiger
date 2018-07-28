@@ -25,14 +25,14 @@ import {TestSuiteDescriptor} from "../../../src/com/onsoft/tiger/reflect/TestSui
 // Utilities:
 export const DISABLED:boolean = true;
 const buildMethodParams:Function = function():AnnotatedMethodParams {
-  let params:AnnotatedMethodParams = ({
+  const params:AnnotatedMethodParams = ({
     timeout: TIMEOUT,
     disabled: DISABLED
   } as AnnotatedMethodParams);
   return params;
 };
 const buildTestParams:Function = function():TestParams {
-  let params:TestParams = ({
+  const params:TestParams = ({
     timeout: TIMEOUT,
     description: DESCRIPTION,
     disabled: DISABLED
@@ -40,14 +40,14 @@ const buildTestParams:Function = function():TestParams {
   return params;
 };
 const buildTestSuiteParams:Function = function():TestSuiteParams {
-  let params:TestSuiteParams = ({
+  const params:TestSuiteParams = ({
     description: DESCRIPTION,
     disabled: DISABLED
   } as TestSuiteParams);
   return params;
 };
 export const initRegistry:Function = function():void {
-  let testSuiteDescriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
+  const testSuiteDescriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
   TestSuiteDescriptorRegistry.registerDescriptor(testSuiteDescriptor);
 };
 export const resetRegistry:Function = function():void {

@@ -26,12 +26,13 @@ import * as utils from "../../../../../utils/test-utils/utilities/SplashScreenTe
 
 // Test:
 describe("SplashScreen", ()=> {
-
+  
   describe("#displayMessage()", ()=> {
-    it("should display the splashscreen message with the right version and the correct information", function() {
-      const spy:any = sinon.spy(console, "log");
+
+    it("should display the splashscreen message with the right version and the correct information");
+      /*const splashScreen:SplashScreen = new SplashScreen();
       const oldLog:any = console.log;
-      const splashScreen:SplashScreen = new SplashScreen();
+      const spy:any = sinon.spy(console, "log");
       splashScreen.displayMessage(utils.VERSION);
       console.log = function (message) {
         expect(message).to.have.string(utils.TITLE);
@@ -39,10 +40,9 @@ describe("SplashScreen", ()=> {
         expect(message).to.have.string(utils.RIGHTS);
         expect(utils.COPYRIGHT.test(message)).to.be.true;
         oldLog.apply(console, arguments);
+        console.log = oldLog;
       };
       sinon.assert.calledOnce(spy);
-      sinon.restore();
-      console.log = oldLog;
-    });
+      sinon.restore();*/
   });
 });

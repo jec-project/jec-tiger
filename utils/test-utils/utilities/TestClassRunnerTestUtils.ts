@@ -48,7 +48,7 @@ export const buildAnnotatedMethod:Function = function(type:number, disabled:bool
 };
 export const buildAnnotatedMethodsMapper:Function = function():AnnotatedMethodsMapper {
   let mapper:AnnotatedMethodsMapper = null;
-  let methods:AnnotatedMethod[] = [
+  const methods:AnnotatedMethod[] = [
     buildAnnotatedMethod(AnnotatedMethodType.BEFORE),
     buildAnnotatedMethod(AnnotatedMethodType.BEFORE_ALL),
     buildAnnotatedMethod(AnnotatedMethodType.BEFORE_CLASS),
@@ -63,8 +63,7 @@ export const buildTestMethod:Function = function(
   disabled:boolean = false, timeout:number = 0, repeat:number = null,
   name:string = null
 ):TestMethod {
-  let methodName:string = null;
-  let desc:TestDescriptor = new TestDescriptor();
+  const desc:TestDescriptor = new TestDescriptor();
   desc.method = name || "test";
   desc.description = "description";
   desc.disabled = disabled;

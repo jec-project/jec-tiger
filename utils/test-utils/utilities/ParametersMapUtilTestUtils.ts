@@ -28,13 +28,13 @@ import {AnnotatedMethodType} from "jec-juta";
 export const METHOD_NAME:string = "methodToTest";
 export const DESCRIPTION:string = "Test description";
 const buildTestDescriptor:Function = function():TestDescriptor {
-  let descriptor:TestDescriptor = new TestDescriptor();
+  const descriptor:TestDescriptor = new TestDescriptor();
   descriptor.description = DESCRIPTION;
   descriptor.method = METHOD_NAME;
   return descriptor;
 };
 const buildTestSuiteDescriptor:Function = function():TestSuiteDescriptor {
-  let testSuiteDescriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
+  const testSuiteDescriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
   testSuiteDescriptor.description = DESCRIPTION;
   return testSuiteDescriptor;
 };

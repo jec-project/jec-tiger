@@ -14,7 +14,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import {AnnotatedMethod, AnnotatedMethodType} from "jec-juta";
+import {AnnotatedMethodType} from "jec-juta";
 import {AnnotatedMethodDescriptor} from "../../../src/com/onsoft/tiger/reflect/AnnotatedMethodDescriptor";
 
 /*!
@@ -24,7 +24,7 @@ import {AnnotatedMethodDescriptor} from "../../../src/com/onsoft/tiger/reflect/A
 
 // Utilities:
 const buildMethodDescriptor:Function = function():AnnotatedMethodDescriptor {
-  let descriptor:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
+  const descriptor:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
   descriptor.type = METHOD_TYPE;
   descriptor.method = METHOD_NAME;
   descriptor.timeout = METHOD_TIMEOUT;

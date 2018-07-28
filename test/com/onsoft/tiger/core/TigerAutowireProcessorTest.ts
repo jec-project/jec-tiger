@@ -33,11 +33,23 @@ describe("TigerAutowireProcessor", ()=> {
   describe("#processComplete()", ()=> {
     it("should remove all the registered JCAD contexts associated with the Tiger Framework", ()=> {
       const processor:TigerAutowireProcessor = new TigerAutowireProcessor();
-      expect(utils.CONTEXT_MANAGER.hasContext(JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF)).to.be.true;
-      expect(utils.CONTEXT_MANAGER.hasContext(JutaConnectorRefs.TEST_CONNECTOR_REF)).to.be.true;
+      expect(
+        utils.CONTEXT_MANAGER.hasContext(
+          JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF
+        )
+      ).to.be.true;
+      expect(
+        utils.CONTEXT_MANAGER.hasContext(JutaConnectorRefs.TEST_CONNECTOR_REF)
+      ).to.be.true;
       processor.processComplete(utils.WATCHER, utils.PATH);
-      expect(utils.CONTEXT_MANAGER.hasContext(JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF)).to.be.false;
-      expect(utils.CONTEXT_MANAGER.hasContext(JutaConnectorRefs.TEST_CONNECTOR_REF)).to.be.false;
+      expect(
+        utils.CONTEXT_MANAGER.hasContext(
+          JutaConnectorRefs.TEST_SUITE_CONNECTOR_REF
+        )
+      ).to.be.false;
+      expect(
+        utils.CONTEXT_MANAGER.hasContext(JutaConnectorRefs.TEST_CONNECTOR_REF)
+      ).to.be.false;
     });
   });
 

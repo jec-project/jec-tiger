@@ -30,7 +30,7 @@ describe("TigerContainerWatcher", ()=> {
 
   describe("#getContextPath()", ()=> {
     it("should return the current context path", ()=> {
-      let watcher:TestWatcher = new TigerContainerWatcher();
+      const watcher:TestWatcher = new TigerContainerWatcher();
       expect(watcher.getContextPath()).to.equal(process.cwd());
     });
   });
@@ -38,16 +38,16 @@ describe("TigerContainerWatcher", ()=> {
   describe("#getTestSuites()", ()=> {
 
     it("should return an empty array when no test suites have been registered", ()=> {
-      let watcher:TestWatcher = new TigerContainerWatcher();
-      let testSuites:RunableTestSuite[] = watcher.getTestSuites();
+      const watcher:TestWatcher = new TigerContainerWatcher();
+      const testSuites:RunableTestSuite[] = watcher.getTestSuites();
       expect(testSuites).to.be.an("array");
       expect(testSuites).to.have.lengthOf(0);
     });
     
     it("should return an array that contains test suites which have been registered with the addTestSuite() method", ()=> {
-      let watcher:TestWatcher = new TigerContainerWatcher();
+      const watcher:TestWatcher = new TigerContainerWatcher();
       watcher.addTestSuite(utils.RUNABLE_TEST_SUITE);
-      let testSuites:RunableTestSuite[] = watcher.getTestSuites();
+      const testSuites:RunableTestSuite[] = watcher.getTestSuites();
       expect(testSuites).to.have.lengthOf(1);
       expect(testSuites).to.include(utils.RUNABLE_TEST_SUITE);
     });

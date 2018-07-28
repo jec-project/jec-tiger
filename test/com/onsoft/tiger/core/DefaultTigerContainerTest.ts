@@ -31,20 +31,22 @@ describe("DefaultTigerContainer", ()=> {
   describe("#getVersion()", ()=> {
 
     it("should return the current version of the DefaultTigerContainer instance", ()=>{
-      let tigerContainer:Tiger = new DefaultTigerContainer();
-      expect(utils.VERSION_PATTERN.test(tigerContainer.getVersion())).to.be.true;
+      const tigerContainer:Tiger = new DefaultTigerContainer();
+      expect(
+        utils.VERSION_PATTERN.test(tigerContainer.getVersion())
+      ).to.be.true;
     });
   });
   
   describe("#getTestPaths()", ()=> {
 
     it("should return null when no test path is defined", ()=>{
-      let tigerContainer:Tiger = new DefaultTigerContainer();
+      const tigerContainer:Tiger = new DefaultTigerContainer();
       expect(tigerContainer.getTestPaths()).to.be.null;
     });
     
     it("should return a default test path when no test path has been defined and the process has already be invoked", (done:MochaDone)=>{
-      let tigerContainer:Tiger = new DefaultTigerContainer();
+      const tigerContainer:Tiger = new DefaultTigerContainer();
       let paths:string[] = null;
       tigerContainer.process((err:any)=> {
         paths = tigerContainer.getTestPaths();
@@ -59,13 +61,13 @@ describe("DefaultTigerContainer", ()=> {
   describe("#setTestPaths()", ()=> {
 
     it("should change the test path values", ()=>{
-      let tigerContainer:Tiger = new DefaultTigerContainer();
+      const tigerContainer:Tiger = new DefaultTigerContainer();
       tigerContainer.setTestPaths(utils.CUSTOM_PATHS);
       expect(tigerContainer.getTestPaths()).to.equal(utils.CUSTOM_PATHS);
     });
     
     it("should use the custom test path values for excuting the autowiring process", (done:MochaDone)=>{
-      let tigerContainer:Tiger = new DefaultTigerContainer();
+      const tigerContainer:Tiger = new DefaultTigerContainer();
       tigerContainer.setTestPaths(utils.CUSTOM_PATHS);
       tigerContainer.process((err:any)=> {
         expect(tigerContainer.getTestPaths()).to.equal(utils.CUSTOM_PATHS);
@@ -77,7 +79,7 @@ describe("DefaultTigerContainer", ()=> {
   describe("#process()", ()=> {
 
     it("should return a TestSuiteError when class paths are not valid", (done:MochaDone)=>{
-      let tigerContainer:Tiger = new DefaultTigerContainer();
+      const tigerContainer:Tiger = new DefaultTigerContainer();
       tigerContainer.setTestPaths(utils.INVALID_PATHS);
       tigerContainer.process((err:any)=> {
         expect(err).not.to.be.null;

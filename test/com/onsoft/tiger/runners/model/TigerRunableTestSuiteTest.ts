@@ -29,7 +29,7 @@ describe("TigerRunableTestSuite", ()=> {
   
   describe("#setTestSuite()", ()=> {
     it("should throw a TestSuiteError when no TestSuiteDescriptor have been registered", ()=> {
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       try {
         trts.setTestSuite(utils.TEST_SUITE);
       } catch(e) {
@@ -41,13 +41,13 @@ describe("TigerRunableTestSuite", ()=> {
   describe("#isDisabled()", ()=> {
 
     it("should return false when no test suite have been registered", ()=> {
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       expect(trts.isDisabled()).to.be.false;
     });
     
     it("should return the same as value as specified by the TestSuiteDescriptor ", ()=> {
       utils.initRegistry();
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       trts.setTestSuite(utils.TEST_SUITE);
       expect(trts.isDisabled()).to.equal(utils.DISABLED);
       utils.resetRegistry();
@@ -57,13 +57,13 @@ describe("TigerRunableTestSuite", ()=> {
   describe("#getTestOrder()", ()=> {
 
     it("should return TestSorters.DEFAULT when no test suite have been registered", ()=> {
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       expect(trts.getTestOrder()).to.equal(TestSorters.DEFAULT);
     });
     
     it("should return the same as value as specified by the TestSuiteDescriptor ", ()=> {
       utils.initRegistry();
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       trts.setTestSuite(utils.TEST_SUITE);
       expect(trts.getTestOrder()).to.equal(utils.TEST_ORDER);
       utils.resetRegistry();
@@ -73,7 +73,7 @@ describe("TigerRunableTestSuite", ()=> {
   describe("#getInstantiationPolicy()", ()=> {
 
     it("should return InstantiationPolicy.SINGLE when no test suite have been registered", ()=> {
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       expect(
         trts.getInstantiationPolicy()
       ).to.equal(InstantiationPolicy.SINGLE);
@@ -81,7 +81,7 @@ describe("TigerRunableTestSuite", ()=> {
     
     it("should return the same as value as specified by the TestSuiteDescriptor ", ()=> {
       utils.initRegistry();
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       trts.setTestSuite(utils.TEST_SUITE);
       expect(
         trts.getInstantiationPolicy()
@@ -93,13 +93,13 @@ describe("TigerRunableTestSuite", ()=> {
   describe("#getTestSuite()", ()=> {
 
     it("should return null when no test suite have been registered", ()=> {
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       expect(trts.getTestSuite()).to.be.null;
     });
     
     it("should return the same test suite as registered with the setTestSuite() method", ()=> {
       utils.initRegistry();
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       trts.setTestSuite(utils.TEST_SUITE);
       expect(trts.getTestSuite()).to.equal(utils.TEST_SUITE);
       utils.resetRegistry();
@@ -108,13 +108,13 @@ describe("TigerRunableTestSuite", ()=> {
 
   describe("#getDescription()", ()=> {
     it("should return null when no TestSuiteDescriptor have been registered", ()=> {
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       expect(trts.getDescription()).to.be.null;
     });
 
     it("should return the same description as defined by the current TestSuiteDescriptor", ()=> {
       utils.initRegistry();
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       trts.setTestSuite(utils.TEST_SUITE);
       expect(trts.getDescription()).to.equal(utils.DESCRIPTION);
       utils.resetRegistry();
@@ -124,27 +124,27 @@ describe("TigerRunableTestSuite", ()=> {
   describe("#getTestMethods()", ()=> {
 
     it("should return an empty array when no TestDescriptor have been registered", ()=> {
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
-      let methods:TestMethod[] = trts.getTestMethods();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const methods:TestMethod[] = trts.getTestMethods();
       expect(methods).to.be.an("array");
       expect(methods).to.have.lengthOf(0);
     });
 
     it("should return an empty array when no test suite have been registered", ()=> {
       utils.initRegistry();
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
-      let methods:TestMethod[] = trts.getTestMethods();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const methods:TestMethod[] = trts.getTestMethods();
       expect(methods).to.have.lengthOf(0);
       utils.resetRegistry();
     });
 
     it("should return an array that contains the registered TestMethod objects for the related TestDescriptor objects", ()=> {
       utils.initRegistry();
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       trts.setTestSuite(utils.TEST_SUITE);
-      let methods:TestMethod[] = trts.getTestMethods();
+      const methods:TestMethod[] = trts.getTestMethods();
       expect(methods).to.have.lengthOf(1);
-      let method:TestMethod = methods[0];
+      const method:TestMethod = methods[0];
       expect(method.name).to.equal(utils.TEST_DESCRIPTOR.method);
       expect(method.description).to.equal(utils.TEST_DESCRIPTOR.description);
       utils.resetRegistry();
@@ -155,27 +155,27 @@ describe("TigerRunableTestSuite", ()=> {
   describe("#getAnnotatedMethods()", ()=> {
 
     it("should return an empty array when no AnnotatedMethodDescriptor have been registered", ()=> {
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
-      let methods:AnnotatedMethod[] = trts.getAnnotatedMethods();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const methods:AnnotatedMethod[] = trts.getAnnotatedMethods();
       expect(methods).to.be.an("array");
       expect(methods).to.have.lengthOf(0);
     });
 
     it("should return an empty array when no test suite have been registered", ()=> {
       utils.initRegistry();
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
-      let methods:AnnotatedMethod[] = trts.getAnnotatedMethods();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const methods:AnnotatedMethod[] = trts.getAnnotatedMethods();
       expect(methods).to.have.lengthOf(0);
       utils.resetRegistry();
     });
 
     it("should return an array that contains the registered AnnotatedMethod objects for the related AnnotatedMethodDescriptor objects", ()=> {
       utils.initRegistry();
-      let trts:TigerRunableTestSuite = new TigerRunableTestSuite();
+      const trts:TigerRunableTestSuite = new TigerRunableTestSuite();
       trts.setTestSuite(utils.TEST_SUITE);
-      let methods:AnnotatedMethod[] = trts.getAnnotatedMethods();
+      const methods:AnnotatedMethod[] = trts.getAnnotatedMethods();
       expect(methods).to.have.lengthOf(1);
-      let method:AnnotatedMethod = methods[0];
+      const method:AnnotatedMethod = methods[0];
       expect(method.name).to.equal(utils.ANNOTATED_METHOD_DESCRIPTOR.method);
       expect(method.timeout).to.equal(utils.ANNOTATED_METHOD_DESCRIPTOR.timeout);
       expect(method.type).to.equal(utils.ANNOTATED_METHOD_DESCRIPTOR.type);

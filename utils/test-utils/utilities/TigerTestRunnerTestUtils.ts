@@ -28,7 +28,7 @@ import {AnnotatedMethodType, RunableTestSuite} from "jec-juta";
 // Utilities:
 export const DESCRIPTION:string = "Test description";
 const buildTestDescriptor:Function = function():TestDescriptor {
-  let descriptor:TestDescriptor = new TestDescriptor();
+  const descriptor:TestDescriptor = new TestDescriptor();
   descriptor.description = "should increment methodToTest";
   descriptor.method = "methodToTest",
   //descriptor.timeout = 100;
@@ -36,12 +36,12 @@ const buildTestDescriptor:Function = function():TestDescriptor {
   return descriptor;
 };
 const buildTestSuiteDescriptor:Function = function():TestSuiteDescriptor {
-  let testSuiteDescriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
+  const testSuiteDescriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
   testSuiteDescriptor.description = DESCRIPTION;
   return testSuiteDescriptor;
 };
 const buildAnnotatedMethodDescriptor:Function = function():AnnotatedMethodDescriptor {
-  let descriptor:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
+  const descriptor:AnnotatedMethodDescriptor = new AnnotatedMethodDescriptor();
   descriptor.method = "beforeAllMethod",
   descriptor.type = AnnotatedMethodType.BEFORE_ALL;
   return descriptor;
@@ -60,7 +60,7 @@ export const initRegistry:Function = function():void {
   TestSuiteDescriptorRegistry.addAnnotatedMethodDescriptor(ANNOTATED_METHOD_DESCRIPTOR);
 };
 export const initInvalidPolicyRegistry:Function = function():void {
-  let descriptor:TestSuiteDescriptor = buildTestSuiteDescriptor();
+  const descriptor:TestSuiteDescriptor = buildTestSuiteDescriptor();
   descriptor.instantiationPolicy = "invalid";
   TestSuiteDescriptorRegistry.registerDescriptor(descriptor);
   TestSuiteDescriptorRegistry.addTestDescriptor(TEST_DESCRIPTOR);
@@ -70,7 +70,7 @@ export const resetRegistry:Function = function():void {
   TestSuiteDescriptorRegistry.registerDescriptor(null);
 };
 export const buildRunableTestSuite:Function = function():RunableTestSuite {
-  let tigerRunableTestSuite:TigerRunableTestSuite = new TigerRunableTestSuite();
+  const tigerRunableTestSuite:TigerRunableTestSuite = new TigerRunableTestSuite();
   tigerRunableTestSuite.setTestSuite(TEST_SUITE);
   return tigerRunableTestSuite;
 };

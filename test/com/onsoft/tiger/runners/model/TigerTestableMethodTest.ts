@@ -23,7 +23,7 @@ import {TigerTestableMethodImpl} from "../../../../../../utils/test-utils/utilit
 // Test:
 describe("TigerTestableMethod", ()=> {
 
-  let descriptor:TigerTestableMethodImpl = new TigerTestableMethodImpl();
+  const descriptor:TigerTestableMethodImpl = new TigerTestableMethodImpl();
   
   it("should have a 'timeout' property set to -1", function() {
     expect(descriptor).to.have.property("timeout", -1);

@@ -27,18 +27,18 @@ import {TigerFactory} from "../../../src/com/onsoft/tiger/builders/TigerFactory"
 
 // Utilities:
 const buildTiger:Function = function():Tiger {
-  let factory:TigerFactory = new TigerFactory();
+  const factory:TigerFactory = new TigerFactory();
   return factory.create();
 };
 const FILE_PATH:string = process.cwd() + "/utils/test-utils/classes/TestSuiteTestClass.js";
 const FILE_NAME:string = "TestSuiteTestClass.js";
 const buildFile:Function = function():FileProperties {
-  let builder:FilePropertiesBuilder = new FilePropertiesBuilder();
-  let properties:FileProperties = builder.build(FILE_NAME, FILE_PATH, null);
+  const builder:FilePropertiesBuilder = new FilePropertiesBuilder();
+  const properties:FileProperties = builder.build(FILE_NAME, FILE_PATH, null);
   return properties;
 };
 const buildWatcher:Function = function():TestWatcher {
-  let watcher:TestWatcher = ({
+  const watcher:TestWatcher = ({
     getContextPath: ()=> { return null; },
     addTestSuite: (testSuite)=> { },
     getTestSuites: ()=> { return null; }

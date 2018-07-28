@@ -30,22 +30,28 @@ describe("TigerConnector", ()=> {
   
   describe("extends AbstractDecoratorConnector", ()=> {
     it("should extend the AbstractDecoratorConnector class", ()=>{
-      let connector:TigerConnector = new TigerConnector(JutaConnectorRefs.TEST_CONNECTOR_REF, utils.DECORATOR);
+      const connector:TigerConnector = new TigerConnector(
+        JutaConnectorRefs.TEST_CONNECTOR_REF, utils.DECORATOR
+      );
       expect(connector).to.be.an.instanceOf(AbstractDecoratorConnector);
     });
   });
   
   describe("#getJcadReference()", ()=> {
     it("should return the JCAD reference passed as parameter of the constructor function", ()=>{
-      let connector:TigerConnector = new TigerConnector(JutaConnectorRefs.TEST_CONNECTOR_REF, utils.DECORATOR);
-      expect(connector.getJcadReference()).to.be.equal(JutaConnectorRefs.TEST_CONNECTOR_REF);
+      const connector:TigerConnector = new TigerConnector(
+        JutaConnectorRefs.TEST_CONNECTOR_REF, utils.DECORATOR
+      );
+      expect(connector.getJcadReference()).to.equal(JutaConnectorRefs.TEST_CONNECTOR_REF);
     });
   });
   
   describe("#getDecorator()", ()=> {
     it("should return the Decorator instance passed as parameter of the constructor function", ()=>{
-      let connector:TigerConnector = new TigerConnector(JutaConnectorRefs.TEST_CONNECTOR_REF, utils.DECORATOR);
-      expect(connector.getDecorator()).to.be.equal(utils.DECORATOR);
+      const connector:TigerConnector = new TigerConnector(
+        JutaConnectorRefs.TEST_CONNECTOR_REF, utils.DECORATOR
+      );
+      expect(connector.getDecorator()).to.equal(utils.DECORATOR);
     });
   });
 });

@@ -33,7 +33,7 @@ import {TigerConnector} from "../../../src/com/onsoft/tiger/jcad/connectors/Tige
 const PATH:string = process.cwd() + "/utils/test-utils/classes/";
 const CLASS_NAME:string =  "TestSuiteTestClass";
 const buildfileProperties:Function = function():FileProperties {
-  let fp:FileProperties = (
+  const fp:FileProperties = (
     {
       name: CLASS_NAME,
       extension: JecStringsEnum.JS_EXTENSION,
@@ -41,7 +41,7 @@ const buildfileProperties:Function = function():FileProperties {
     } as FileProperties);
     return fp;
 };
-let contextFactory:JcadContextFactory = new JcadContextFactory();
+const contextFactory:JcadContextFactory = new JcadContextFactory();
 const TEST_DECORATOR:Decorator = new TestDecorator();
 const TEST_SUITE_DECORATOR:Decorator = new TestSuiteDecorator();
 const ASYNC_DECORATOR:Decorator = new TestSuiteDecorator();

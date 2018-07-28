@@ -54,8 +54,7 @@ describe("TigerSourceFileInspector", ()=> {
     
     it("should run silently when no properties have been set", ()=> {
       const inspector:SourceFileInspector = new TigerSourceFileInspector();
-      inspector.inspect(null);
-      expect("inspect").to.be.ok;
+      expect(inspector.inspect(null)).to.be.undefined;
     });
 
     it("should invoke process() and processComplete() method on the specified FilePreProcessor instance", ()=> {

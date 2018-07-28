@@ -24,7 +24,7 @@ import { InstantiationPolicy, TestSorters } from "jec-juta";
 // Test:
 describe("TestSuiteDescriptor", ()=> {
 
-  let descriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
+  const descriptor:TestSuiteDescriptor = new TestSuiteDescriptor();
   
   it("should have a 'description' property set to 'null'", function() {
     expect(descriptor).to.have.property("description", null);
