@@ -15,37 +15,32 @@
 //   limitations under the License.
 
 import "mocha";
-import * as chai from "chai";
-import * as spies from "chai-spies";
-import { AnnotatedMethod, TestSuiteError, InstantiationPolicy } from "jec-juta";
-import { AnnotatedMethodsMapper } from "../../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
+import {expect} from "chai";
+import * as sinon from "sinon";
+import {TestSuiteError, InstantiationPolicy} from "jec-juta";
+import {AnnotatedMethodsMapper} from "../../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
 
 // Class to test:
-import { TestClassRunner } from "../../../../../../src/com/onsoft/tiger/runners/utils/TestClassRunner";
+import {TestClassRunner} from "../../../../../../src/com/onsoft/tiger/runners/utils/TestClassRunner";
 
 // Utilities:
 import * as utils from "../../../../../../utils/test-utils/utilities/TestClassRunnerTestUtils";
-import { TestClassRunnerTestClass } from "../../../../../../utils/test-utils/classes/TestClassRunnerTestClass";
-
-
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
+import {TestClassRunnerTestClass} from "../../../../../../utils/test-utils/classes/TestClassRunnerTestClass";
 
 // Test:
 describe("TestClassRunner", ()=> {
 
-  let runner:TestClassRunner = new TestClassRunner();
-  let testSuiteObj:TestClassRunnerTestClass = new TestClassRunnerTestClass();
+  const runner:TestClassRunner = new TestClassRunner();
+  const testSuiteObj:TestClassRunnerTestClass = new TestClassRunnerTestClass();
   TestClassRunnerTestClass.invokator = {
     notify: function(methodName:string) { }
   };
-  let mapper:AnnotatedMethodsMapper = utils.buildAnnotatedMethodsMapper();
+  const mapper:AnnotatedMethodsMapper = utils.buildAnnotatedMethodsMapper();
 
   describe("#applyGlobalFixtures()", ()=> {
     
     it("should throw a TestSuiteError exception when test policy is not valid", function() {
-      let applyGlobalFixtures:Function = function():void {
+      const applyGlobalFixtures:Function = function():void {
         runner.applyGlobalFixtures(
           "invalidPolicy", mapper, testSuiteObj, this
         );
@@ -54,23 +49,25 @@ describe("TestClassRunner", ()=> {
     });
     
     it("InstantiationPolicy.MULTIPLE should invoke both mocha 'before' and after' methods on global scope", function() {
-      let spyBefore:any = chai.spy.on(global, "before");
-      let spyAfter:any = chai.spy.on(global, "after");
+      const spyBefore:any = sinon.spy(global, "before");
+      const spyAfter:any = sinon.spy(global, "after");
       runner.applyGlobalFixtures(
         InstantiationPolicy.MULTIPLE, mapper, testSuiteObj, this
       );
-      expect(spyBefore).to.have.been.called.once;
-      expect(spyAfter).to.have.been.called.once;
+      sinon.assert.calledOnce(spyBefore);
+      sinon.assert.calledOnce(spyAfter);
+      sinon.restore();
     });
     
     it("InstantiationPolicy.SINGLE should invoke both mocha 'before' and after' methods on global scope", function() {
-      let spyBefore:any = chai.spy.on(global, "before");
-      let spyAfter:any = chai.spy.on(global, "after");
+      const spyBefore:any = sinon.spy(global, "before");
+      const spyAfter:any = sinon.spy(global, "after");
       runner.applyGlobalFixtures(
         InstantiationPolicy.SINGLE, mapper, testSuiteObj, this
       );
-      expect(spyBefore).to.have.been.called.once;
-      expect(spyAfter).to.have.been.called.once;
+      sinon.assert.calledOnce(spyBefore);
+      sinon.assert.calledOnce(spyAfter);
+      sinon.restore();
     });
   });
 });

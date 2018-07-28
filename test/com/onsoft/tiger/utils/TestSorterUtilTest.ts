@@ -39,15 +39,14 @@ describe("TestSorterUtil", ()=> {
 
   describe("#sort()", ()=> {
     it("should run the process event if the collection to sort is empty", ()=>{
-      let methods:Array<TestMethod> = new Array<TestMethod>();
-      sorter.sort(methods, TestSorters.DEFAULT);
-      expect("sort").to.be.OK;
+      const methods:Array<TestMethod> = new Array<TestMethod>();
+      expect(sorter.sort(methods, TestSorters.DEFAULT)).to.be.undefined;
     });
   });
 
   describe("#sort(TestSorters.DEFAULT)", ()=> {
     it("should run the process whithout changing the order of the collection to sort", ()=>{
-      let methods:TestMethod[] = utils.getTestMethods();
+      const methods:TestMethod[] = utils.getTestMethods();
       sorter.sort(methods, TestSorters.DEFAULT);
       let len:number = methods.length;
       while(len--) {
@@ -58,7 +57,7 @@ describe("TestSorterUtil", ()=> {
   
   describe("#sort(TestSorters.NAME_ASCENDING)", ()=> {
     it("should order the collection by usng the 'name' property in lexicographic order.", ()=>{
-      let methods:TestMethod[] = utils.getTestMethods();
+      const methods:TestMethod[] = utils.getTestMethods();
       sorter.sort(methods, TestSorters.NAME_ASCENDING);
       let len:number = methods.length;
       while(len--) {
@@ -69,7 +68,7 @@ describe("TestSorterUtil", ()=> {
   
   describe("#sort(TestSorters.NAME_DESCENDING)", ()=> {
     it("should order the collection by usng the 'name' property in inverted lexicographic order.", ()=>{
-      let methods:TestMethod[] = utils.getTestMethods();
+      const methods:TestMethod[] = utils.getTestMethods();
       sorter.sort(methods, TestSorters.NAME_DESCENDING);
       let len:number = methods.length;
       while(len--) {
@@ -80,7 +79,7 @@ describe("TestSorterUtil", ()=> {
   
   describe("#sort(TestSorters.ORDER_ASCENDING)", ()=> {
     it("should order the collection by usng the 'order' property from lower to higher value.", ()=>{
-      let methods:TestMethod[] = utils.getTestMethods();
+      const methods:TestMethod[] = utils.getTestMethods();
       sorter.sort(methods, TestSorters.ORDER_ASCENDING);
       let len:number = methods.length;
       while(len--) {
@@ -91,7 +90,7 @@ describe("TestSorterUtil", ()=> {
   
   describe("#sort(TestSorters.ORDER_DESCENDING)", ()=> {
     it("should order the collection by usng the 'order' property from higher to lower value.", ()=>{
-      let methods:TestMethod[] = utils.getTestMethods();
+      const methods:TestMethod[] = utils.getTestMethods();
       sorter.sort(methods, TestSorters.ORDER_DESCENDING);
       let len:number = methods.length;
       while(len--) {

@@ -17,7 +17,6 @@
 import "mocha";
 import {expect} from "chai";
 import {AnnotatedMethod} from "jec-juta";
-import {AnnotatedMethodDescriptor} from "../../../../../src/com/onsoft/tiger/reflect/AnnotatedMethodDescriptor";
 import {TigerAnnotatedMethod} from "../../../../../src/com/onsoft/tiger/runners/model/TigerAnnotatedMethod";
 
 // Class to test:
@@ -31,8 +30,8 @@ describe("AnnotatedMethodBuilder", ()=> {
 
   describe("#build()", ()=> {
 
-    let builder:AnnotatedMethodBuilder = new AnnotatedMethodBuilder();
-    let annotatedMethod:AnnotatedMethod = builder.build(utils.DESCRIPTOR);
+    const builder:AnnotatedMethodBuilder = new AnnotatedMethodBuilder();
+    const annotatedMethod:AnnotatedMethod = builder.build(utils.DESCRIPTOR);
     
     it("should return an instance of the TigerAnnotatedMethod class", function() {
       expect(annotatedMethod).to.be.an.instanceof(TigerAnnotatedMethod);

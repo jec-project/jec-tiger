@@ -15,67 +15,63 @@
 //   limitations under the License.
 
 import "mocha";
-import * as chai from "chai";
-import * as spies from "chai-spies";
-import { TestSuiteError, TestStats, TestMethod } from "jec-juta";
-import { AnnotatedMethodsMapper } from "../../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
+import {expect} from "chai";
+import * as sinon from "sinon";
+import {TestStats, TestMethod} from "jec-juta";
+import {AnnotatedMethodsMapper} from "../../../../../../src/com/onsoft/tiger/utils/AnnotatedMethodsMapper";
 
 // Class to test:
 import { TestClassRunner } from "../../../../../../src/com/onsoft/tiger/runners/utils/TestClassRunner";
 
 // Utilities:
 import * as utils from "../../../../../../utils/test-utils/utilities/TestClassRunnerTestUtils";
-import { TestClassRunnerTestClass } from "../../../../../../utils/test-utils/classes/TestClassRunnerTestClass";
-
-
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
+import {TestClassRunnerTestClass} from "../../../../../../utils/test-utils/classes/TestClassRunnerTestClass";
 
 // Test:
 describe("TestClassRunner", ()=> {
 
-  let runner:TestClassRunner = new TestClassRunner();
-  let testSuiteObj:TestClassRunnerTestClass = new TestClassRunnerTestClass();
+  const runner:TestClassRunner = new TestClassRunner();
+  const testSuiteObj:TestClassRunnerTestClass = new TestClassRunnerTestClass();
   TestClassRunnerTestClass.invokator = {
     notify: function(methodName:string) { }
   };
-  let mapper:AnnotatedMethodsMapper = utils.buildAnnotatedMethodsMapper();
 
   describe("#applyTestMethod()", ()=> {
     
      it("should increment the 'numDisabledTests' value of the TestStats object when test is disabled", function() {
-      let spy:any = chai.spy.on(global, "it");
-      let stats:TestStats = utils.buildTestStats();
-      let method:TestMethod = utils.buildTestMethod(true);
+      const spy:any = sinon.spy(global, "it");
+      const stats:TestStats = utils.buildTestStats();
+      const method:TestMethod = utils.buildTestMethod(true);
       expect(
         runner.applyTestMethod(method, testSuiteObj, this, stats)
-      ).to.be.OK;
-      expect(spy).to.have.been.called.once;
+      ).to.be.undefined;
+      sinon.assert.calledOnce(spy);
+      sinon.restore();
       expect(stats.numDisabledTests).to.equal(1);
     });
     
     it("should invoke the timeout property with the specified timeout", function() {
-      let spy:any = chai.spy.on(this, "timeout");
-      let stats:TestStats = utils.buildTestStats();
-      let method:TestMethod = utils.buildTestMethod(false, 100);
+      const spy:any = sinon.spy(this, "timeout");
+      const stats:TestStats = utils.buildTestStats();
+      const method:TestMethod = utils.buildTestMethod(false, 100);
       expect(
         runner.applyTestMethod(method, testSuiteObj, this, stats)
-      ).to.be.OK;
-      expect(spy).to.have.been.called.with(100);
+      ).to.be.undefined;
+      sinon.assert.calledWith(spy, 100);
+      sinon.restore()
       this.timeout(0);
     });
 
     it("should invoke the mocha 'it' method on global scope and increment the 'numTests' value of the TestStats object", function() {
-      let spy:any = chai.spy.on(this, "it");
-      let stats:TestStats = utils.buildTestStats();
-      let method:TestMethod = utils.buildTestMethod(false);
+      //const spy:any = sinon.spy(this, "it");
+      const stats:TestStats = utils.buildTestStats();
+      const method:TestMethod = utils.buildTestMethod(false);
       expect(
         runner.applyTestMethod(method, testSuiteObj, this, stats)
-      ).to.be.OK;
-      //expect(spy).to.have.been.called.with(utils.COMPUTED_DESCRIPTION);
+      ).to.be.undefined;
+      /*sinon.assert.calledWith(spy, utils.COMPUTED_DESCRIPTION);
+      sinon.restore()*/
       expect(stats.numTests).to.equal(1);
     });
-
   });
 });

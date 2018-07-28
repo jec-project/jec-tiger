@@ -15,8 +15,8 @@
 //   limitations under the License.
 
 import "mocha";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import {expect} from "chai";
+import * as sinon from "sinon";
 
 // Class to test:
 import {SplashScreen} from "../../../../../src/com/onsoft/tiger/utils/SplashScreen";
@@ -24,18 +24,14 @@ import {SplashScreen} from "../../../../../src/com/onsoft/tiger/utils/SplashScre
 // Utilities:
 import * as utils from "../../../../../utils/test-utils/utilities/SplashScreenTestUtils";
 
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
-
 // Test:
 describe("SplashScreen", ()=> {
 
   describe("#displayMessage()", ()=> {
     it("should display the splashscreen message with the right version and the correct information", function() {
-      let spy:any = chai.spy.on(console, "log");
-      let oldLog:any = console.log;
-      let splashScreen:SplashScreen = new SplashScreen();
+      const spy:any = sinon.spy(console, "log");
+      const oldLog:any = console.log;
+      const splashScreen:SplashScreen = new SplashScreen();
       splashScreen.displayMessage(utils.VERSION);
       console.log = function (message) {
         expect(message).to.have.string(utils.TITLE);
@@ -44,7 +40,8 @@ describe("SplashScreen", ()=> {
         expect(utils.COPYRIGHT.test(message)).to.be.true;
         oldLog.apply(console, arguments);
       };
-      expect(spy).to.have.been.called;
+      sinon.assert.calledOnce(spy);
+      sinon.restore();
       console.log = oldLog;
     });
   });

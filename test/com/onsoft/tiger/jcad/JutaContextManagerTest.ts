@@ -26,8 +26,8 @@ describe("JutaContextManager", ()=> {
   
   describe("#deleteContext() Error", ()=> {
     it("should throw a JcadContextError excpetion when nor context have been created before", ()=> {
-      let manager:JutaContextManager = new JutaContextManager();
-      let doDeleteContext:Function = function():void {
+      const manager:JutaContextManager = new JutaContextManager();
+      const doDeleteContext:Function = function():void {
         manager.deleteContext();
       }
       expect(doDeleteContext).to.throw(JcadContextError);
@@ -35,10 +35,10 @@ describe("JutaContextManager", ()=> {
   });
   
   describe("#createContext(), #deleteContext()", ()=> {
-    it("", ()=> {
-      let manager:JutaContextManager = new JutaContextManager();
-      expect(manager.createContext()).to.be.OK;
-      expect(manager.deleteContext()).to.be.OK;
+    it("should provide both, createContext() and deleteContext() methods", ()=> {
+      const manager:JutaContextManager = new JutaContextManager();
+      expect(manager.createContext()).to.be.undefined;
+      expect(manager.deleteContext()).to.be.undefined;
     });
   });
 });

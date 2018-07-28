@@ -15,8 +15,8 @@
 //   limitations under the License.
 
 import "mocha";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import {expect} from "chai";
+import * as sinon from "sinon";
 import {TestSuiteDescriptorRegistry} from "../../../../../src/com/onsoft/tiger/metadata/TestSuiteDescriptorRegistry";
 import {ParameterDescriptor} from "../../../../../src/com/onsoft/tiger/reflect/ParameterDescriptor";
 
@@ -25,10 +25,6 @@ import {ParametersMapUtil} from "../../../../../src/com/onsoft/tiger/utils/Param
 
 // Utilities:
 import * as utils from "../../../../..//utils/test-utils/utilities/ParametersMapUtilTestUtils";
-
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
 
 // Test:
 describe("ParametersMapUtil", ()=> {
@@ -45,15 +41,19 @@ describe("ParametersMapUtil", ()=> {
 
     it("should invoke the TestSuiteDescriptorRegistry.getParametersMap() method", function() {
       utils.initRegistry();
-      let spy:any = chai.spy.on(TestSuiteDescriptorRegistry, "getParametersMap");
+      const spy:any = sinon.spy(
+        TestSuiteDescriptorRegistry, "getParametersMap"
+      );
       ParametersMapUtil.getParameterCollection(utils.METHOD_NAME);
-      expect(spy).to.have.been.called;
+      sinon.assert.calledOnce(spy);
+      sinon.restore();
       utils.resetRegistry();
     });
 
     it("should return an empty array", function() {
       utils.initRegistry();
-      let descriptors:ParameterDescriptor[] = ParametersMapUtil.getParameterCollection(utils.METHOD_NAME);
+      const descriptors:ParameterDescriptor[] =
+                    ParametersMapUtil.getParameterCollection(utils.METHOD_NAME);
       expect(descriptors).to.be.an("array");
       expect(descriptors).to.have.lengthOf(0);
       utils.resetRegistry();

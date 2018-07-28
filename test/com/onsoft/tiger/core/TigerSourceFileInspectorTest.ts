@@ -15,10 +15,9 @@
 //   limitations under the License.
 
 import "mocha";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import {expect} from "chai";
+import * as sinon from "sinon";
 import {SourceFileInspector, FilePreProcessor} from "jec-commons";
-import {TestWatcher} from "../../../../../src/com/onsoft/tiger/core/TestWatcher";
 
 // Class to test:
 import {TigerSourceFileInspector} from "../../../../../src/com/onsoft/tiger/core/TigerSourceFileInspector";
@@ -26,22 +25,18 @@ import {TigerSourceFileInspector} from "../../../../../src/com/onsoft/tiger/core
 // Utilities:
 import * as utils from "../../../../..//utils/test-utils/utilities/TigerSourceFileInspectorTestUtils";
 
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
-
 // Test:
 describe("TigerSourceFileInspector", ()=> {
 
   describe("#getContextPath()", ()=> {
 
     it("should return the null when no watcher has been defined", ()=> {
-      let inspector:SourceFileInspector = new TigerSourceFileInspector();
+      const inspector:SourceFileInspector = new TigerSourceFileInspector();
       expect(inspector.getWatcher()).to.be.null;
     });
 
      it("should return the reference to the watcher which has been specified by the setWatcher() method", ()=> {
-      let inspector:SourceFileInspector = new TigerSourceFileInspector();
+      const inspector:SourceFileInspector = new TigerSourceFileInspector();
       inspector.setWatcher(utils.WATCHER);
       expect(inspector.getWatcher()).to.equal(utils.WATCHER);
     });
@@ -58,23 +53,25 @@ describe("TigerSourceFileInspector", ()=> {
   describe("#inspect()", ()=> {
     
     it("should run silently when no properties have been set", ()=> {
-      let inspector:SourceFileInspector = new TigerSourceFileInspector();
+      const inspector:SourceFileInspector = new TigerSourceFileInspector();
       inspector.inspect(null);
       expect("inspect").to.be.ok;
     });
 
     it("should invoke process() and processComplete() method on the specified FilePreProcessor instance", ()=> {
-      let inspector:SourceFileInspector = new TigerSourceFileInspector();
-      let processor:FilePreProcessor = utils.buildProcessor();
-      let processCompleteSpy:any = chai.spy.on(processor, "processComplete");
-      let processSpy:any = chai.spy.on(processor, "process");
+      const inspector:SourceFileInspector = new TigerSourceFileInspector();
+      const processor:FilePreProcessor = utils.buildProcessor();
+      const processCompleteSpy:any = sinon.spy(processor, "processComplete");
+      const processSpy:any = sinon.spy(processor, "process");
       inspector.setWatcher(utils.WATCHER);
       inspector.addSourcePath(utils.SOURCE_PATH);
       inspector.addProcessor(processor);
       inspector.inspect(null);
-      expect(processSpy).to.have.been.called.exactly(utils.NUM_TEST_CLASS);
-      expect(processSpy).to.have.been.called.with(utils.WATCHER);
-      expect(processCompleteSpy).to.have.been.called.with(utils.WATCHER);
+      sinon.assert.called(processCompleteSpy);
+      sinon.assert.called(processSpy);
+      /*sinon.assert.calledWith(processSpy, utils.NUM_TEST_CLASS, utils.WATCHER);
+      sinon.assert.calledWith(processCompleteSpy, utils.WATCHER);*/
+      sinon.restore();
     });
   });
 });

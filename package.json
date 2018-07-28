@@ -1,6 +1,6 @@
 {
   "name": "jec-tiger",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "JEC Tiger - The default unit testing framework for JEC applications.",
   "main": "dist/com/onsoft/jec-tiger-index",
   "types": "types/jec-tiger.d.ts",
@@ -28,25 +28,25 @@
     "url": "https://github.com/jec-project/jec-tiger/issues"
   },
   "dependencies": {
-    "moment": "^2.18.1",
-    "print-message": "^2.1.0",
-    "jec-commons": "^1.1.9",
-    "jec-commons-node": "^1.0.7",
-    "jec-juta": "^1.1.8"
+    "jec-commons": "^1.2.0",
+    "jec-commons-node": "^1.0.9",
+    "jec-juta": "^1.1.9",
+    "moment": "^2.22.2",
+    "print-message": "^2.1.0"
   },
   "homepage": "https://github.com/jec-project/jec-tiger#readme",
   "devDependencies": {
-    "@types/mocha": "^2.2.41",
-    "chai": "^3.5.0",
-    "chai-spies": "^0.7.1",
-    "grunt": "^1.0.1",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.1.2",
+    "sinon": "^6.1.4",
+    "grunt": "1.0.3",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-copy": "^1.0.0",
-    "grunt-mocha-test": "^0.13.2",
-    "grunt-ts": "^6.0.0-beta.17",
+    "grunt-mocha-test": "^0.13.3",
+    "grunt-ts": "^6.0.0-beta.21",
     "grunt-typedoc": "^0.2.4",
-    "mocha": "^3.3.0",
-    "typedoc": "^0.8.0",
-    "typescript": "^2.6.2"
+    "mocha": "^5.2.0",
+    "typedoc": "^0.11.1",
+    "typescript": "^2.9.2"
   }
 }

@@ -15,8 +15,8 @@
 //   limitations under the License.
 
 import "mocha";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import {expect} from "chai";
+import * as sinon from "sinon";
 import {Decorator} from "jec-commons";
 import {JutaConnectorRefs} from "jec-juta";
 import {ParametersMapUtil} from "../../../../../../src/com/onsoft/tiger/utils/ParametersMapUtil";
@@ -27,10 +27,6 @@ import {AsyncDecorator} from "../../../../../../src/com/onsoft/tiger/jcad/decora
 
 // Utilities:
 import * as utils from "../../../../../../utils/test-utils/utilities/DecoratorsTestUtils";
-
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
 
 // Test:
 describe("AsyncDecorator", ()=> {
@@ -50,18 +46,22 @@ describe("AsyncDecorator", ()=> {
   describe("#decorate()", ()=> {
 
     it("should return the reference to the target instance", ()=>{
-      let target:any = decorator.decorate(utils.TARGET, utils.KEY, utils.PARAMETER_INDEX);
+      const target:any = decorator.decorate(
+        utils.TARGET, utils.KEY, utils.PARAMETER_INDEX
+      );
       expect(target).to.equal(utils.TARGET);
     });
 
     it("should register information into the ParametersMapUtil by invoking the getParameterCollection() method", ()=>{
-      let spy:any = chai.spy.on(ParametersMapUtil, "getParameterCollection");
-      let target:any = decorator.decorate(utils.TARGET, utils.KEY, utils.PARAMETER_INDEX);
-      expect(spy).to.have.been.called.once;
+      const spy:any = sinon.spy(ParametersMapUtil, "getParameterCollection");
+      decorator.decorate(utils.TARGET, utils.KEY, utils.PARAMETER_INDEX);
+      sinon.assert.calledOnce(spy);
+      sinon.restore();
     });
     
     it("should create an ParameterDescriptor object into the TestSuiteDescriptorRegistry object", ()=>{
-      let descriptors:ParameterDescriptor[] = ParametersMapUtil.getParameterCollection(utils.KEY);
+      let descriptors:ParameterDescriptor[] =
+                          ParametersMapUtil.getParameterCollection(utils.KEY);
       expect(descriptors).to.have.lengthOf(0);
       decorator.decorate(utils.TARGET, utils.KEY, utils.PARAMETER_INDEX);
       descriptors = ParametersMapUtil.getParameterCollection(utils.KEY);
@@ -70,23 +70,28 @@ describe("AsyncDecorator", ()=> {
 
     it("should create an ParameterDescriptor instance with the specified 'methodName' value", ()=>{
       decorator.decorate(utils.TARGET, utils.KEY, utils.PARAMETER_INDEX);
-      let descriptors:ParameterDescriptor[] = ParametersMapUtil.getParameterCollection(utils.KEY);
-      let descriptor:ParameterDescriptor = descriptors[0];
+      const descriptors:ParameterDescriptor[] =
+                            ParametersMapUtil.getParameterCollection(utils.KEY);
+      const descriptor:ParameterDescriptor = descriptors[0];
       expect(descriptor.methodName).to.equal(utils.KEY);
     });
     
     it("should create an ParameterDescriptor instance with the specified 'index' value", ()=>{
       decorator.decorate(utils.TARGET, utils.KEY, utils.PARAMETER_INDEX);
-      let descriptors:ParameterDescriptor[] = ParametersMapUtil.getParameterCollection(utils.KEY);
-      let descriptor:ParameterDescriptor = descriptors[0];
+      const descriptors:ParameterDescriptor[] =
+                            ParametersMapUtil.getParameterCollection(utils.KEY);
+      const descriptor:ParameterDescriptor = descriptors[0];
       expect(descriptor.index).to.equal(utils.PARAMETER_INDEX);
     });
     
     it("should create an ParameterDescriptor instance with the 'connectorRef' value set to JutaConnectorRefs.ASYNC_CONNECTOR_REF", ()=>{
       decorator.decorate(utils.TARGET, utils.KEY, utils.PARAMETER_INDEX);
-      let descriptors:ParameterDescriptor[] = ParametersMapUtil.getParameterCollection(utils.KEY);
-      let descriptor:ParameterDescriptor = descriptors[0];
-      expect(descriptor.connectorRef).to.equal(JutaConnectorRefs.ASYNC_CONNECTOR_REF);
+      const descriptors:ParameterDescriptor[] =
+                            ParametersMapUtil.getParameterCollection(utils.KEY);
+      const descriptor:ParameterDescriptor = descriptors[0];
+      expect(
+        descriptor.connectorRef
+      ).to.equal(JutaConnectorRefs.ASYNC_CONNECTOR_REF);
     });
   });
 });

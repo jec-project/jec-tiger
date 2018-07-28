@@ -15,10 +15,9 @@
 //   limitations under the License.
 
 import "mocha";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import {expect} from "chai";
+import * as sinon from "sinon";
 import {Decorator} from "jec-commons";
-import {AnnotatedMethodType} from "jec-juta";
 import {TestSuiteDescriptorRegistry} from "../../../../../../src/com/onsoft/tiger/metadata/TestSuiteDescriptorRegistry";
 import {TestSuiteDescriptor} from "../../../../../../src/com/onsoft/tiger/reflect/TestSuiteDescriptor";
 
@@ -27,10 +26,6 @@ import {TestSuiteDecorator} from "../../../../../../src/com/onsoft/tiger/jcad/de
 
 // Utilities:
 import * as utils from "../../../../../../utils/test-utils/utilities/DecoratorsTestUtils";
-
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
 
 // Test:
 describe("TestSuiteDecorator", ()=> {
@@ -50,15 +45,21 @@ describe("TestSuiteDecorator", ()=> {
   describe("#decorate()", ()=> {
 
     it("should return the reference to the target instance", ()=>{
-      let target:any = decorator.decorate(utils.TARGET, utils.TEST_SUITE_PARAMS);
+      const target:any = decorator.decorate(
+        utils.TARGET, utils.TEST_SUITE_PARAMS
+      );
       expect(target).to.equal(utils.TARGET);
     });
 
     it("should register information into the TestSuiteDescriptorRegistry object", ()=>{
-      let spy:any = chai.spy.on(TestSuiteDescriptorRegistry, "getRegisteredDescriptor");
+      const spy:any = sinon.spy(
+        TestSuiteDescriptorRegistry, "getRegisteredDescriptor"
+      );
       decorator.decorate(utils.TARGET, utils.TEST_SUITE_PARAMS);
-      expect(spy).to.have.been.called.once;
-      let descriptor:TestSuiteDescriptor = TestSuiteDescriptorRegistry.getRegisteredDescriptor();
+      sinon.assert.calledOnce(spy);
+      sinon.restore();
+      const descriptor:TestSuiteDescriptor =
+                          TestSuiteDescriptorRegistry.getRegisteredDescriptor();
       expect(descriptor.description).to.equal(utils.DESCRIPTION);
       expect(descriptor.disabled).to.equal(utils.DISABLED);
     });

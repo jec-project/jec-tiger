@@ -15,10 +15,10 @@
 //   limitations under the License.
 
 import "mocha";
-import * as chai from "chai";
-import * as spies from "chai-spies";
+import {expect} from "chai";
+import * as sinon from "sinon";
 import {Decorator} from "jec-commons";
-import { AnnotatedMethodType, TestSuiteError } from "jec-juta";
+import {AnnotatedMethodType, TestSuiteError} from "jec-juta";
 import {TestSuiteDescriptorRegistry} from "../../../../../../src/com/onsoft/tiger/metadata/TestSuiteDescriptorRegistry";
 import {AnnotatedMethodDescriptor} from "../../../../../../src/com/onsoft/tiger/reflect/AnnotatedMethodDescriptor";
 
@@ -27,10 +27,6 @@ import {AfterClassDecorator} from "../../../../../../src/com/onsoft/tiger/jcad/d
 
 // Utilities:
 import * as utils from "../../../../../../utils/test-utils/utilities/DecoratorsTestUtils";
-
-// Chai declarations:
-const expect:any = chai.expect;
-chai.use(spies);
 
 // Test:
 describe("AfterClassDecorator", ()=> {
@@ -50,56 +46,81 @@ describe("AfterClassDecorator", ()=> {
   describe("#decorate()", ()=> {
 
     it("should return the reference to the PropertyDescriptor instance", ()=>{
-      let target:any = decorator.decorate(utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
+      const target:any = decorator.decorate(
+        utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
+      );
       expect(target).to.equal(utils.DESCRIPTOR);
     });
 
     it("should throw an error when the tarteg is not a static function", ()=>{
-      let doDecorate:Function = function():void {
-        decorator.decorate(utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
+      const doDecorate:Function = function():void {
+        decorator.decorate(
+          utils.TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
+        );
       };
       expect(doDecorate).to.throw(TestSuiteError);
     });
 
     it("should register information into the TestSuiteDescriptorRegistry by invoking the addAnnotatedMethodDescriptor() method", ()=>{
-      let spy:any = chai.spy.on(TestSuiteDescriptorRegistry, "addAnnotatedMethodDescriptor");
-      decorator.decorate(utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
-      expect(spy).to.have.been.called.once;
+      const spy:any = sinon.spy(
+        TestSuiteDescriptorRegistry, "addAnnotatedMethodDescriptor"
+      );
+      decorator.decorate(
+        utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
+      );
+      sinon.assert.calledOnce(spy);
+      sinon.restore();
     });
 
     it("should create an AnnotatedMethodDescriptor object into the TestSuiteDescriptorRegistry object", ()=>{
-      let descriptors:AnnotatedMethodDescriptor[] = TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
+      let descriptors:AnnotatedMethodDescriptor[] =
+           TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
       expect(descriptors).to.have.lengthOf(0);
-      decorator.decorate(utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
-      descriptors= TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
+      decorator.decorate(
+        utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
+      );
+      descriptors =
+           TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
       expect(descriptors).to.have.lengthOf(1);
     });
 
     it("should create an AnnotatedMethodDescriptor instance with the specified 'method' value", ()=>{
-      decorator.decorate(utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
-      let descriptors:AnnotatedMethodDescriptor[] = TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
-      let descriptor:AnnotatedMethodDescriptor = descriptors[0];
+      decorator.decorate(
+        utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
+      );
+      const descriptors:AnnotatedMethodDescriptor[] =
+           TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
+      const descriptor:AnnotatedMethodDescriptor = descriptors[0];
       expect(descriptor.method).to.equal(utils.KEY);
     });
     
     it("should create an AnnotatedMethodDescriptor instance with the specified 'timeout' value", ()=>{
-      decorator.decorate(utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
-      let descriptors:AnnotatedMethodDescriptor[] = TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
-      let descriptor:AnnotatedMethodDescriptor = descriptors[0];
+      decorator.decorate(
+        utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
+      );
+      const descriptors:AnnotatedMethodDescriptor[] =
+           TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
+      const descriptor:AnnotatedMethodDescriptor = descriptors[0];
       expect(descriptor.timeout).to.equal(utils.TIMEOUT);
     });
     
     it("should create an AnnotatedMethodDescriptor instance with the AnnotatedMethodType.AFTER_CLASS 'type' value", ()=>{
-      decorator.decorate(utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
-      let descriptors:AnnotatedMethodDescriptor[] = TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
-      let descriptor:AnnotatedMethodDescriptor = descriptors[0];
+      decorator.decorate(
+        utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
+      );
+      const descriptors:AnnotatedMethodDescriptor[] =
+           TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
+      const descriptor:AnnotatedMethodDescriptor = descriptors[0];
       expect(descriptor.type).to.equal(AnnotatedMethodType.AFTER_CLASS);
     });
     
     it("should create an AnnotatedMethodDescriptor instance with the specified 'disabled' value", ()=>{
-      decorator.decorate(utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS);
-      let descriptors:AnnotatedMethodDescriptor[] = TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
-      let descriptor:AnnotatedMethodDescriptor = descriptors[0];
+      decorator.decorate(
+        utils.STATIC_TARGET, utils.KEY, utils.DESCRIPTOR, utils.PARAMS
+      );
+      const descriptors:AnnotatedMethodDescriptor[] =
+           TestSuiteDescriptorRegistry.getAnnotatedMethodDescriptorCollection();
+      const descriptor:AnnotatedMethodDescriptor = descriptors[0];
       expect(descriptor.disabled).to.equal(utils.DISABLED);
     });
   });

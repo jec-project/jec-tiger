@@ -1,5 +1,9 @@
 # JEC Tiger Project
 
+[![JEC version](https://img.shields.io/badge/JEC-1.0-%23ba00ff.svg)](http://jecproject.org)
+[![npm version](https://badge.fury.io/js/jec-tiger.svg)](https://www.npmjs.com/package/jec-tiger)
+[![Apache 2.0](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
 Tiger is the standard implementation of the [JavaScript Unit Testing API *(JUTA)*][jec-juta-url] specification. It provides the portability of unit tests for TypeScript applications.
 
 [![][jec-logo]][jec-url]
@@ -114,7 +118,7 @@ The documentation generator is [TypeDoc](http://typedoc.org/)
 
 ## Update Release Notes
 
-**Current stable release:** [1.2.1](CHANGELOG.md#jec-tiger-1.2.1)
+**Current stable release:** [1.2.2](CHANGELOG.md#jec-tiger-1.2.2)
  
 For a complete listing of release notes for all JEC Tiger update releases, see the [CHANGELOG](CHANGELOG.md) file. 
 
